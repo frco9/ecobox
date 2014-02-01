@@ -10,10 +10,7 @@ class SensorsController < ApplicationController
   # GET /sensors/1
   # GET /sensors/1.json
   def show
-    logger.debug "In show"
-    @sensor.data_sensors.each do |data|
-      logger.debug "Data::Valeur:#{data.value}"
-    end
+    Sensor.genSensorList(@sensor)
   end
 
   # GET /sensors/new
