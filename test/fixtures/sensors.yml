@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  frequency: 1.5
+  name: MyString
+  modulation_id: 
+  room_id: 
+
+two:
+  frequency: 1.5
+  name: MyString
+  modulation_id: 
+  room_id: 

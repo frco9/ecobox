@@ -1,0 +1,51 @@
+@media (max-width: 992px) {
+    a {
+        font-size: 10pt;
+    }
+    .right_arrow {
+        top: 25px;
+    }
+    .active a{
+        position: absolute;
+        left: 0;
+    }
+    #wrap {
+        margin: 0 auto -30px;
+        padding: 0 0 30px;
+    }
+    header {
+        height: 50px;
+    }
+    h1{
+        font-size: 30pt;
+        line-height: 50px;
+        margin-top: 8px;
+    }
+    h3{
+        font-size: 20pt;
+    }
+    #head_title{
+        padding-top: 0px;
+        height: 50px;
+    }
+    nav{
+        text-align: center;
+        padding-top: 4px;
+        padding-left: 0px;
+        min-height: 320px;  /*logo_min_height-(header_height+footer_height)*/
+    }
+    nav ul li{
+    	height: 80px;
+        padding-top: 6px;
+    }
+    .li-title {
+        margin-top: 3px;
+    }
+    #content{
+        min-height: 320px;  /*logo_min_height-(header_height+footer_height)*/
+    }
+    footer{
+    	height: 30px;
+        margin-left: 100px;
+    }
+}
