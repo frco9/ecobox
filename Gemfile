@@ -18,6 +18,12 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
+gem 'raphael-rails'
+
+gem 'morrisjs-rails', :git => 'http://github.com/frco9/morrisjs-rails.git'
+
+gem 'momentjs-rails'
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -39,7 +45,7 @@ end
 gem 'rails_12factor', group: :production
 
 # Use ActiveModel has_secure_password
-# gem 'bcrypt-ruby', '~> 3.1.2'
+gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
@@ -59,6 +65,5 @@ group :test do
   gem 'capybara', '2.1.0'
 end
 
-ruby '2.0.0'
 
-gem 'bcrypt-ruby', '3.1.2'
+ruby '2.0.0'

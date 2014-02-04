@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery(document).ready ($) ->
-  temp_data = []
+  window.sensors_data = []
   start_date = 0
   end_date = 0
   randomDate = (start, end) ->
@@ -18,12 +18,12 @@ jQuery(document).ready ($) ->
       date2 = randomDate(new Date(2012, 0, 9), new Date()).getTime()
       randNum = getRandomInt(-5, 30)
       randNum2 = getRandomInt(15, 26)
-      temp_data.push
+      sensors_data.push
         date: date.getTime()
         capteur1: randNum
         capteur3: getRandomInt(20, 24)
 
-      temp_data.push
+      sensors_data.push
         date: date2
         capteur2: randNum2
 
@@ -75,7 +75,7 @@ jQuery(document).ready ($) ->
     element: "temp_chart"
     # Chart data records -- each entry in this array corresponds to a point on
     # the chart.
-    data: temp_data    
+    data: sensors_data    
     # The name of the data record attribute that contains x-values.
     xkey: "date"    
     # A list of names of data record attributes that contain y-values.
@@ -104,6 +104,24 @@ jQuery(document).ready ($) ->
 
   $(".multiselect").multiselect onChange: (element, checked) ->
     if checked
+      $.ajax
+        type: "GET"
+        url: "sensors/1/sensor_data"
+        dataType: "script"
       graph.addYkey element.val(), element.text(), start_date, end_date
     else
       graph.removeYkey element.val(), element.text(), start_date, end_date
+
+
+
+
+
+
+
+
+
+
+
+
+
+

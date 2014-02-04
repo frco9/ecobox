@@ -1,10 +1,10 @@
 <%-# Adding js and css needed declaration to header -%>
 <% content_for :head_css_includes do %>
-  <%= stylesheet_link_tag "daterangepicker-bs3", "morris", "bootstrap-multiselect", media: "all" %>  
+  <%= stylesheet_link_tag "daterangepicker-bs3", "bootstrap-multiselect", media: "all" %>  
 <% end %>
 
 <% content_for :head_js_includes do %>
-  <%= javascript_include_tag "moment.min", "daterangepicker", "bootstrap-multiselect", "raphael-min", "morris" %>
+  <%= javascript_include_tag "daterangepicker", "bootstrap-multiselect" %>
 <% end %>
 
 <% content_for :head_title do %>
@@ -33,6 +33,9 @@
           <option value="capteur2">Capteur 2</option>
           <option value="capteur3">Capteur 3</option>
         </select>
+        <% @sensors.each do |sensor| %>
+          <%#= link_to "Mark as complete", sensor_data_sensor_path(:id => sensor.id), :remote=>true %>
+        <% end %>
       </div>
     </div>
   </div>

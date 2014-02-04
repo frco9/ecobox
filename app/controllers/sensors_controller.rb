@@ -22,6 +22,15 @@ class SensorsController < ApplicationController
   def edit
   end
 
+  def sensor_data
+    @sensor = Sensor.find(params[:id])
+    @array_data = Sensor.genSensorList(@sensor)
+    respond_to do |format|
+      format.html { redirect_to @sensor, notice: 'Sensor was successfully updated.' }
+      format.js
+    end
+  end
+
   # POST /sensors
   # POST /sensors.json
   def create

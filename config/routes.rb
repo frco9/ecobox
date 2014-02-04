@@ -1,5 +1,9 @@
 Ecobox::Application.routes.draw do
-  resources :sensors
+  resources :sensors do
+    member do
+      get 'sensor_data'
+    end
+  end
   resources :users
   match   '/signup',  to: 'users#new',      via: 'get'
 
