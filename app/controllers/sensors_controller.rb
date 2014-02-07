@@ -11,10 +11,7 @@ class SensorsController < ApplicationController
   # GET /sensors/1
   # GET /sensors/1.json
   def show
-    logger.debug "In show"
-    @sensor.data_sensors.each do |data|
-      logger.debug "Data::Valeur:#{data.value}"
-    end
+    Sensor.genSensorList(@sensor)
   end
 
   # GET /sensors/new
@@ -24,6 +21,15 @@ class SensorsController < ApplicationController
 
   # GET /sensors/1/edit
   def edit
+  end
+
+  def sensor_data
+    @sensor = Sensor.find(params[:id])
+    @array_data = Sensor.genSensorList(@sensor)
+    respond_to do |format|
+      format.html { redirect_to @sensor, notice: 'Sensor was successfully updated.' }
+      format.js
+    end
   end
 
   # POST /sensors
