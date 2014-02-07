@@ -1,7 +1,13 @@
+#TO DO : CORRIGER PROBLEME L9-10
 Ecobox::Application.routes.draw do
   resources :sensors
+  resources :sessions, only: [:new, :create, :destroy]
   resources :users
-  match   '/signup',  to: 'users#new',      via: 'get'
+  root 'sensors#index'
+  match '/signup',  to: 'users#new',     	via: 'get'
+  match '/signin',  to: 'sessions#new',     via: 'get'
+  match '/signout', to: 'sessions#destroy',	via: 'delete'
+  #match '/signout',  to: 'sessions#destroy',     via: 'get'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

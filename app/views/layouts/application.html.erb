@@ -54,10 +54,20 @@
             <p class="li-title col-xs-12 col-md-6">Temperature</p>
           </a>
         </li>
-        
-        <li class="row">
-          <%= link_to "S'inscrire", signup_path, class: "col-md-12 btn btn-large" %>
-        </li>
+		
+		<% if signed_in? %>		
+			<li class="row">
+			  <%= link_to "Paramètres", '#', class: "col-md-12 btn btn-large" %>
+			  </li>
+
+			<li class="row">
+			<%= link_to "Déconnexion", signout_path, class: "col-md-12 btn btn-large", method: "delete"%>
+			</li>
+		<% else %>
+			<li class="row">
+			  <%= link_to "S'inscrire", signup_path, class: "col-md-12 btn btn-large" %>
+			</li>
+		<% end %>
       </ul>
     </nav>
   </div>
