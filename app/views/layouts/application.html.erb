@@ -25,11 +25,27 @@
         <p class="clear" style="width: 0;"></p>
         <span id="gear-icon" class="icon-cog visible-sm visible-md visible-lg"></span>
         <div id="user-icon-container">
-          <div id="user-icon-circle">
+			<div id="user-icon-circle">
             <div id="user-container-layer"></div>
             <span id="user-icon" class="icon-user"></span>
-          </div>
-          <span id="user-down-arrow" class="down_arrow visible-sm visible-md visible-lg"></span>
+			</div>
+				<div id="user-down-arrow"  class="dropdown">
+					<a data-toggle="dropdown" href="#">
+						<span class="down_arrow visible-sm visible-md visible-lg"></span>
+					</a>
+					<ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+
+					<% if signed_in? %>		
+						<li><%= link_to "Profil", current_user %></li>
+						<li><%= link_to "Paramètres", '#'%></li>
+						<li><%= link_to "Deconnexion", signout_path, method: "delete" %></li>
+
+					<% else %>
+						<li><%= link_to "Se connecter", signin_path %></li>
+						<li><%= link_to "S'inscrire", signup_path %></li>
+					<% end %>
+					</ul>
+				</div>
         </div>
         <span id="username" class="visible-xs">Username</span>
       </div>
@@ -55,19 +71,6 @@
           </a>
         </li>
 		
-		<% if signed_in? %>		
-			<li class="row">
-			  <%= link_to "Paramètres", '#', class: "col-md-12 btn btn-large" %>
-			  </li>
-
-			<li class="row">
-			<%= link_to "Déconnexion", signout_path, class: "col-md-12 btn btn-large", method: "delete"%>
-			</li>
-		<% else %>
-			<li class="row">
-			  <%= link_to "S'inscrire", signup_path, class: "col-md-12 btn btn-large" %>
-			</li>
-		<% end %>
       </ul>
     </nav>
   </div>
