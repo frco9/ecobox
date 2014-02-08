@@ -2,12 +2,12 @@ class Sensor < ActiveRecord::Base
   belongs_to :modulation
   belongs_to :room
   has_many :data_sensors
-  has_and_belongs_to_many :data_types
+  has_many :data_types, :through => :sensors_data_types
 
-  def self.genSensorList(sensor)
+  def self.genSensorList(selected_data, sensor)
     tab = ""
-    sensor.data_sensors.each do |data_sensor|
-      tab += "{date: '#{data_sensor.created_at}', #{sensor.name.mb_chars.downcase.to_s}: #{data_sensor.value}}, "
+    selected_data.each do |data_sensor|
+      tab += "{date: '#{data_sensor.created_at.to_s(:db)}', #{sensor.id}: #{data_sensor.value}}, "
     end
     tab = tab[0..-3]
   end

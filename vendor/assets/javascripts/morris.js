@@ -668,7 +668,7 @@
     o = date.match(/^(\d+)-(\d+)-(\d+)$/);
     p = date.match(/^(\d+) W(\d+)$/);
     q = date.match(/^(\d+)-(\d+)-(\d+)[ T](\d+):(\d+)(Z|([+-])(\d\d):?(\d\d))?$/);
-    r = date.match(/^(\d+)-(\d+)-(\d+)[ T](\d+):(\d+):(\d+(\.\d+)?)(Z|([+-])(\d\d):?(\d\d))?$/);
+    r = date.match(/^(\d+)-(\d+)-(\d+)[ T](\d+):(\d+):(\d+(\.\d+)?)\s?(Z|([+-])(\d\d):?(\d\d))?$/);
     if (m) {
       return new Date(parseInt(m[1], 10), parseInt(m[2], 10) * 3 - 1, 1).getTime();
     } else if (n) {
@@ -711,6 +711,7 @@
         return Date.UTC(parseInt(r[1], 10), parseInt(r[2], 10) - 1, parseInt(r[3], 10), parseInt(r[4], 10), parseInt(r[5], 10) + offsetmins, isecs, msecs);
       }
     } else {
+      console.log("no date");
       return new Date(parseInt(date, 10), 0, 1).getTime();
     }
   };

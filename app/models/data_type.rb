@@ -1,3 +1,3 @@
 class DataType < ActiveRecord::Base
-  has_and_belongs_to_many :sensors
+  has_many :sensors, :through => :sensors_data_types
 end

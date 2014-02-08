@@ -18,12 +18,6 @@ gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'raphael-rails'
-
-gem 'morrisjs-rails', :git => 'http://github.com/frco9/morrisjs-rails.git'
-
-gem 'momentjs-rails'
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 
@@ -65,5 +59,12 @@ group :test do
   gem 'capybara', '2.1.0'
 end
 
+gem 'faker', :git => 'https://github.com/vitormil/faker'
+
+gem 'raphael-rails'
+
+gem 'morrisjs-rails', :git => 'http://github.com/frco9/morrisjs-rails.git'
+
+gem 'momentjs-rails'
 
 ruby '2.0.0'

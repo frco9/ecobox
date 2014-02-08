@@ -1,11 +1,9 @@
-#TO DO : CORRIGER PROBLEME L9-10
 Ecobox::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
-  resources :sensors do
-    member do
-      get 'sensor_data'
-    end
-  end
+  
+  resources :sensors 
+  match "/sensors/:id/sensor_data" => "sensors#sensor_data", via: [:get, :post]
+
   resources :users
   root 'sensors#index'
   match '/signup',  to: 'users#new',     	via: 'get'

@@ -24,11 +24,17 @@ class SensorsController < ApplicationController
   end
 
   def sensor_data
-    @sensor = Sensor.find(params[:id])
-    @array_data = Sensor.genSensorList(@sensor)
+    @sensors = Sensor.find(params[:id].split(','))
+    @start_date = DateTime.parse(params[:start_date]).to_s(:db)
+    @end_date = DateTime.parse(params[:end_date]).to_s(:db)
+    @selected_data = []
+    @sensors.each do |sensor|
+      @selected_data << sensor.data_sensors.where("created_at between '#{@start_date}' and '#{@end_date}'").order("created_at ASC")
+    end 
+    # @array_data = Sensor.genSensorList(@selected_data, @sensor)
+  
     respond_to do |format|
-      format.html { redirect_to @sensor, notice: 'Sensor was successfully updated.' }
-      format.js
+      format.json
     end
   end
 
