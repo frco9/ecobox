@@ -1,3 +1,11 @@
+<% content_for :head_css_includes do %>
+    <%= stylesheet_link_tag "sensors", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "sensors", "data-turbolinks-track" => true %>
+<% end %>
+
 <% content_for :head_title do %>
   Capteurs
 <% end %>

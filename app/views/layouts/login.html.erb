@@ -1,0 +1,36 @@
+<html>
+<head>
+  <title>Ecobox - <%= yield :head_title %></title>
+  <%= stylesheet_link_tag "application", "login", media: "all", "data-turbolinks-track" => true %>
+  <%= yield :head_css_includes %>
+
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= yield :head_js_includes %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 hidden-xs col-sm-3"></div> 
+    <div class="col-xs-12 col-sm-6">
+      <div class="block" style="height:100%;">
+        <div class="box centered">
+          <div id="sign_title"></div>
+          <div id="sign_content">
+            <!-- flash -->
+            <% flash.each do |key, value| %>
+              <div class="alert alert-<%= key %>"><%= value %></div>
+            <% end %>
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+    </div> 
+    <div class="col-xs-12 hidden-xs col-sm-3"></div> 
+  </div>
+</div>
+
+</body>
+</html>

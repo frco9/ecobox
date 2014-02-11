@@ -13,8 +13,4 @@
  *= require style
  *= require style_med
  *= require style_icon
- *= require morris
- *= require daterangepicker
- *= require bootstrap-multiselect
- *= require_tree .
  */

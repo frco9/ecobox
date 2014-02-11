@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:show, :create]
+  layout "login", :only => [:new]
 
 	def show
 		@user = User.find(params[:id])

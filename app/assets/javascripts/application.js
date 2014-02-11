@@ -13,9 +13,3 @@
 //= require jquery
 //= require turbolinks
 //= require bootstrap
-//= require raphael
-//= require morris
-//= require moment
-//= require daterangepicker
-//= require bootstrap-multiselect
-//= require_tree .
