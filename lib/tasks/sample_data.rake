@@ -14,7 +14,7 @@ namespace :db do
     end
 
     rooms.each do |type|
-      DataType.create!(name: type)
+      Room.create!(name: type)
     end
 
     10.times do |n|
