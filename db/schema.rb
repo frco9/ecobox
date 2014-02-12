@@ -13,9 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140205142100) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
-
   create_table "data_sensors", force: true do |t|
     t.float    "value"
     t.integer  "sensor_id"
@@ -24,8 +21,8 @@ ActiveRecord::Schema.define(version: 20140205142100) do
     t.datetime "updated_at"
   end
 
-  add_index "data_sensors", ["data_type_id"], name: "index_data_sensors_on_data_type_id", using: :btree
-  add_index "data_sensors", ["sensor_id"], name: "index_data_sensors_on_sensor_id", using: :btree
+  add_index "data_sensors", ["data_type_id"], name: "index_data_sensors_on_data_type_id"
+  add_index "data_sensors", ["sensor_id"], name: "index_data_sensors_on_sensor_id"
 
   create_table "data_types", force: true do |t|
     t.string "name"
@@ -49,15 +46,15 @@ ActiveRecord::Schema.define(version: 20140205142100) do
     t.datetime "updated_at"
   end
 
-  add_index "sensors", ["modulation_id"], name: "index_sensors_on_modulation_id", using: :btree
-  add_index "sensors", ["room_id"], name: "index_sensors_on_room_id", using: :btree
+  add_index "sensors", ["modulation_id"], name: "index_sensors_on_modulation_id"
+  add_index "sensors", ["room_id"], name: "index_sensors_on_room_id"
 
   create_table "sensors_data_types", id: false, force: true do |t|
     t.integer "sensor_id"
     t.integer "data_type_id"
   end
 
-  add_index "sensors_data_types", ["sensor_id", "data_type_id"], name: "index_sensors_data_types_on_sensor_id_and_data_type_id", using: :btree
+  add_index "sensors_data_types", ["sensor_id", "data_type_id"], name: "index_sensors_data_types_on_sensor_id_and_data_type_id"
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -69,6 +66,6 @@ ActiveRecord::Schema.define(version: 20140205142100) do
     t.string   "remember_token"
   end
 
-  add_index "users", ["remember_token"], name: "index_users_on_remember_token", using: :btree
+  add_index "users", ["remember_token"], name: "index_users_on_remember_token"
 
 end
