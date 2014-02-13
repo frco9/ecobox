@@ -13,45 +13,42 @@
 
 
 
-<section class="row">
+<!-- <section class="row"> -->
   <div class="sec_header col-md-12 row">
     <h2 class="col-md-8">Home</h2>
-  <!--   <div class="col-md-4" style="padding-right: 45px;"> -->
-  <!--     <div id="reportrange" class="2pull-right"> -->
-  <!--       <i class="glyphicon glyphicon-calendar"></i> -->
-  <!--       <%Time.zone.now.to_datetime%> -->
-  <!--       <b class="caret"></b> -->
-  <!--     </div> -->
-  <!--   </div> -->
-  <!-- </div> -->
-  <!-- <div class="sec_content col-md-12"> -->
-  <!--   <div class="row"> -->
-  <!--     <div id="temp_chart" class="col-md-8"></div> -->
-  <!--     <div class="col-md-4"> -->
-  <!-- 	<SCRIPT LANGUAGE="JavaScript"> -->
-	  
-    <tbody>
-      Current home's temperature: <%= @current_temp %> degré
-    </tbody>
-
-    <tbody>
-      <% @rooms.each do |room| %>
-      <tr>
-	<table>
-	  <tr>
-	    <td>room.name</td>
-	  </tr>
-	  <% @rooms.sensors.each do |sensor| %>
-	  <tr>
-	    <td> <%= sensor.name %> </td>
-	    <td>availability</td>
-	  </tr>
-	  <% end %>
-	</table>
-      </tr>
-      <% end %>
-    </tbody>
   </div>
-
+  <section>
+    <article>
+      <tbody>
+	<% @rooms.each do |room| %>
+	<tr>
+	  <table>
+	    <tr>
+	      <td>room.name</td>
+	    </tr>
+	    <% @rooms.sensors.each do |sensor| %>
+	    <tr>
+	      <td> <%= sensor.name %> </td>
+	      <td>availability</td>
+	    </tr>
+	    <% end %>
+	  </table>
+	</tr>
+	<% end %>
+      </tbody>
+    </article>
+    <aside>
+      <tbody>
+	Current home's temperature: 
+      </tbody>
+      <b:if cond='@current_temp == 9999'>
+	<tbody>Unknown</tbody>
+	<b:else>
+	  <%= @current_temp %>
+	  <tbody>&deg;C</tbody>
+      </b:if>
+      
+    </aside>
+    
+  </section>
 </div>
-</section>

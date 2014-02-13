@@ -7,12 +7,12 @@ class HomeController < ApplicationController
     @rooms = Room.all
  
 # Recuperation Des capteurs de types 
-    @data_types = DataType.where(["name = 'temperature'"])
+    @data_types = DataType.where(["name = 'Temperature'"])
     tmp = Time.now
 #    time_of_availability = Time.new(tmp.year,tmp.month,tmp.day,tmp.hour,tmp.min- 2,tmp.sec)
     @last_data = DataSensor.last
     if @last_data != nil
-       @current_temperature s = @last_data.where("data_type = ?",@data_types)
+       @current_temperatures = @last_data.where("data_type = ?",@data_types)
     end
 
     if @current_temperatures != nil
