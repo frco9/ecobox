@@ -1,0 +1,21 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: ecobox_test
+  pool: 5
+  username: user
+  password: mdp
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: ecobox_test
+  pool: 5
+  username: user
+  password: mdp
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: ecobox_test
+  pool: 5
+  username: user
+  password: mdp
