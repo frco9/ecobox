@@ -36,7 +36,7 @@
 					<% if signed_in? %>		
 						<li><%= link_to "Profil", current_user %></li>
 						<li><%= link_to "Paramètres", '#'%></li>
-						<li><%= link_to "Deconnexion", signout_path, method: "delete" %></li>
+						<li><%= link_to "Déconnexion", signout_path, method: "delete" %></li>
 
 					<% else %>
 						<li><%= link_to "Se connecter", signin_path %></li>
