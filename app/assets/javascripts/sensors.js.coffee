@@ -138,6 +138,8 @@ jQuery(document).ready ($) ->
     hideHover: "auto"
     smooth: false
     resize: true
+    minVal: true
+    maxVal: true
   )
   $("#reportrange").daterangepicker
     ranges:
