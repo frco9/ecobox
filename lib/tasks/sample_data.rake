@@ -56,19 +56,19 @@ namespace :db do
 
 
     # Password validation fails when populate
-    # 
-    # 2.times do |n|
-    #   name = Faker::Name.last_name
-    #   firstname = Faker::Name.first_name
-    #   email = "user-#{n}@ecobox.com"
-    #   created_at  = Faker::Date.between("01/01/2014", "02/02/2014")
-    #   User.create!(name: name,
-    #                firstname: firstname,
-    #                email: email,
-    #                created_at: created_at,
-    #                updated_at: created_at,
-    #                password_digest: Digest::SHA1.hexdigest("my_password"))
-    # end
+	
+	2.times do |n|
+	  name = Faker::Name.last_name
+	  firstname = Faker::Name.first_name
+	  email = "user-#{n}@ecobox.com"
+	  created_at  = Faker::Date.between("01/01/2014", "02/02/2014")
+	  User.create!(name: name,
+				   firstname: firstname,
+				   email: email,
+				   created_at: created_at,
+				   updated_at: created_at,
+				   password: Digest::SHA1.hexdigest("my_password"))
+	end
 
   end
 end
