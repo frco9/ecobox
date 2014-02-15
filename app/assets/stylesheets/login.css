@@ -35,3 +35,11 @@ body {
   max-width: 350px;
   width: 99%;
 }
+
+.left {
+	text-align: left;
+}
+
+.center {
+	text-align: center;
+}
