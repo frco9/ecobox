@@ -54,10 +54,15 @@ namespace :db do
                    updated_at: created_at)
     end
 
+	#AJOUT ADMIN ET AUTRES UTILISATEURS
 
-    # Password validation fails when populate
-	
-	2.times do |n|
+	admin = User.create!(name: 'Admin',
+						firstname: 'Trent',
+						email: 'admin@gmail.com',
+						password: 'foobar',
+						password_confirmation: 'foobar',
+						admin: true)
+	10.times do |n|
 	  name = Faker::Name.last_name
 	  firstname = Faker::Name.first_name
 	  email = "user-#{n}@ecobox.com"

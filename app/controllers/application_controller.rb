@@ -6,6 +6,9 @@ class ApplicationController < ActionController::Base
 	include SessionsHelper
 
 	def signed_in_user
-		redirect_to signin_url, flash: { info: "Veuillez vous connecter d'abord" } unless signed_in?
+		unless signed_in?
+			store_location
+			redirect_to signin_url, flash: { info: "Veuillez vous connecter d'abord" }
+		end
 	end
 end

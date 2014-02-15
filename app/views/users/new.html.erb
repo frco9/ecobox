@@ -1,27 +1,9 @@
-<% provide(:head_title, 'Sign up') %>
-<h1 class="center">Sign up</h1>
+<% provide(:head_title, 'Inscription') %>
+<h1 class="center">Inscription</h1>
 
 <%= form_for(@user) do |f| %>
-	<%= render 'shared/error_messages' %>
-
-	<div class="form-group">
-		<%= f.label :name %>
-		<%= f.text_field :name, class: 'form-control' %>
-
-		<%= f.label :firstname %>
-		<%= f.text_field :firstname, class: 'form-control' %>
-
-		<%= f.label :email %>
-		<%= f.text_field :email, class: 'form-control' %>
-
-		<%= f.label :password %>
-		<%= f.password_field :password, class: 'form-control' %>
-
-		<%= f.label :password_confirmation, "Confirmation" %>
-		<%= f.password_field :password_confirmation, class: 'form-control' %>
-	</div>
-
-	<%= f.submit "S'inscrire", class: "btn btn-large btn-primary" %>
+	<%= render 'fields', f: f %>
+	<%= f.submit "S'inscrire", class: "btn btn-large btn-success" %>
 <% end %>
 
 <p><%= link_to "Déjà inscrit : se connecter", signin_path %></p>

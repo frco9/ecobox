@@ -1,5 +1,5 @@
 <% provide(:head_title, "Connexion") %>
-<h1 class="center">Sign in</h1>
+<h1 class="center">Connexion</h1>
 
 
 <%= form_for(:session, url: sessions_path) do |f| %>
@@ -10,7 +10,7 @@
 	<%= f.label :password %>
 	<%= f.password_field :password %>
 
-	<%= f.submit "Se connecter", class: "btn btn-large btn-primary" %>
+	<%= f.submit "Se connecter", class: "btn btn-large btn-success" %>
 <% end %>
 
 <p><%= link_to "Première connexion", signup_path %></p>

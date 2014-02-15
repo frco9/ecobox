@@ -68,3 +68,6 @@ gem 'morrisjs-rails', :git => 'http://github.com/frco9/morrisjs-rails.git'
 gem 'momentjs-rails'
 
 ruby '2.0.0'
+
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'

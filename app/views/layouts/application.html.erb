@@ -21,7 +21,8 @@
       </div>
       <div id="user_settings">
         <p class="clear" style="width: 0;"></p>
-        <span id="gear-icon" class="icon-cog visible-sm visible-md visible-lg"></span>
+		<span id="gear-icon" class="icon-cog visible-sm visible-md visible-lg"></span>
+
         <div id="user-icon-container">
 			<div id="user-icon-circle">
             <div id="user-container-layer"></div>
@@ -35,13 +36,13 @@
 
 					<% if signed_in? %>		
 						<li><%= link_to "Profil", current_user %></li>
-						<li><%= link_to "Paramètres", '#'%></li>
+						<li><%= link_to "Utilisateurs", users_path %></li>
+						<li><%= link_to "Paramètres", edit_user_path(current_user)%></li>
 						<li><%= link_to "Déconnexion", signout_path, method: "delete" %></li>
-
-					<% else %>
-						<li><%= link_to "Se connecter", signin_path %></li>
-						<li><%= link_to "S'inscrire", signup_path %></li>
-					<% end %>
+						<% if current_user.admin? %>
+							<li><%= link_to "Ajouter un utilisateur", signup_path %></li>
+						<% end %>
+					<% end%>
 					</ul>
 				</div>
         </div>
