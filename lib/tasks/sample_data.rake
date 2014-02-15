@@ -61,13 +61,15 @@ namespace :db do
 	  name = Faker::Name.last_name
 	  firstname = Faker::Name.first_name
 	  email = "user-#{n}@ecobox.com"
+	  password = "password"
 	  created_at  = Faker::Date.between("01/01/2014", "02/02/2014")
 	  User.create!(name: name,
 				   firstname: firstname,
 				   email: email,
 				   created_at: created_at,
 				   updated_at: created_at,
-				   password: Digest::SHA1.hexdigest("my_password"))
+				   password: password,
+				   password_confirmation: password)
 	end
 
   end

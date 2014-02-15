@@ -17,7 +17,6 @@ class UsersController < ApplicationController
 			flash[:success] = "Welcome to Ecobox #{@user.name}";
 			redirect_to @user
 		else
-			layout "login"
 			render 'new';
 		end
 	end
