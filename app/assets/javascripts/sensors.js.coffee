@@ -140,6 +140,7 @@ jQuery(document).ready ($) ->
     resize: true
     minVal: true
     maxVal: true
+    sortData: false
   )
   $("#reportrange").daterangepicker
     ranges:
