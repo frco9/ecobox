@@ -5,15 +5,17 @@ class SensorsController < ApplicationController
   # GET /sensors
   # GET /sensors.json
   def index
-    @sensors = Sensor.all
   end
 
   # GET /sensors/1
   # GET /sensors/1.json
   def show
-    Sensor.genSensorList(@sensor)
   end
 
+  # GET /sensors/list
+  def list
+    @sensors = Sensor.all
+  end
   # GET /sensors/new
   def new
     @sensor = Sensor.new
@@ -27,11 +29,15 @@ class SensorsController < ApplicationController
     @sensors = Sensor.find(params[:id].split(','))
     @start_date = DateTime.parse(params[:start_date]).to_s(:db)
     @end_date = DateTime.parse(params[:end_date]).to_s(:db)
+    points_frequency = params[:points_frequency]
     @selected_data = []
     @sensors.each do |sensor|
-      @selected_data << sensor.data_sensors.where("created_at between '#{@start_date}' and '#{@end_date}'").order("created_at ASC")
+      if ["year", "month", "day", "hour", "minute", "second"].include? points_frequency
+        @selected_data << sensor.data_sensors.select('round(AVG(value)::numeric,2) as value, sensor_id').group(:sensor_id).where("created_at between '#{@start_date}' and '#{@end_date}'").count_by("created_at", :group_by => points_frequency, :group_column => "date")
+      else
+        @selected_data << sensor.data_sensors.select('*, created_at as date').where("created_at between '#{@start_date}' and '#{@end_date}'").order("created_at ASC")
+      end
     end 
-    # @array_data = Sensor.genSensorList(@selected_data, @sensor)
   
     respond_to do |format|
       format.json
@@ -45,7 +51,7 @@ class SensorsController < ApplicationController
 
     respond_to do |format|
       if @sensor.save
-        format.html { redirect_to @sensor, notice: 'Sensor was successfully created.' }
+        format.html { redirect_to @sensor, flash: { info: "Sensor was successfully created."} }
         format.json { render action: 'show', status: :created, location: @sensor }
       else
         format.html { render action: 'new' }
@@ -59,7 +65,7 @@ class SensorsController < ApplicationController
   def update
     respond_to do |format|
       if @sensor.update(sensor_params)
-        format.html { redirect_to @sensor, notice: 'Sensor was successfully updated.' }
+        format.html { redirect_to @sensor, flash: { info: "Sensor was successfully updated." }}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -73,7 +79,7 @@ class SensorsController < ApplicationController
   def destroy
     @sensor.destroy
     respond_to do |format|
-      format.html { redirect_to sensors_url }
+      format.html { redirect_to sensors_list_path }
       format.json { head :no_content }
     end
   end

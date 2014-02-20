@@ -1,24 +1,30 @@
-<p id="notice"><%= notice %></p>
+<% content_for :head_title do %>
+  Capteur
+<% end %>
 
-<p>
-  <strong>Frequency:</strong>
-  <%= @sensor.frequency %>
-</p>
+<section class="row">
+  <div class="sec_header col-md-12">
+    <h2>Detail du capteur</h2>
+  </div>
+  <div class="sec_content col-md-12">
+    <p>
+      <strong>Name:</strong>
+      <%= @sensor.name %>
+    </p>
+    <p>
+      <strong>Frequency:</strong>
+      <%= @sensor.frequency %>
+    </p>
+    <p>
+      <strong>Modulation:</strong>
+      <%= @sensor.modulation.name if @sensor.modulation %>
+    </p>
+    <p>
+      <strong>Room:</strong>
+      <%= @sensor.room.name if @sensor.room %>
+    </p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @sensor.name %>
-</p>
-
-<p>
-  <strong>Modulation:</strong>
-  <%= @sensor.modulation %>
-</p>
-
-<p>
-  <strong>Room:</strong>
-  <%= @sensor.room %>
-</p>
-
-<%= link_to 'Edit', edit_sensor_path(@sensor) %> |
-<%= link_to 'Back', sensors_path %>
+    <%= link_to 'Edit', edit_sensor_path(@sensor) %>
+    <%= link_to 'Back', sensors_list_path %> 
+  </div>
+</section>

@@ -11,6 +11,8 @@ jQuery(document).ready ($) ->
   window.sensors_data = []
   start_date = 0
   start_date_max = 0
+  points_frequency = "none"
+  points_frequency_changed = false
   end_date = 0
   end_date_max = 0
   init_data_length = 30
@@ -59,6 +61,8 @@ jQuery(document).ready ($) ->
       start_date_max = start_date
     else if end_date_max < end_date and start_date_max <= start_date
       end_date_max = end_date
+    else if points_frequency_changed == true
+      points_frequency_changed = false
     else
       #We check if we have data for required sensor
       key_exist = false
@@ -72,10 +76,11 @@ jQuery(document).ready ($) ->
 
     $.ajax
       type: "POST"
-      url: url #"sensors/"+element.val()+"/sensor_data"
+      url: url 
       data: 
         start_date: start_date_max
         end_date: end_date_max
+        points_frequency: points_frequency
       dataType: "json"
       success: (data) ->
         if typeof g is 'function'
@@ -83,6 +88,21 @@ jQuery(document).ready ($) ->
         if typeof f is 'function'
           f()
     return
+
+  $("select[name=\"points_frequency\"]").change ->
+    points_frequency_changed = true
+    points_frequency = $("option:selected",this).val()
+    getData null
+      , null
+      , ->
+        graph.updateData graph.options.data, start_date, end_date
+      , (data) ->
+        window.sensors_data.length = 0
+        $.each data.selected_data, ->
+          $.merge(sensors_data, this) 
+    return
+  
+
   $("li").click ->
     $("nav>ul>li").removeClass "active"
     $(this).addClass "active"
@@ -140,7 +160,7 @@ jQuery(document).ready ($) ->
     resize: true
     minVal: true
     maxVal: true
-    sortData: false
+    sortedData: true
   )
   $("#reportrange").daterangepicker
     ranges:

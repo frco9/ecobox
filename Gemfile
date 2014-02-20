@@ -67,4 +67,6 @@ gem 'morrisjs-rails', :git => 'http://github.com/frco9/morrisjs-rails.git'
 
 gem 'momentjs-rails'
 
+gem 'sql_funk', :git => 'http://github.com/frco9/sql_funk'
+
 ruby '2.0.0'
