@@ -70,3 +70,6 @@ gem 'momentjs-rails'
 gem 'sql_funk', :git => 'http://github.com/frco9/sql_funk'
 
 ruby '2.0.0'
+
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'

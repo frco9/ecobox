@@ -10,6 +10,7 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<<<<<<< HEAD
   <div id="foreground" class="my_container">
     <header class="row zindex-header">
       <div id="logo" class="col-sm-2 visible-sm visible-md visible-lg"><h3>Ecobox</h3></div>
@@ -32,16 +33,17 @@
   				</div>
           </div>
           </a>
-                    <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
+          <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
             <% if signed_in? %>   
               <li><%= link_to "Profil", current_user %></li>
-              <li><%= link_to "Paramètres", '#'%></li>
+              <li><%= link_to "Utilisateurs", users_path %></li>
+              <li><%= link_to "Paramètres", edit_user_path(current_user)%></li>
               <li><%= link_to "Déconnexion", signout_path, method: "delete" %></li>
-            <% else %>
-              <li><%= link_to "Se connecter", signin_path %></li>
-              <li><%= link_to "S'inscrire", signup_path %></li>
-            <% end %>
-            </ul>
+              <% if current_user.admin? %>
+                <li><%= link_to "Ajouter un utilisateur", signup_path %></li>
+              <% end %>
+            <% end%>
+          </ul>
           <span id="username" class="visible-xs">Username</span>
         </div>
       </div>
