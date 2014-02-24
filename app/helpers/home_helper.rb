@@ -37,7 +37,7 @@ module HomeHelper
                avg = sum/tab.length
                return avg
             else
-               return 9999
+               return "Unavailable"
             end
       end
 
