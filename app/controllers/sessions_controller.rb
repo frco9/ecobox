@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  layout "login"
+	layout "login"
 
 	def new
 	
@@ -9,15 +9,15 @@ class SessionsController < ApplicationController
 		user = User.find_by(email: params[:session][:email].downcase)
 		if user && user.authenticate(params[:session][:password])
 			sign_in user
-			redirect_to user
+			redirect_back_or user
 		else
-			flash.now[:error] = 'Invalid email/password combination' # Not quite right!
+			flash.now[:danger] = 'Invalid email/password combination'
 			render 'new'
 		end
 	end
 
 	def destroy
 		sign_out 
-		render 'new'
+		redirect_to signin_path 
 	end
 end

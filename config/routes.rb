@@ -1,22 +1,23 @@
 Ecobox::Application.routes.draw do
   resources :sessions, only: [:new, :create, :destroy]
   
-  resources :sensors 
+  match "/sensors/list" => "sensors#list", via: :get
   match "/sensors/:id/sensor_data" => "sensors#sensor_data", via: [:get, :post]
+  resources :sensors 
 
   resources :users
-  root 'sensors#index'
-  match '/signup',  to: 'users#new',     	via: 'get'
-  match '/signin',  to: 'sessions#new',     via: 'get'
-  match '/signout', to: 'sessions#destroy',	via: 'delete'
+  match '/signup',  to: 'users#new',     	via: :get
+  match '/signin',  to: 'sessions#new',     via: :get
+  match '/signout', to: 'sessions#destroy',	via: :delete
 
   resources :home
-  match '/home',  to: 'home#index',     via: 'get'
+  match '/home',  to: 'home#index',     via: :get
+  root 'home#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  # root 'welcome#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

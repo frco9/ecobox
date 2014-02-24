@@ -1,0 +1,40 @@
+<% content_for :head_title do %>
+  Capteurs
+<% end %>
+
+<section class="row">
+  <div class="sec_header col-md-12">
+    <h2>Liste des capteurs</h2>
+  </div>
+  <div class="sec_content col-md-12">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Frequency</th>
+          <th>Modulation</th>
+          <th>Room</th>
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% @sensors.each do |sensor| %>
+          <tr>
+            <td><%= sensor.name %></td>
+            <td><%= sensor.frequency %></td>
+            <td><%= sensor.modulation.name if sensor.modulation %></td>
+            <td><%= sensor.room.name if sensor.room %></td>
+            <td><%= link_to 'Show', sensor %></td>
+            <td><%= link_to 'Edit', edit_sensor_path(sensor) %></td>
+            <td><%= link_to 'Destroy', sensor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    
+    <%= link_to 'New Sensor', new_sensor_path %>  
+  </div>
+</section>

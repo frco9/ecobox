@@ -12,20 +12,20 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :frequency %><br>
-    <%= f.text_field :frequency %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :modulation_id %><br>
-    <%= f.text_field :modulation_id %>
+    <%= f.label :frequency %>
+    <%= f.text_field :frequency %>
   </div>
   <div class="field">
-    <%= f.label :room_id %><br>
-    <%= f.text_field :room_id %>
+    <%= f.label :modulation_id %>
+    <%= collection_select(:sensor, :modulation_id, Modulation.find(:all), :id, :name) %>
+  </div>
+  <div class="field">
+    <%= f.label :room_id %>
+    <%= collection_select(:sensor, :room_id, Room.find(:all), :id, :name) %>
   </div>
   <div class="actions">
     <%= f.submit %>

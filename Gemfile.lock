@@ -1,9 +1,15 @@
 GIT
   remote: http://github.com/frco9/morrisjs-rails.git
-  revision: 06058c7374a1cc70dc7e331e3e6cf305acb02fc7
+  revision: cfc0902f72b120a830681c62668c1938f74a9f82
   specs:
     morrisjs-rails (0.5.1)
       railties (> 3.1, < 5)
+
+GIT
+  remote: http://github.com/frco9/sql_funk
+  revision: eadf97bd44c47c39fcd85ce90c25295ee48f6a64
+  specs:
+    sql_funk (0.0.1)
 
 GIT
   remote: https://github.com/vitormil/faker
@@ -39,11 +45,13 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    arel (4.0.1)
+    arel (4.0.2)
     atomic (1.1.14)
     bcrypt-ruby (3.1.2)
     bootstrap-sass (3.0.3.0)
       sass (~> 3.2)
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
     builder (3.1.4)
     capybara (2.1.0)
       mime-types (>= 1.16)
@@ -51,7 +59,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
-    childprocess (0.4.0)
+    childprocess (0.5.1)
       ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
@@ -84,7 +92,8 @@ GEM
     multi_json (1.8.4)
     nokogiri (1.6.1)
       mini_portile (~> 0.5.0)
-    polyglot (0.3.3)
+    pg (0.17.1)
+    polyglot (0.3.4)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -144,7 +153,6 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sqlite3 (1.3.8)
     thor (0.18.1)
     thread_safe (0.1.3)
       atomic
@@ -152,13 +160,14 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.2.0)
+    turbolinks (2.2.1)
       coffee-rails
     tzinfo (0.3.38)
     uglifier (2.4.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     websocket (1.0.7)
+    will_paginate (3.0.4)
     xpath (2.0.0)
       nokogiri (~> 1.3)
 
@@ -168,6 +177,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby (~> 3.1.2)
   bootstrap-sass (~> 3.0.3.0)
+  bootstrap-will_paginate (= 0.0.9)
   capybara (= 2.1.0)
   coffee-rails (~> 4.0.0)
   faker!
@@ -175,6 +185,7 @@ DEPENDENCIES
   jquery-rails
   momentjs-rails
   morrisjs-rails!
+  pg
   rails (= 4.0.1)
   rails_12factor
   raphael-rails
@@ -182,6 +193,7 @@ DEPENDENCIES
   sass-rails (~> 4.0.0)
   sdoc
   selenium-webdriver (= 2.35.1)
-  sqlite3
+  sql_funk!
   turbolinks
   uglifier (>= 1.3.0)
+  will_paginate (= 3.0.4)

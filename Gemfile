@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.1'
 
 # Use postgreSQL as the database for Active Record
-gem 'sqlite3'
+gem 'pg'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -67,4 +67,9 @@ gem 'morrisjs-rails', :git => 'http://github.com/frco9/morrisjs-rails.git'
 
 gem 'momentjs-rails'
 
+gem 'sql_funk', :git => 'http://github.com/frco9/sql_funk'
+
 ruby '2.0.0'
+
+gem 'will_paginate', '3.0.4'
+gem 'bootstrap-will_paginate', '0.0.9'

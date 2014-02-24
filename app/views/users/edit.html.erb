@@ -1,0 +1,7 @@
+<% provide(:head_title, 'Modification du profil') %>
+<h1 class="center">Mettre a jour votre profil</h1>
+
+<%= form_for(@user) do |f| %>
+	<%= render 'fields', f: f %>
+	<%= f.submit "Enregistrer", class: "btn btn-large btn-success" %>
+<% end %>

@@ -14,11 +14,11 @@
 
 <section class="row">
   <div class="sec_header col-md-12 row">
-    <h2 class="col-md-8">Relev&eacute de temp&eacuterature</h2>
-    <div class="col-md-4" style="padding-right: 45px;">
+    <h2 class="col-md-7">Relev&eacute de temp&eacuterature</h2>
+    <div class="col-md-5" style="padding-right: 45px;">
       <div id="reportrange" class="2pull-right">
         <i class="glyphicon glyphicon-calendar"></i>
-        <span>December 5, 2013 - January 4, 2014</span>
+        <span></span>
         <b class="caret"></b>
       </div>
     </div>
@@ -32,39 +32,16 @@
           <option value="2">Capteur 2</option>
           <option value="3">Capteur 3</option>
         </select>
+        <select name="points_frequency">
+        <option selected="selected" value="none">None</option>
+        <option value="month">Month</option>
+        <option value="day">Day</option>
+        <option value="hour">Hour</option>
+        <option value="minute">Minute</option>
+      </select>
       </div>
     </div>
   </div>
 </section>
 
-<!-- <table>
-  <thead>
-    <tr>
-      <th>Frequency</th>
-      <th>Name</th>
-      <th>Modulation</th>
-      <th>Room</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @sensors.each do |sensor| %>
-      <tr>
-        <td><%= sensor.frequency %></td>
-        <td><%= sensor.name %></td>
-        <td><%= sensor.modulation %></td>
-        <td><%= sensor.room %></td>
-        <td><%= link_to 'Show', sensor %></td>
-        <td><%= link_to 'Edit', edit_sensor_path(sensor) %></td>
-        <td><%= link_to 'Destroy', sensor, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Sensor', new_sensor_path %> -->
+<!--  -->

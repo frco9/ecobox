@@ -20,3 +20,5 @@ config/database.yml
 config/database.yml.local
 
 dump.sql
+
+Gemfile
