@@ -1,54 +1,45 @@
 <%-# Adding js and css needed declaration to header -%>
 <% content_for :head_css_includes do %>
-  <%= stylesheet_link_tag "daterangepicker-bs3", "morris", "bootstrap-multiselect", media: "all" %>  
+<%= stylesheet_link_tag "daterangepicker-bs3", "morris", "bootstrap-multiselect", media: "all" %>  
 <% end %>
 
 <% content_for :head_js_includes do %>
-  <%= javascript_include_tag "moment.min", "daterangepicker", "bootstrap-multiselect", "raphael-min", "morris" %>
+<%= javascript_include_tag "moment.min", "daterangepicker", "bootstrap-multiselect", "raphael-min", "morris" %>
 <% end %>
 
 <% content_for :head_title do %>
-  Home
+Home
 <% end %>
 
 
 
-<!-- <section class="row"> -->
+<section class="row">
   <div class="sec_header col-md-12 row">
     <h2 class="col-md-8">Home</h2>
   </div>
   <section>
-    <article>
-      <tbody>
-	<% @rooms.each do |room| %>
-	<tr>
-	  <table>
-	    <tr>
-	      <td>room.name</td>
-	    </tr>
-	    <% @rooms.sensors.each do |sensor| %>
-	    <tr>
-	      <td> <%= sensor.name %> </td>
-	      <td>availability</td>
-	    </tr>
-	    <% end %>
-	  </table>
-	</tr>
-	<% end %>
-      </tbody>
-    </article>
-    <aside>
-      <tbody>
-	Current home's temperature: 
-      </tbody>
-      <b:if cond='@current_temp == 9999'>
-	<tbody>Unknown</tbody>
-	<b:else>
-	  <%= @current_temp %>
-	  <tbody>&deg;C</tbody>
-      </b:if>
-      
-    </aside>
-    
+    <!-- <p id="currenttemp"></p> -->
+      <tbody>    
+	<article>	  
+	 <td>temperature actuelle: <%= @current_temp %></td>
+	    <tbody>
+	      <% @rooms.each do |room| %>
+	      <tr>
+		<table>
+		  <tr>
+		    <td><%= room.name %></td>
+		  </tr>
+		  <% room.sensors.each do |sensor| %>
+		  <tr>
+		    <td> <%= sensor.name %> </td>
+		    <a id="availability"></a>
+		  </tr>
+		  <% end %>
+		</table>
+	      </tr>
+	      <% end %>
+	    </tbody>
+	</article>
   </section>
 </div>
+</section>
