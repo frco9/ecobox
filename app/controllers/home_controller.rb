@@ -48,7 +48,7 @@ class HomeController < ApplicationController
     @min_temp = min(@temperature_datas)
     @max_temp = max(@temperature_datas)
     @avg_temp = average(@temperature_datas)
-
+    @current_temp = current_value(@temp_type)
 
 # Getting unavailable sensors:
 

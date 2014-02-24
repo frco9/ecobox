@@ -41,6 +41,28 @@ module HomeHelper
             end
       end
 
+
+      def current_value(type_data)
+            datas = []
+            @sensors.each do |sensor|
+                data = sensor.data_sensors.last
+                if data.data_type == type_data and data.created_at.beginning_of_minute >= Time.now.beginning_of_minute-1
+                   datas << data
+               end
+            end
+           
+            if !datas.empty?
+               tmp = 0
+               datas.each do |data_sensor|
+                   tmp += data_sensor
+               end
+               return tmp/datas.length
+            else
+               return "Unavailable"
+            end
+      end
+
+
       def unavailable_sensors
             sensors_tab = []
             tmp = Time.now
