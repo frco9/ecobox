@@ -2,10 +2,10 @@ module HomeHelper
 
       def max(tab)
             if !tab.empty?
-               maximum = tab[0]
-               tab.each do |float|
-                     if float > maximum
-                        maximum = float
+               maximum = tab[0].value
+               tab.each do |data_sensor|
+                     if data_sensor.value > maximum
+                        maximum = data_sensor.value
                     end
                end
                return maximum
@@ -16,10 +16,10 @@ module HomeHelper
  
       def min(tab)
            if !tab.empty?
-              minimum = tab[0]
-              tab.each do |float|
-                    if float < minimum
-                        minimum = float
+              minimum = tab[0].value
+              tab.each do |data_sensor|
+                    if data_sensor.value < minimum
+                        minimum = data_sensor.value
                     end
               end
               return minimum
@@ -30,9 +30,9 @@ module HomeHelper
 
       def average(tab)
             if !tab.empty?
-               sum = 0
-               tab.each do |float|
-                    sum += float
+               sum = 0.0
+               tab.each do |data_sensor|
+                    sum += data_sensor.value
                end
                avg = sum/tab.length
                return avg
@@ -46,15 +46,16 @@ module HomeHelper
             datas = []
             @sensors.each do |sensor|
                 data = sensor.data_sensors.last
+# Use of datas from the 1-2 last minutes 
                 if data.data_type == type_data and data.created_at.beginning_of_minute >= Time.now.beginning_of_minute-1
                    datas << data
                end
             end
            
             if !datas.empty?
-               tmp = 0
+               tmp = 0.0
                datas.each do |data_sensor|
-                   tmp += data_sensor
+                   tmp += data_sensor.value
                end
                return tmp/datas.length
             else
@@ -66,11 +67,12 @@ module HomeHelper
       def unavailable_sensors
             sensors_tab = []
             tmp = Time.now
+# If a sensor have not sent a data from 2 min, It is considerate as unavailable 
             time_of_availability = Time.new(tmp.year,tmp.month,tmp.day,tmp.hour,tmp.min - 2,tmp.sec)
             
             @sensors.each do |sensor|
                  datas = sensor.data_sensors.last
-                 if datas.created_at < time_of_availability
+                 if datas.created_at <= time_of_availability
                      sensors_tab << sensor
                  end
             end
