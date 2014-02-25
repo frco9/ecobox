@@ -3,6 +3,9 @@ class HomeController < ApplicationController
   include HomeHelper
 # Main fonction of the Home page
   def index
+#Getting the datetime:
+
+    @tmp = Time.now
 
 # Getting of the last value for each sensors: 
 # => pb pour capteur a plusieurs types de donnees
@@ -19,7 +22,7 @@ class HomeController < ApplicationController
 #      @type.each do |data_type|
 #            datas = data_type.data_sensors
 #            datas.each do |data_sensor|
-#                if data_sensor.created_at.beginning_of_day ==  Time.now.beginning_of_day
+#                if data_sensor.created_at.beginning_of_day ==  @tmp.beginning_of_day
 #                    tmp << data_sensor
 #                end
 #            end
@@ -31,8 +34,8 @@ class HomeController < ApplicationController
     @dailydatas = []
     @sensors.each do |sensor|
           datas = sensor.data_sensors
-          datas.each do |data_sensor|   
-              if data_sensor.created_at.beginning_of_day ==  Time.now.beginning_of_day
+          datas.each do |data_sensor|
+              if data_sensor.created_at.beginning_of_day ==  @tmp.beginning_of_day
                   @dailydatas << data_sensor
               end
           end
@@ -59,13 +62,13 @@ class HomeController < ApplicationController
     @min_temp = min(@temperature_datas)
     @max_temp = max(@temperature_datas)
     @avg_temp = average(@temperature_datas)
-    @current_temp = current_value(@temperature_datas)
+    @current_temp = current_value(@temp_type)
 
 # Getting daily temperature statistics:
     @min_press = min(@pressure_datas)
     @max_press = max(@pressure_datas)
     @avg_press = average(@pressure_datas)
-    @current_press = current_value(@pressure_datas)
+    @current_press = current_value(@press_type)
 
 
 # Getting unavailable sensors:

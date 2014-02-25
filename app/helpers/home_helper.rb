@@ -47,7 +47,7 @@ module HomeHelper
             @sensors.each do |sensor|
                 data = sensor.data_sensors.last
 # Use of datas from the 1-2 last minutes 
-                if data.data_type == type_data and data.created_at.beginning_of_minute >= Time.now.beginning_of_minute-1
+                if data.data_type == type_data and data.created_at.beginning_of_minute >= Time.new(@tmp.year,@tmp.month,@tmp.day,@tmp.hour,@tmp.min - 1,0)
                    datas << data
                end
             end
@@ -66,9 +66,9 @@ module HomeHelper
 
       def unavailable_sensors
             sensors_tab = []
-            tmp = Time.now
+            
 # If a sensor have not sent a data from 2 min, It is considerate as unavailable 
-            time_of_availability = Time.new(tmp.year,tmp.month,tmp.day,tmp.hour,tmp.min - 2,tmp.sec)
+            time_of_availability = Time.new(@tmp.year,@tmp.month,@tmp.day,@tmp.hour,@tmp.min - 2,@tmp.sec)
             
             @sensors.each do |sensor|
                  datas = sensor.data_sensors.last
@@ -78,5 +78,4 @@ module HomeHelper
             end
             return sensors_tab
       end
-
 end
