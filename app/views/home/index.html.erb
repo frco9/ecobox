@@ -17,34 +17,37 @@ Home
   <div class="sec_header col-md-12 row">
     <h2 class="col-md-8">Home</h2>
   </div>
-  <section>
-    <!-- <p id="currenttemp"></p> -->
-      <tbody>    
-	<article>	  
-	 <td><br>Temperature minimale de la journée dans votre maison: <%= @min_temp %> &deg;C</td>
-         <td><br>Temperature maximale de la journée dans votre maison: <%= @max_temp %> &deg;C</td>
-         <td><br>Temperature moyenne de la journée dans votre maison: <%= @avg_temp %> &deg;C</td>
-         <td><br>Temperature actuelle dans votre maison: <%= @current_temp %> &deg;C<br></td>
+</section>
 
-	 <td><br>Pression minimale de la journée dans votre maison: <%= @min_press %> Pa</td>
-         <td><br>Pression maximale de la journée dans votre maison: <%= @max_press %> Pa</td>
-         <td><br>Pression moyenne de la journée dans votre maison: <%= @avg_press %> Pa</td>
-         <td><br>Pression actuelle dans votre maison: <%= @current_press %> Pa<br></td>
-	    
-	 <td><br>Capteur non disponibles:</td>
-	 <tbody>
-	   <% @unavailable_sensors.each do |sensor| %>
-	   <tr>
-	     <table>
-	       <tr>
-	 	 <td><%= sensor.room.name %>: </td>
-	 	 <td> <%= sensor.name %> </td>
-	       </tr>
-	     </table>
-	   </tr>
-	   <% end %>
-	 </tbody>
-	</article>
-  </section>
-</div>
+<section>
+  <article>
+    <div class="alert alert-warning">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <strong>Warning! Certains capteur ne sont inactifs: </strong>
+      <ul>
+	<% @unavailable_sensors.each do |sensor| %>
+	<li>
+	  <td><%= sensor.room.name %>: </td>
+	  <td> <%= sensor.name %> </td>
+	</li>
+	<% end %>
+      </ul>
+      Pensez à vérifier les piles des capteurs concernés par cette alerte
+    </div>
+  </article>
+
+
+  <article>	  
+    <td><br>Temperature minimale de la journée dans votre maison: <%= @min_temp %> &deg;C</td>
+    <td><br>Temperature maximale de la journée dans votre maison: <%= @max_temp %> &deg;C</td>
+    <td><br>Temperature moyenne de la journée dans votre maison: <%= @avg_temp %> &deg;C</td>
+    <td><br>Temperature actuelle dans votre maison: <%= @current_temp %> &deg;C<br></td>
+    
+    <td><br>Pression minimale de la journée dans votre maison: <%= @min_press %> Pa</td>
+    <td><br>Pression maximale de la journée dans votre maison: <%= @max_press %> Pa</td>
+    <td><br>Pression moyenne de la journée dans votre maison: <%= @avg_press %> Pa</td>
+    <td><br>Pression actuelle dans votre maison: <%= @current_press %> Pa<br></td>
+  </article>
+
+</section>
 </section>
