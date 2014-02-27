@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 class HomeController < ApplicationController
   include HomeHelper
+	before_action :signed_in_user
 # Main fonction of the Home page
   def index
 #Getting the datetime:
