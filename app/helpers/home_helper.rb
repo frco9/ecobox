@@ -72,7 +72,7 @@ module HomeHelper
             
             @sensors.each do |sensor|
                  datas = sensor.data_sensors.last
-                 if datas.created_at <= time_of_availability
+                 if datas.created_at < time_of_availability
                      sensors_tab << sensor
                  end
             end

@@ -35,18 +35,19 @@ class HomeController < ApplicationController
     @sensors.each do |sensor|
           datas = sensor.data_sensors
           datas.each do |data_sensor|
-              if data_sensor.created_at.beginning_of_day ==  @tmp.beginning_of_day
+              if data_sensor.created_at.beginning_of_day ==  Time.now.beginning_of_day
                   @dailydatas << data_sensor
               end
           end
     end
 
+logger.debug @dailydatas
+
 # Separation of datas by type: 
    @temperature_datas = []
    @pressure_datas = []
     
-   @dailydatas.each do |data_sensor|
-          
+   @dailydatas.each do |data_sensor|          
        if data_sensor.data_type == @temp_type
            @temperature_datas << data_sensor 
        else 
@@ -54,7 +55,6 @@ class HomeController < ApplicationController
               @pressure_datas << data_sensor
            end
        end
- 
    end 
    
 
