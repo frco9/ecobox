@@ -42,6 +42,27 @@ namespace :db do
                    data_type_id: data_type_id)
     end
 
+    
+  #AJOUT ADMIN ET AUTRES UTILISATEURS
+
+  User.create!(name: 'Admin',
+            firstname: 'Trent',
+            email: 'admin@gmail.com',
+            password: 'foobar',
+            password_confirmation: 'foobar',
+            admin: true)
+  10.times do |n|
+    name = Faker::Name.last_name
+    firstname = Faker::Name.first_name
+    email = "user-#{n}@ecobox.com"
+    password = "password"
+    User.create!(name: name,
+           firstname: firstname,
+           email: email,
+           password: password,
+           password_confirmation: password)
+  end
+
     #Capteur garage
     1000.times do |n|
       value = Faker::Number.between(5, 10)
@@ -81,25 +102,6 @@ namespace :db do
                    updated_at: created_at)
     end
 
-	#AJOUT ADMIN ET AUTRES UTILISATEURS
-
-	User.create!(name: 'Admin',
-						firstname: 'Trent',
-						email: 'admin@gmail.com',
-						password: 'foobar',
-						password_confirmation: 'foobar',
-						admin: true)
-	10.times do |n|
-	  name = Faker::Name.last_name
-	  firstname = Faker::Name.first_name
-	  email = "user-#{n}@ecobox.com"
-	  password = "password"
-	  User.create!(name: name,
-				   firstname: firstname,
-				   email: email,
-				   password: password,
-				   password_confirmation: password)
-	end
 
   end
 end
