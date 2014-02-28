@@ -19,15 +19,9 @@
         <div class="box centered">
           <div id="sign_title"></div>
           <div id="sign_content">
-
-			<div class="left">
-			<!-- flash -->
-            <% flash.each do |key, value| %>
-              <div class="alert alert-<%= key %>"><%= value %></div>
-		  	<% end %>
-			
-			<%= yield %>
-			</div>
+      			<div class="left">
+      			 <%= yield %>
+      			</div>
           </div>
         </div>
       </div>
