@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 	end
 
 	def new
-		if !current_user.admin?
+		if (!current_user and User.all.size > 0) or !current_user.admin? 
 			redirect_to signin_path, flash: { danger: "Seul l'administrateur a le droit d'ajouter des utilisateurs" }
 		end
 
