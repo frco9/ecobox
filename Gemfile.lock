@@ -1,9 +1,9 @@
 GIT
-  remote: http://github.com/frco9/morrisjs-rails.git
-  revision: cfc0902f72b120a830681c62668c1938f74a9f82
+  remote: http://github.com/frco9/rickshaw_rails.git
+  revision: a9e6854ab5178655a508d212e6c88eca6e13735d
   specs:
-    morrisjs-rails (0.5.1)
-      railties (> 3.1, < 5)
+    rickshaw_rails (1.4.6)
+      railties (>= 3.1.0)
 
 GIT
   remote: http://github.com/frco9/sql_funk
@@ -68,6 +68,8 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    d3_rails (3.4.1)
+      railties (>= 3.1.0)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
@@ -116,7 +118,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.1.1)
-    raphael-rails (2.1.2)
     rdoc (4.1.1)
       json (~> 1.4)
     rspec-core (2.13.1)
@@ -180,15 +181,15 @@ DEPENDENCIES
   bootstrap-will_paginate (= 0.0.9)
   capybara (= 2.1.0)
   coffee-rails (~> 4.0.0)
+  d3_rails (~> 3.4.1)
   faker!
   jbuilder (~> 1.2)
   jquery-rails
   momentjs-rails
-  morrisjs-rails!
   pg
   rails (= 4.0.1)
   rails_12factor
-  raphael-rails
+  rickshaw_rails!
   rspec-rails (= 2.13.1)
   sass-rails (~> 4.0.0)
   sdoc

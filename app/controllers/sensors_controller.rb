@@ -10,11 +10,23 @@ class SensorsController < ApplicationController
   # GET /sensors/1
   # GET /sensors/1.json
   def show
+    @sensors = Sensor.find(params[:id].split(','))
+    #Little hack : when many ids are given, only the first is shown for html response format.
+    @sensor = @sensors[0]
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json  # show.json.jbuilder
+    end
   end
 
   # GET /sensors/list
   def list
     @sensors = Sensor.all
+
+    respond_to do |format|
+      format.html # list.html.erb
+      format.json  # list.json.jbuilder
+    end
   end
   # GET /sensors/new
   def new
@@ -25,20 +37,35 @@ class SensorsController < ApplicationController
   def edit
   end
 
+  def active_sensor
+    render :nothing => true
+
+    @sensors = Sensor.find(params[:id].split(','))
+    if Sensor.where(:is_activated => true).count() == 1 and !params[:is_activated]
+      return
+    end
+    @sensors.each do |sensor|
+      sensor.update(:is_activated => params[:is_activated])
+    end
+  end
+
   def sensor_data
     @sensors = Sensor.find(params[:id].split(','))
-    @start_date = DateTime.parse(params[:start_date]).to_s(:db)
-    @end_date = DateTime.parse(params[:end_date]).to_s(:db)
-    points_frequency = params[:points_frequency]
+    @start_date = DateTime.parse(params[:startDate]).to_s(:db) if params[:startDate]
+    @end_date = DateTime.parse(params[:endDate]).to_s(:db) if params[:endDate]
+    points_frequency = params[:pointFrequency]
+    valid_frequency = false
+    valid_frequency = true if ["year", "month", "day", "hour", "minute", "second"].include? points_frequency
     @selected_data = []
     @sensors.each do |sensor|
-      if ["year", "month", "day", "hour", "minute", "second"].include? points_frequency
-        @selected_data << sensor.data_sensors.select('round(AVG(value)::numeric,2) as value, sensor_id').group(:sensor_id).where("created_at between '#{@start_date}' and '#{@end_date}'").count_by("created_at", :group_by => points_frequency, :group_column => "date")
-      else
-        @selected_data << sensor.data_sensors.select('*, created_at as date').where("created_at between '#{@start_date}' and '#{@end_date}'").order("created_at ASC")
-      end
+      query = sensor.data_sensors
+      query = query.select('round(AVG(value)::numeric,2) as value, sensor_id').group(:sensor_id) if valid_frequency
+      query = query.select('*, created_at as date') unless valid_frequency
+      query = query.where("created_at between '#{@start_date}' and '#{@end_date}'") if @start_date and @end_date
+      query = query.count_by("created_at", :group_by => points_frequency, :group_column => "date") if valid_frequency
+      query = query.order("date ASC")
+      @selected_data << query
     end 
-  
     respond_to do |format|
       format.json
     end

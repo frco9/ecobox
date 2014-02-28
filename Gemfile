@@ -61,15 +61,14 @@ end
 
 gem 'faker', :git => 'https://github.com/vitormil/faker'
 
-gem 'raphael-rails'
-
-gem 'morrisjs-rails', :git => 'http://github.com/frco9/morrisjs-rails.git'
-
+gem "d3_rails", "~> 3.4.1"
 gem 'momentjs-rails'
+gem 'rickshaw_rails', :git => 'http://github.com/frco9/rickshaw_rails.git'
 
 gem 'sql_funk', :git => 'http://github.com/frco9/sql_funk'
 
-ruby '2.0.0'
-
 gem 'will_paginate', '3.0.4'
 gem 'bootstrap-will_paginate', '0.0.9'
+
+
+ruby '2.0.0'

@@ -12,5 +12,5 @@ json.array!(@sensors) do |sensor|
 		json.disabled false
 	end
 	json.id sensor.id
-	json.color "palette.color()"
+	json.color 'palette.color()'
 end
