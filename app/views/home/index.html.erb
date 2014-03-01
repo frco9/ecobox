@@ -1,6 +1,7 @@
 <%-# Adding js and css needed declaration to header -%>
 <% content_for :head_css_includes do %>
-<%= stylesheet_link_tag "daterangepicker-bs3", "morris", "bootstrap-multiselect", media: "all" %>  
+<!-- <%= stylesheet_link_tag "daterangepicker-bs3", "morris", "bootstrap-multiselect", media: "all" %>   -->
+<%= stylesheet_link_tag "home", media: "all", "data-turbolinks-track" => true %>
 <% end %>
 
 <% content_for :head_js_includes do %>
@@ -16,13 +17,31 @@ Home
 
 </head> 
 
-
 <section class="row">
   <div class="sec_header col-md-12 row">
-    <h2 class="col-md-8">Home</h2>
+    <h2>Acceuil</h2>
+  </div>
+  <%= render 'layouts/flash' %>
+  <div class="sec_content col-md-12">
+    <div class="row">
+      <div class="col-md-12">
+        <div id="yAxis" style="position: absolute; width: 20px;"></div>
+        <div id="temp_chart" style="margin-left:20px;"></div>
+        <div id="selectorContainer" class="row">
+          <div id="leftFreq" class="col-xs-1"></div>
+          <div id="preview" class="col-xs-10"></div>
+          <div id="rightFreq" class="col-xs-1"></div>
+        </div>
+        <div class="row">
+          <div id="freqSelector" class="col-xs-12"></div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div id="legend"></div>
+      </div>
+    </div>
   </div>
 </section>
-
 
 <% if !@unavailable_sensors.empty? %>
 <article>
