@@ -1,5 +1,5 @@
 module HomeHelper
-
+      include ActionView::Helpers::NumberHelper
       def max(tab)
             if !tab.empty?
                maximum = tab[0].value
@@ -8,7 +8,7 @@ module HomeHelper
                         maximum = data_sensor.value
                     end
                end
-               return maximum
+               return number_with_precision(maximum, :precision => 2)
             else
                return "Unavailable"
             end
@@ -22,7 +22,7 @@ module HomeHelper
                         minimum = data_sensor.value
                     end
               end
-              return minimum
+              return number_with_precision(minimum, :precision => 2)
            else
               return "Unavailable"
            end
@@ -35,7 +35,7 @@ module HomeHelper
                     sum += data_sensor.value
                end
                avg = sum/tab.length
-               return avg
+               return number_with_precision(avg, :precision => 2)
             else
                return "Unavailable"
             end
@@ -57,7 +57,8 @@ module HomeHelper
                datas.each do |data_sensor|
                    tmp += data_sensor.value
                end
-               return tmp/datas.length
+               tmp = tmp/datas.length
+               return number_with_precision(tmp, :precision => 2)
             else
                return "Unavailable"
             end

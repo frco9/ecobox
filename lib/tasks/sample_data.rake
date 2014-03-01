@@ -90,7 +90,7 @@ namespace :db do
     end
 
     #Capteur interieur
-    100000.times do |n|
+    5000.times do |n|
       value = Faker::Number.between(18, 25)
       data_type_id = Faker::Number.between(1, DataType.all.length)
       sensor_id = Faker::Number.between(3, Sensor.all.length)

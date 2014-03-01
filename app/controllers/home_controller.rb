@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 class HomeController < ApplicationController
-  include HomeHelper
+    include HomeHelper
 	before_action :signed_in_user
 # Main fonction of the Home page
   def index
@@ -34,15 +34,13 @@ class HomeController < ApplicationController
 # Getting of the daily datas:      
     @dailydatas = []
     @sensors.each do |sensor|
-          datas = sensor.data_sensors
-          datas.each do |data_sensor|
-              if data_sensor.created_at.beginning_of_day ==  Time.now.beginning_of_day
+          @datas = sensor.data_sensors 
+          @datas.each do |data_sensor|
+              if data_sensor.created_at.beginning_of_day ==  Time.current.beginning_of_day
                   @dailydatas << data_sensor
               end
           end
     end
-
-logger.debug @dailydatas
 
 # Separation of datas by type: 
    @temperature_datas = []
@@ -58,7 +56,6 @@ logger.debug @dailydatas
        end
    end 
    
-
 # Getting daily temperature statistics:
     @min_temp = min(@temperature_datas)
     @max_temp = max(@temperature_datas)
@@ -74,7 +71,9 @@ logger.debug @dailydatas
 
 # Getting unavailable sensors:
 
-    @unavailable_sensors = unavailable_sensors
-   
+    @unavailable_sensors = unavailable_sensors   
+    logger.debug Time.current
+    logger.debug Time.now
+    logger.debug DataSensor.last.created_at
   end       
 end
