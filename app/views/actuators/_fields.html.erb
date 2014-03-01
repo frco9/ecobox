@@ -1,0 +1,29 @@
+<% if @actuator.errors.any? %>
+	<div id="error_explanation">
+		<div class="alert alert-danger ">
+	    	The form contains <%= pluralize(@actuator.errors.count, "error") %>.
+	    </div>
+	    <ul>
+	    <% @actuator.errors.full_messages.each do |msg| %>
+	    	<li>* <%= msg %></li>
+	    <% end %>
+	    </ul>
+	</div>
+<% end %>
+
+<div class="field">
+	<%= f.label :name, "Nom" %>
+	<%= f.text_field :name %>
+</div>
+<div class="field">
+	<%= f.label :frequency, "Fréquence" %>
+	<%= f.text_field :frequency %>
+</div>
+<div class="field">
+	<%= f.label :modulation_id, "Modulation" %>
+	<%= collection_select(:actuator, :modulation_id, Modulation.find(:all), :id, :name) %>
+</div>
+<div class="field">
+	<%= f.label :room_id, "Pièce" %>
+	<%= collection_select(:actuator, :room_id, Room.find(:all), :id, :name) %>
+</div>
