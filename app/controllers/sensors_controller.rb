@@ -22,7 +22,10 @@ class SensorsController < ApplicationController
   # GET /sensors/list
   def list
     @sensors = Sensor.all
-
+    #We set as max end_date the minimum of the last data from each sensors
+    @maxDate = Sensor.all.map { |sensor| sensor.data_sensors.order("created_at").last[:created_at]}.min
+    #We set as min start_date the maximum of the first data from each sensors
+    @minDate = Sensor.all.map { |sensor| sensor.data_sensors.order("created_at").first[:created_at]}.max
     respond_to do |format|
       format.html # list.html.erb
       format.json  # list.json.jbuilder
