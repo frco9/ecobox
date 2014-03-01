@@ -23,8 +23,6 @@
 
 /lib/tasks/sample_data.rake
 
-/lib/tasks/sample_more_data.rake
-
 /dump.sql
 
 /Gemfile
