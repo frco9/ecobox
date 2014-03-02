@@ -8,8 +8,8 @@
 jQuery(document).ready ($) ->
   palette = new Rickshaw.Color.Palette()
   $.get '/sensors/list'
-    , (ajax_series) ->
-      ajax_series.forEach (s) ->
+    , (ajax) ->
+      ajax.series.forEach (s) ->
         s.color = palette.color()
 
       ajaxGraph = new Rickshaw.Graph.Ajax.PointFrequency(
@@ -17,14 +17,16 @@ jQuery(document).ready ($) ->
         width: $("#temp_chart").width()
         height: $("#temp_chart").height()
         renderer: "line"
-        dataURL: "/sensors/"+Rickshaw.Graph.Ajax.genURL(ajax_series)+"/sensor_data"
+        dataURL: "/sensors/"+Rickshaw.Graph.Ajax.genURL(ajax.series)+"/sensor_data"
         dataType: "json"
         is_init:false
-        series: ajax_series
+        series: ajax.series
         leftElement: $("#leftFreq")[0]
         rightElement: $("#rightFreq")[0]
         selectorElement: $("#freqSelector")[0]
         selectedFrequency: 'month'
+        minDate: ajax.minDate
+        maxDate: ajax.maxDate
 
         # onData: (d) ->
         #   Rickshaw.Series.zeroFill d
