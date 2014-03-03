@@ -1,1 +1,36 @@
-<%= @user.firstname %>, <%= @user.name %>, <%= @user.email %>
+<% provide(:head_title, "Utilisateur") %>
+<h1>Utilisateur</h1>
+
+<section class="row">
+  <div class="sec_header col-md-12">
+    <h2>Detail de l'utilisateur</h2>
+  </div>
+  <div class="sec_content col-md-12">
+    <p>
+      <strong>Prénom :</strong>
+      <%= @user.firstname %>
+    </p>
+    <p>
+      <strong>Nom :</strong>
+      <%= @user.name %>
+    </p>
+    <p>
+      <strong>Mail :</strong>
+	  <%= @user.email %>
+    </p>
+    <p>
+      <strong>Statut :</strong>
+	  <%= "Administrateur" if @user.admin %>
+	  <%= "Opérateur" if !@user.admin %>
+	</p>
+	<%= link_to 'Retour', users_url, class: "btn btn-large btn-success" %> 
+	<% if current_user.admin? or current_user?(@user) %>
+		<%= link_to 'Modification', edit_user_path(@user), class: "btn btn-large btn-primary" %>
+	<% end %>
+	<% if current_user.admin? %>
+		<%= link_to "Supprimer", @user, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer l'utilisateur?" }, class: "btn btn-large btn-danger" %>
+	<% end %>
+</div>
+
+
+</section>

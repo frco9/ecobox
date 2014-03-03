@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+#source 'https://rails-assets.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.1'
@@ -23,7 +24,10 @@ gem 'jquery-rails'
 
 # Use bootstrap as Css and Js library
 # gem 'twitter-bootstrap-rails', :git => 'http://github.com/seyhunak/twitter-bootstrap-rails.git'
-gem 'bootstrap-sass', '~> 3.0.3.0'
+gem 'bootstrap-sass', '~> 3.1.1'
+gem "bootstrap-switch-rails"
+#gem 'rails-assets-bootstrap-switch'
+#gem 'rails-assets-bootstrap'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
