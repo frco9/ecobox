@@ -62,17 +62,15 @@ Home
 </article>
 <% end %>
 
+<% @stats.each do |daily_stats| %>
 <article>	  
-  <td><br>Temperature minimale de la journée dans votre maison: <%= @min_temp %> &deg;C</td>
-  <td><br>Temperature maximale de la journée dans votre maison: <%= @max_temp %> &deg;C</td>
-  <td><br>Temperature moyenne de la journée dans votre maison: <%= @avg_temp %> &deg;C</td>
-  <td><br>Temperature actuelle dans votre maison: <%= @current_temp %> &deg;C<br></td>
-  
-  <td><br>Pression minimale de la journée dans votre maison: <%= @min_press %> Pa</td>
-  <td><br>Pression maximale de la journée dans votre maison: <%= @max_press %> Pa</td>
-  <td><br>Pression moyenne de la journée dans votre maison: <%= @avg_press %> Pa</td>
-  <td><br>Pression actuelle dans votre maison: <%= @current_press %> Pa<br></td>
+  <td><br><%= daily_stats.typename %> minimale de la journée dans votre maison: <%= daily_stats.min %> </td>
+  <td><br><%= daily_stats.typename %> maximale de la journée dans votre maison: <%= daily_stats.max %> </td>
+  <td><br><%= daily_stats.typename %> moyenne de la journée dans votre maison: <%= daily_stats.avg %></td>
+  <td><br><%= daily_stats.typename %> actuelle dans votre maison: <%= daily_stats.current %> <br></td>  
 </article>
+<% end %>
+
 
 </section>
 </section>
