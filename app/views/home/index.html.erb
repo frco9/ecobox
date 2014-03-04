@@ -1,11 +1,10 @@
 <%-# Adding js and css needed declaration to header -%>
 <% content_for :head_css_includes do %>
-<!-- <%= stylesheet_link_tag "daterangepicker-bs3", "morris", "bootstrap-multiselect", media: "all" %>   -->
 <%= stylesheet_link_tag "home", media: "all", "data-turbolinks-track" => true %>
 <% end %>
 
 <% content_for :head_js_includes do %>
-<%= javascript_include_tag "moment.min", "daterangepicker", "bootstrap-multiselect", "raphael-min", "morris" %>
+<%= javascript_include_tag "home", "data-turbolinks-track" => true %>
 <% end %>
 
 <% content_for :head_title do %>
@@ -18,59 +17,38 @@ Home
 </head> 
 
 <section class="row">
-  <div class="sec_header col-md-12 row">
+  <div class="sec_header col-md-12">
     <h2>Acceuil</h2>
   </div>
   <%= render 'layouts/flash' %>
   <div class="sec_content col-md-12">
     <div class="row">
       <div class="col-md-12">
-        <div id="yAxis" style="position: absolute; width: 20px;"></div>
-        <div id="temp_chart" style="margin-left:20px;"></div>
-        <div id="selectorContainer" class="row">
-          <div id="leftFreq" class="col-xs-1"></div>
-          <div id="preview" class="col-xs-10"></div>
-          <div id="rightFreq" class="col-xs-1"></div>
-        </div>
-        <div class="row">
-          <div id="freqSelector" class="col-xs-12"></div>
-        </div>
+        <% if !@unavailable_sensors.empty? %>
+          <div class="alert alert-warning">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
+            <strong>Warning! Certains capteur ne sont inactifs: </strong>
+            <ul>
+              <% @unavailable_sensors.each do |sensor| %>
+              <li>
+            <td><%= sensor.room.name %>: </td>
+            <td> <%= sensor.name %> </td>
+              </li>
+              <% end %>
+            </ul>
+            Pensez à vérifier les piles des capteurs concernés par cette alerte
+          </div>
+        <% end %>
       </div>
+      <% @stats.each do |daily_stats| %>
       <div class="col-md-12">
-        <div id="legend"></div>
+        <td><br><%= daily_stats.typename %> minimale de la journée dans votre maison: <%= daily_stats.min %> </td>
+        <td><br><%= daily_stats.typename %> maximale de la journée dans votre maison: <%= daily_stats.max %> </td>
+        <td><br><%= daily_stats.typename %> moyenne de la journée dans votre maison: <%= daily_stats.avg %></td>
+        <td><br><%= daily_stats.typename %> actuelle dans votre maison: <%= daily_stats.current %> <br></td>  
       </div>
+      <% end %>
     </div>
   </div>
-</section>
-
-<% if !@unavailable_sensors.empty? %>
-<article>
-  <div class="alert alert-warning">
-    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-    <strong>Warning! Certains capteur ne sont inactifs: </strong>
-    <ul>
-      <% @unavailable_sensors.each do |sensor| %>
-      <li>
-  	<td><%= sensor.room.name %>: </td>
-  	<td> <%= sensor.name %> </td>
-      </li>
-      <% end %>
-    </ul>
-    Pensez à vérifier les piles des capteurs concernés par cette alerte
-  </div>
-</article>
-<% end %>
-
-<% @stats.each do |daily_stats| %>
-<article>	  
-  <td><br><%= daily_stats.typename %> minimale de la journée dans votre maison: <%= daily_stats.min %> </td>
-  <td><br><%= daily_stats.typename %> maximale de la journée dans votre maison: <%= daily_stats.max %> </td>
-  <td><br><%= daily_stats.typename %> moyenne de la journée dans votre maison: <%= daily_stats.avg %></td>
-  <td><br><%= daily_stats.typename %> actuelle dans votre maison: <%= daily_stats.current %> <br></td>  
-</article>
-<% end %>
-
-
-</section>
 </section>
