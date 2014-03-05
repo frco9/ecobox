@@ -43,6 +43,45 @@ namespace :db do
                    data_type_id: data_type_id)
     end
 
+    #ACTUATORS
+    10.times do |n|
+      modulation_id  = Faker::Number.between(1, modulations.length)
+      room_id = Faker::Number.between(1, rooms.length)
+      created_at  = Faker::Date.between("01/01/2014", "02/02/2014")
+    rand_boolean = [true, false].sample
+      Actuator.create!(frequency: 868.3,
+                   name: "Actionneur #{n}",
+                   modulation_id: modulation_id,
+                   room_id: room_id,
+           activated: rand_boolean,
+                   created_at: created_at,
+                   updated_at: created_at)
+    end
+
+    10.times do |n|
+      data_type_id = Faker::Number.between(1, data_types.length)
+      ActuatorsDataType.create!(actuator_id: n,
+                   data_type_id: data_type_id)
+    end
+
+    3.times do |n|
+      data_type_id = Faker::Number.between(1, data_types.length)
+      actuator_id = Faker::Number.between(1, Actuator.all.length)
+      ActuatorsDataType.create!(actuator_id: actuator_id,
+                   data_type_id: data_type_id)
+    end
+
+    1000.times do |n|
+      value = Faker::Number.between(5, 30)
+      data_type_id = Faker::Number.between(1, DataType.all.length)
+      actuator_id= Faker::Number.between(1, Actuator.all.length)
+      created_at  = Faker::Date.between("01/01/2013", "02/02/2014")
+      DataActuator.create!(value: value,
+                   actuator_id: actuator_id,
+                   data_type_id: data_type_id,
+                   created_at: created_at,
+                   updated_at: created_at)
+    end
     
     #AJOUT ADMIN ET AUTRES UTILISATEURS
     User.create!(name: 'Admin',
@@ -102,45 +141,5 @@ namespace :db do
                    updated_at: created_at)
     end
 
-
-    #ACTUATORS
-    10.times do |n|
-      modulation_id  = Faker::Number.between(1, modulations.length)
-      room_id = Faker::Number.between(1, rooms.length)
-      created_at  = Faker::Date.between("01/01/2014", "02/02/2014")
-    rand_boolean = [true, false].sample
-      Actuator.create!(frequency: 868.3,
-                   name: "Actionneur #{n}",
-                   modulation_id: modulation_id,
-                   room_id: room_id,
-           activated: rand_boolean,
-                   created_at: created_at,
-                   updated_at: created_at)
-    end
-
-    10.times do |n|
-      data_type_id = Faker::Number.between(1, data_types.length)
-      ActuatorsDataType.create!(actuator_id: n,
-                   data_type_id: data_type_id)
-    end
-
-    3.times do |n|
-      data_type_id = Faker::Number.between(1, data_types.length)
-      actuator_id = Faker::Number.between(1, Actuator.all.length)
-      ActuatorsDataType.create!(actuator_id: actuator_id,
-                   data_type_id: data_type_id)
-    end
-
-    1000.times do |n|
-      value = Faker::Number.between(5, 30)
-      data_type_id = Faker::Number.between(1, DataType.all.length)
-      actuator_id= Faker::Number.between(1, Actuator.all.length)
-      created_at  = Faker::Date.between("01/01/2013", "02/02/2014")
-      DataActuator.create!(value: value,
-                   actuator_id: actuator_id,
-                   data_type_id: data_type_id,
-                   created_at: created_at,
-                   updated_at: created_at)
-    end
   end
 end

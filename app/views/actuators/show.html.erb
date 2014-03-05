@@ -1,3 +1,7 @@
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
+<% end %>
+
 <% provide(:head_title, "Actionneur") %>
 
 <h1>Actionneur</h1>

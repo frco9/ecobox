@@ -15,5 +15,4 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-switch
-//= require actuators
 
