@@ -16,3 +16,4 @@
 //= require bootstrap
 //= require bootstrap-switch
 //= require home
+//= require actuators

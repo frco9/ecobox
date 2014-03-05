@@ -1,4 +1,4 @@
-alert "Hello CoffeeScript!"
+jQuery('document').ready ($) ->
+	$("[name='mycheckbox']").bootstrapSwitch()
+	$("[name='actuator[activated]']").bootstrapSwitch()
 
-jQuery(document).ready ($) ->
-	$("[name='my-checkbox']").bootstrapSwitch();

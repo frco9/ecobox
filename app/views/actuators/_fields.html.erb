@@ -27,3 +27,7 @@
 	<%= f.label :room_id, "Pièce" %>
 	<%= collection_select(:actuator, :room_id, Room.find(:all), :id, :name) %>
 </div>
+<div class="field">
+	<%= f.label :activated, "Etat" %>
+	<%= f.check_box :activated %>
+</div>

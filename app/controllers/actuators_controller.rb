@@ -47,7 +47,7 @@ class ActuatorsController < ApplicationController
 		end
 
 		def actuator_params
-		  params.require(:actuator).permit(:frequency, :name, :modulation_id, :room_id)
+		  params.require(:actuator).permit(:frequency, :name, :modulation_id, :room_id, :activated)
 		end
 		
 		def admin_user
