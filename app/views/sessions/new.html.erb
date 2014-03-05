@@ -1,6 +1,7 @@
 <% provide(:head_title, "Connexion") %>
 <h1 class="center">Connexion</h1>
 
+<%= render 'layouts/flash' %>
 
 <%= form_for(:session, url: sessions_path) do |f| %>
 

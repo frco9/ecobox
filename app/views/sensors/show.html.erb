@@ -3,6 +3,7 @@
 <% end %>
 
 <section class="row">
+	<%= render 'layouts/flash' %>
 	<div class="sec_header col-md-12">
 		<h2>Detail du capteur</h2>
 	</div>
@@ -24,7 +25,11 @@
 		  <%= @sensor.room.name if @sensor.room %>
 		  
 		</p>
-		<%= link_to 'Modification', edit_sensor_path(@sensor) %>
-		<%= link_to 'Retour', sensors_list_path %> 
+
+		<%= link_to 'Retour', sensors_url, class: "btn btn-large btn-success" %> 
+        <% if current_user.admin? %> 
+            <%= link_to 'Modification', edit_sensor_path(@sensor), class: "btn btn-large btn-primary" %>
+            <%= link_to "Supprimer", @sensor, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "btn btn-large btn-danger" %>
+        <% end %>
 	</div>
 </section>

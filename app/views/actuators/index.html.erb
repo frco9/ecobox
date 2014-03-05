@@ -2,6 +2,8 @@
 <% provide(:head_title, "Actionneurs") %>
 <h1>Actionneurs</h1>
 
+<%= render 'layouts/flash' %>
+
 <% @rooms.each do |room| %>
 	<% @actuators = Actuator.where(room_id: room.id) %>
 	<h2><%= room.name %></h2>

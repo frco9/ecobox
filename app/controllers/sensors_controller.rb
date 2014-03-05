@@ -81,7 +81,7 @@ class SensorsController < ApplicationController
 
     respond_to do |format|
       if @sensor.save
-        format.html { redirect_to @sensor, flash: { info: "Sensor was successfully created."} }
+        format.html { redirect_to @sensor, flash: { success: "Sensor was successfully created."} }
         format.json { render action: 'show', status: :created, location: @sensor }
       else
         format.html { render action: 'new' }
@@ -95,7 +95,7 @@ class SensorsController < ApplicationController
   def update
     respond_to do |format|
       if @sensor.update(sensor_params)
-        format.html { redirect_to @sensor, flash: { info: "Sensor was successfully updated." }}
+        format.html { redirect_to @sensor, flash: { success: "Sensor was successfully updated." }}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
