@@ -1,4 +1,4 @@
-json.array!(@sensors) do |sensor|
+json.series(@sensors) do |sensor|
 	json.name sensor.name
 	if !sensor.is_activated
 		json.data (Array(1..1)) do |index|
@@ -12,5 +12,7 @@ json.array!(@sensors) do |sensor|
 		json.disabled false
 	end
 	json.id sensor.id
-	json.color "palette.color()"
+	json.color 'palette.color()'
 end
+json.minDate @minDate
+json.maxDate @maxDate

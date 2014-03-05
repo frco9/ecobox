@@ -15,10 +15,16 @@
 /log/*.log
 /tmp
 
-config/database.yml
+/config/database.yml
 
-config/database.yml.local
+/config/database.yml.local
 
-dump.sql
+/config/database.yml.pi
 
-Gemfile
+/lib/tasks/sample_data.rake
+
+/dump.sql
+
+/Gemfile
+
+/.gitignore

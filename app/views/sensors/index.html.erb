@@ -13,32 +13,26 @@
 
 
 <section class="row">
-  <div class="sec_header col-md-12 row">
-    <h2 class="col-md-7">Relev&eacute de temp&eacuterature</h2>
-    <div class="col-md-5" style="padding-right: 45px;">
-      <div id="reportrange" class="2pull-right">
-        <i class="glyphicon glyphicon-calendar"></i>
-        <span></span>
-        <b class="caret"></b>
-      </div>
-    </div>
+  <div class="sec_header col-md-12">
+      <h2>Relev&eacute de temp&eacuterature</h2>
   </div>
+  <%= render 'layouts/flash' %>
   <div class="sec_content col-md-12">
     <div class="row">
-      <div id="temp_chart" class="col-md-8"></div>
-      <div class="col-md-4">
-        <select class="multiselect" multiple="multiple">
-          <option value="1">Capteur 1</option>
-          <option value="2">Capteur 2</option>
-          <option value="3">Capteur 3</option>
-        </select>
-        <select name="points_frequency">
-        <option selected="selected" value="none">None</option>
-        <option value="month">Month</option>
-        <option value="day">Day</option>
-        <option value="hour">Hour</option>
-        <option value="minute">Minute</option>
-      </select>
+      <div class="col-md-12">
+        <div id="yAxis" style="position: absolute; width: 20px;"></div>
+        <div id="temp_chart" style="margin-left:20px;"></div>
+        <div id="selectorContainer" class="row">
+          <div id="leftFreq" class="col-xs-1"></div>
+          <div id="preview" class="col-xs-10"></div>
+          <div id="rightFreq" class="col-xs-1"></div>
+        </div>
+        <div class="row">
+          <div id="freqSelector" class="col-xs-12"></div>
+        </div>
+      </div>
+      <div class="col-md-12">
+        <div id="legend"></div>
       </div>
     </div>
   </div>

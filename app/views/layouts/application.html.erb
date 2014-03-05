@@ -95,15 +95,6 @@
         <p class="clear"></p>
         <div class="row">
           <div id="content" class="col-xs-12 zindex-content">
-
-            <!-- flash -->
-            <% flash.each do |key, value| %>
-              <div class="alert alert-<%= key %> alert-dismissable">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                <%= value %>
-              </div>
-            <% end %>
-            
             <%= yield %>
           </div>
         </div>
