@@ -11,12 +11,13 @@ jQuery(document).ready ($) ->
     , (ajax) ->
       ajax.series.forEach (s) ->
         s.color = palette.color()
+      # Rickshaw.Graph.Ajax.PointFrequency.fillAvg(ajax.series,0)
 
-      ajaxGraph = new Rickshaw.Graph.Ajax.PointFrequency(
+      window.ajaxGraph = new Rickshaw.Graph.Ajax.PointFrequency(
         element: $("#temp_chart")[0]
         width: $("#temp_chart").width()
         height: $("#temp_chart").height()
-        renderer: "line"
+        renderer: "multi"
         dataURL: "/sensors/"+Rickshaw.Graph.Ajax.genURL(ajax.series)+"/sensor_data"
         dataType: "json"
         is_init:false
@@ -28,9 +29,9 @@ jQuery(document).ready ($) ->
         minDate: ajax.minDate
         maxDate: ajax.maxDate
 
-        # onData: (d) ->
-        #   Rickshaw.Series.zeroFill d
-        #   d
+        onData: (d) ->
+          Rickshaw.Graph.Ajax.PointFrequency.fillAvg(d,0)
+          d
 
         onComplete: (transport) ->
           graph = transport.graph
