@@ -31,6 +31,7 @@ class SensorsController < ApplicationController
 		format.html # list.html.erb
 		format.json  # list.json.jbuilder
 	end
+
   end
   # GET /sensors/new
   def new
@@ -44,7 +45,7 @@ class SensorsController < ApplicationController
   def active_sensor
     render :nothing => true
 
-    @sensors = Sensor.find(params[:id].split(','))
+    @sensors = Sensor.find(params[:id].split(',').map{|i| i.split("-")[0]})
     if Sensor.where(:is_activated => true).count() == 1 and !params[:is_activated]
       return
     end
@@ -54,22 +55,35 @@ class SensorsController < ApplicationController
   end
 
   def sensor_data
-    @sensors = Sensor.find(params[:id].split(','))
     @start_date = DateTime.parse(params[:startDate]).to_s(:db) if params[:startDate]
     @end_date = DateTime.parse(params[:endDate]).to_s(:db) if params[:endDate]
     points_frequency = params[:pointFrequency]
     valid_frequency = false
     valid_frequency = true if ["year", "month", "day", "hour", "minute", "second"].include? points_frequency
-    @selected_data = []
-    @sensors.each do |sensor|
-      query = sensor.data_sensors
-      query = query.select('round(AVG(value)::numeric,2) as value, sensor_id').group(:sensor_id) if valid_frequency
+    @selected_data = Array.new
+    @ids = Array.new
+    @data_type_ids = Array.new
+    params[:id].split(",").map do |i|
+      query = Sensor.find(i.split("-")[0]).data_sensors
+      query = query.where(:data_type_id => i.split("-")[1])
+      query = query.select('round(AVG(value)::numeric,2) as value, sensor_id, data_type_id').group(:sensor_id, :data_type_id) if valid_frequency
       query = query.select('*, created_at as date') unless valid_frequency
-      query = query.where("created_at between '#{@start_date}' and '#{@end_date}'") if @start_date and @end_date
+      query = query.where(:created_at => @start_date..@end_date) if @start_date and @end_date
       query = query.count_by("created_at", :group_by => points_frequency, :group_column => "date") if valid_frequency
       query = query.order("date ASC")
       @selected_data << query
-    end 
+      @ids << i.split("-")[0]
+      @data_type_ids << i.split("-")[1]
+    end
+    # If there is any data in the required time interval, we get the last point date,
+    # and assign it to empty series (cf:sensor_data.json.jbuild)
+    @maxDate = (@selected_data.map do |data|
+      if data.last
+        data.last.date.to_i
+      else
+        0
+      end
+    end).max
     respond_to do |format|
       format.json
     end
