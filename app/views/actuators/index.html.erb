@@ -1,0 +1,15 @@
+<%#TO DO : CHANGER LE STYLE%>
+<% provide(:head_title, "Actionneurs") %>
+<h1>Actionneurs</h1>
+
+<%= render 'layouts/flash' %>
+
+<% @rooms.each do |room| %>
+	<% @actuators = Actuator.where(room_id: room.id) %>
+	<h2><%= room.name %></h2>
+	<ul class="users">
+		<%= render @actuators %>
+	</ul>
+<% end %>
+<br />
+<%= link_to "ajouter un nouveau capteur", new_actuator_path %>

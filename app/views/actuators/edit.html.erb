@@ -1,0 +1,11 @@
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
+<% end %>
+
+<% provide(:head_title, "Modification actionneur #{@actuator.name}") %>
+<h1>Mettre à jour de l'actionneur</h1>
+
+<%= form_for(@actuator) do |f| %>
+	<%= render 'fields', f: f %>
+	<%= f.submit "Enregistrer", class: "btn btn-large btn-primary" %>
+<% end %>

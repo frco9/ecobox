@@ -6,7 +6,7 @@
 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= yield :head_js_includes %>
-  
+
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -64,6 +64,13 @@
             <%= link_to :sensors, :title => "Capteurs", :class => "col-md-12" do %>
               <span class="li-icon icon-themo-01 col-xs-12 col-md-6"></span>
               <p class="li-title col-xs-12 col-md-6">Capteurs</p>
+            <% end %>
+          </li>
+          <li class="row">
+            <div class="arrow right_arrow"></div>
+            <%= link_to :actuators, :title => "Actionneurs", :class => "col-md-12" do %>
+              <span class="li-icon icon-themo-01 col-xs-12 col-md-6"></span>
+              <p class="li-title col-xs-12 col-md-6">Actionneurs</p>
             <% end %>
           </li>
   		

@@ -4,7 +4,6 @@
 <% end %>
 
 <% content_for :head_js_includes do %>
-<%= javascript_include_tag "home", "data-turbolinks-track" => true %>
 <META HTTP-EQUIV="Refresh" CONTENT="120;"> 
 <% end %>
 
@@ -12,11 +11,11 @@
 Home
 <% end %>
 
-
 <section class="row">
   <div class="sec_header col-md-12">
     <h2>Acceuil</h2>
   </div>
+
   <%= render 'layouts/flash' %>
   <div class="sec_content col-md-12">
     <div class="row">
@@ -25,7 +24,7 @@ Home
           <div class="alert alert-warning">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
             <span class="glyphicon glyphicon-warning-sign form-control-feedback"></span>
-            <strong>Warning! Certains capteur ne sont inactifs: </strong>
+            <strong>Warning! Certains capteur sont inactifs: </strong>
             <ul>
               <% @unavailable_sensors.each do |sensor| %>
               <li>
@@ -36,16 +35,25 @@ Home
             </ul>
             Pensez à vérifier les piles des capteurs concernés par cette alerte
           </div>
-        <% end %>
+          <% end %>
       </div>
+
       <% @stats.each do |daily_stats| %>
+      <!-- <h1><%= daily_stats.typename %></h1> -->
+      <input type='text' name='compteur' value='<%= daily_stats.avg %>' class='compteur' data-min='<%= daily_stats.min %>' data-max='<%= daily_stats.max %>' 
+	     data-avg='<%= daily_stats.avg %>' data-color='#33cc00' data-taille='80' />
+      
+      
+      
       <div class="col-md-12">
         <td><br><%= daily_stats.typename %> minimale de la journée dans votre maison: <%= daily_stats.min %> </td>
         <td><br><%= daily_stats.typename %> maximale de la journée dans votre maison: <%= daily_stats.max %> </td>
         <td><br><%= daily_stats.typename %> moyenne de la journée dans votre maison: <%= daily_stats.avg %></td>
         <td><br><%= daily_stats.typename %> actuelle dans votre maison: <%= daily_stats.current %> <br></td>  
       </div>
+      
       <% end %>
+      <%= javascript_include_tag "home", "data-turbolinks-track" => true %>
     </div>
   </div>
 </section>

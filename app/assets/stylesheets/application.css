@@ -13,5 +13,6 @@
  *= require style
  *= require style_med
  *= require style_icon
+ *= require bootstrap3-switch
  *= require users
- */
+*/

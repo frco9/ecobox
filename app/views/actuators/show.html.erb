@@ -1,0 +1,47 @@
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
+<% end %>
+
+<% provide(:head_title, "Actionneur") %>
+
+<h1>Actionneur</h1>
+
+<section class="row">
+    <%= render 'layouts/flash' %>
+
+    <div class="sec_header col-md-12">
+        <h2>Detail de l'actionneur</h2>
+    </div>
+    <div class="sec_content col-md-12">
+        <p>
+            <strong>Nom :</strong>
+            <%= @actuator.name %>
+        </p>
+        <p>
+            <strong>Frequence :</strong>
+            <%= @actuator.frequency %>
+        </p>
+        <p>
+            <strong>Modulation :</strong>
+            <%= @actuator.modulation.name if @actuator.modulation %>
+        </p>
+        <p>
+            <strong>Pièce :</strong>
+            <%= @actuator.room.name if @actuator.room %>
+        </p>
+        <p>
+            <strong>Etat :</strong>
+			<% if @actuator.activated %>
+				<input type="checkbox" name="mycheckbox" checked disabled>
+			<% else %>
+				<input type="checkbox" name="mycheckbox" disabled>
+			<% end %>
+        </p>
+
+        <%= link_to 'Retour', actuators_url, class: "btn btn-large btn-success" %> 
+        <% if current_user.admin? %> 
+            <%= link_to 'Modification', edit_actuator_path(@actuator), class: "btn btn-large btn-primary" %>
+            <%= link_to "Supprimer", @actuator, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer l'actionneur ?" }, class: "btn btn-large btn-danger" %>
+        <% end %>
+    </div>
+</section>  

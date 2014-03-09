@@ -5,6 +5,7 @@ Ecobox::Application.routes.draw do
   match "/sensors/:id/sensor_data" => "sensors#sensor_data", via: [:get, :post]
   match "/sensors/:id/active_sensor" => "sensors#active_sensor", via: :post
   resources :sensors 
+  resources :actuators
 
   resources :users
   match '/signup',  to: 'users#new',     	via: :get
@@ -13,7 +14,7 @@ Ecobox::Application.routes.draw do
 
   resources :home
   match '/home',  to: 'home#index',     via: :get
-  root 'home#index'
+  root 'home#index' 
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
