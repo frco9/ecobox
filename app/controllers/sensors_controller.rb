@@ -21,15 +21,16 @@ class SensorsController < ApplicationController
 
   # GET /sensors/list
   def list
-    @sensors = Sensor.all
-    #We set as max end_date the minimum of the last data from each sensors
-    @maxDate = Sensor.all.map { |sensor| sensor.data_sensors.order("created_at").last[:created_at]}.min
-    #We set as min start_date the maximum of the first data from each sensors
-    @minDate = Sensor.all.map { |sensor| sensor.data_sensors.order("created_at").first[:created_at]}.max
-    respond_to do |format|
-      format.html # list.html.erb
-      format.json  # list.json.jbuilder
-    end
+	@sensors = Sensor.joins(:data_types).select('sensors.*, data_types.id as data_type_id')
+
+	#We set as max end_date the last data for each sensors
+	@maxDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").last[:created_at] if sensor.data_sensors[0] }
+	#We set as min start_date the first data for each sensors
+	@minDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").first[:created_at] if sensor.data_sensors[0] }
+	respond_to do |format|
+		format.html # list.html.erb
+		format.json  # list.json.jbuilder
+	end
   end
   # GET /sensors/new
   def new
@@ -77,7 +78,10 @@ class SensorsController < ApplicationController
   # POST /sensors
   # POST /sensors.json
   def create
-    @sensor = Sensor.new(sensor_params)
+	@sensor = Sensor.new(sensor_params)
+	#sauvegarde des donnees du capteur avant de pouvoir accéder au champ data_types 
+	@sensor.save
+	@sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
 
     respond_to do |format|
       if @sensor.save
@@ -93,6 +97,8 @@ class SensorsController < ApplicationController
   # PATCH/PUT /sensors/1
   # PATCH/PUT /sensors/1.json
   def update
+    @sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
+
     respond_to do |format|
       if @sensor.update(sensor_params)
         format.html { redirect_to @sensor, flash: { success: "Sensor was successfully updated." }}
@@ -122,6 +128,6 @@ class SensorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sensor_params
-      params.require(:sensor).permit(:frequency, :name, :modulation_id, :room_id)
+      params.require(:sensor).permit(:frequency, :name, :modulation_id, :room_id, :data_types)
     end
 end

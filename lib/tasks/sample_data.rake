@@ -107,7 +107,7 @@ namespace :db do
       value = Faker::Number.between(5, 10)
       data_type_id = Faker::Number.between(1, DataType.all.length)
       sensor_id = 1
-      created_at  = Faker::Time.between("01/01/2013", Time.new.strftime("%d/%m/%Y"))
+      created_at  = Faker::Time.between("01/01/2014", Time.new.strftime("%d/%m/%Y"))
       DataSensor.create!(value: value,
                    sensor_id: sensor_id,
                    data_type_id: data_type_id,
@@ -120,7 +120,7 @@ namespace :db do
       value = Faker::Number.between(2, 20)
       data_type_id = Faker::Number.between(1, DataType.all.length)
       sensor_id = 2
-      created_at  = Faker::Time.between("01/01/2013", Time.new.strftime("%d/%m/%Y"))
+      created_at  = Faker::Time.between("01/01/2014", Time.new.strftime("%d/%m/%Y"))
       DataSensor.create!(value: value,
                    sensor_id: sensor_id,
                    data_type_id: data_type_id,
@@ -133,7 +133,7 @@ namespace :db do
       value = Faker::Number.between(18, 25)
       data_type_id = Faker::Number.between(1, DataType.all.length)
       sensor_id = Faker::Number.between(3, Sensor.all.length)
-      created_at  = Faker::Time.between("01/01/2013", Time.new.strftime("%d/%m/%Y"))
+      created_at  = Faker::Time.between("01/01/2014", Time.new.strftime("%d/%m/%Y"))
       DataSensor.create!(value: value,
                    sensor_id: sensor_id,
                    data_type_id: data_type_id,

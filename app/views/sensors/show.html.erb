@@ -17,16 +17,19 @@
 		  <%= @sensor.frequency %>
 		</p>
 		<p>
+		  <strong>Type :</strong>
+		  <%= @sensor.data_types[0].name if @sensor.data_types[0] %>
+		</p>
+		<p>
 		  <strong>Modulation :</strong>
 		  <%= @sensor.modulation.name if @sensor.modulation %>
 		</p>
 		<p>
 		  <strong>Pièce :</strong>
 		  <%= @sensor.room.name if @sensor.room %>
-		  
 		</p>
 
-		<%= link_to 'Retour', sensors_url, class: "btn btn-large btn-success" %> 
+		<%= link_to 'Retour', sensors_list_path, class: "btn btn-large btn-success" %> 
         <% if current_user.admin? %> 
             <%= link_to 'Modification', edit_sensor_path(@sensor), class: "btn btn-large btn-primary" %>
             <%= link_to "Supprimer", @sensor, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "btn btn-large btn-danger" %>
