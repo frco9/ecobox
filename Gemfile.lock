@@ -1,6 +1,6 @@
 GIT
   remote: http://github.com/frco9/rickshaw_rails.git
-  revision: ee3aa705c1c95bbb15106dd09b2e25ee69650b2b
+  revision: d327fe68dbdc64f3b607d1f47ba9512ec60d179c
   specs:
     rickshaw_rails (1.4.6)
       railties (>= 3.1.0)
@@ -135,7 +135,8 @@ GEM
       rspec-expectations (~> 2.13.0)
       rspec-mocks (~> 2.13.0)
     rubyzip (0.9.9)
-    sass (3.2.14)
+    sass (3.3.0)
+      rake
     sass-rails (4.0.1)
       railties (>= 4.0.0, < 5.0)
       sass (>= 3.1.10)

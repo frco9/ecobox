@@ -53,7 +53,7 @@ namespace :db do
                    name: "Actionneur #{n}",
                    modulation_id: modulation_id,
                    room_id: room_id,
-           activated: rand_boolean,
+				   activated: rand_boolean,
                    created_at: created_at,
                    updated_at: created_at)
     end
@@ -71,7 +71,7 @@ namespace :db do
                    data_type_id: data_type_id)
     end
 
-    100000.times do |n|
+    1000.times do |n|
       value = Faker::Number.between(5, 30)
       data_type_id = Faker::Number.between(1, DataType.all.length)
       actuator_id= Faker::Number.between(1, Actuator.all.length)
