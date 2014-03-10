@@ -11,7 +11,6 @@ jQuery(document).ready ($) ->
     , (ajax) ->
       ajax.series.forEach (s) ->
         s.color = palette.color()
-      # Rickshaw.Graph.Ajax.PointFrequency.fillAvg(ajax.series,0)
 
       window.ajaxGraph = new Rickshaw.Graph.Ajax.PointFrequency(
         element: $("#temp_chart")[0]

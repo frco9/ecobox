@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305210213) do
-
+ActiveRecord::Schema.define(version: 20140309173356) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,7 +73,6 @@ ActiveRecord::Schema.define(version: 20140305210213) do
     t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "is_activated",  default: false
   end
 
   add_index "sensors", ["modulation_id"], name: "index_sensors_on_modulation_id", using: :btree
@@ -83,6 +81,7 @@ ActiveRecord::Schema.define(version: 20140305210213) do
   create_table "sensors_data_types", id: false, force: true do |t|
     t.integer "sensor_id"
     t.integer "data_type_id"
+    t.boolean "is_activated", default: false
   end
 
   add_index "sensors_data_types", ["sensor_id", "data_type_id"], name: "index_sensors_data_types_on_sensor_id_and_data_type_id", using: :btree

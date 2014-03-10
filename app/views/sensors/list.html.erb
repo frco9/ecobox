@@ -8,7 +8,27 @@
   </div>
   <%= render 'layouts/flash' %>
   <div class="sec_content col-md-12">
-    <table class="table table-hover">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="row">
+        <% @sensors.each do |sensor| %>
+          <div class="col-xs-12">
+            <%= link_to "#{sensor.id}-#{sensor.data_type_id}", :remote => true do %>
+            <div style="background-color: #FFF; margin-bottom: 15px; padding: 15px;"> 
+              <span><%= sensor.name %></span>
+              <span><%= sensor.room.name if sensor.room %></span>
+            </div>  
+            <% end %>
+          </div>
+        <% end %>
+        </div>
+      </div>
+      <div id="ajax_content" class="col-md-8">
+      </div>
+    </div>
+
+
+    <!-- <table class="table table-hover">
       <thead>
         <tr>
           <th>Name</th>
@@ -34,6 +54,6 @@
       </tbody>
     </table>
     
-    <%= link_to 'New Sensor', new_sensor_path %>  
+    <%= link_to 'New Sensor', new_sensor_path %> -->  
   </div>
 </section>

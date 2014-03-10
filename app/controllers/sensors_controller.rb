@@ -16,16 +16,24 @@ class SensorsController < ApplicationController
     respond_to do |format|
       format.html # show.html.erb
       format.json  # show.json.jbuilder
+      format.js   # show.js.erb
     end
   end
 
   # GET /sensors/list
   def list
+    # We check there's at least one sensor activated
+    # otherwise we set one randomly
+    if SensorsDataType.where(:is_activated => true).count() == 0
+      random = SensorsDataType.all.shuffle.first
+      SensorsDataType.where(sensor_id: random.sensor_id, data_type_id: random.data_type_id).update_all(:is_activated => true)
+    end
+    
+    # We select all sensors with a left outer join on data_type to get all possible associations
     @sensors = Sensor.joins(:data_types).select('sensors.*, data_types.id as data_type_id')
-
-    #We set as max end_date the last data for each sensors
+    # We set as max end_date the last data for each sensors
     @maxDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").last[:created_at]}
-    #We set as min start_date the first data for each sensors
+    # We set as min start_date the first data for each sensors
     @minDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").first[:created_at]}
     respond_to do |format|
       format.html # list.html.erb
@@ -44,12 +52,13 @@ class SensorsController < ApplicationController
   def active_sensor
     render :nothing => true
 
-    @sensors = Sensor.find(params[:id].split(',').map{|i| i.split("-")[0]})
-    if Sensor.where(:is_activated => true).count() == 1 and !params[:is_activated]
+    # We don't desactivate sensor if any other sensor is enable.
+    if SensorsDataType.where(:is_activated => true).count() == 1 and !params[:is_activated]
       return
     end
-    @sensors.each do |sensor|
-      sensor.update(:is_activated => params[:is_activated])
+
+    params[:id].split(",").map do |i|
+      SensorsDataType.where(sensor_id: i.split("-")[0], data_type_id: i.split("-")[1]).update_all(:is_activated => params[:is_activated])
     end
   end
 

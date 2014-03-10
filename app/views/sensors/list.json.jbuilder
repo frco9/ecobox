@@ -1,6 +1,6 @@
 json.series(@sensors) do |sensor|
 	json.name "#{sensor.name} - #{DataType.find(sensor.data_type_id).name}"
-	if !sensor.is_activated
+	if !SensorsDataType.find_by(sensor_id: sensor.id, data_type_id: sensor.data_type_id).is_activated
 		json.data (Array(1..1)) do |index|
 			json.x DateTime.now.to_i
 			json.y 0
