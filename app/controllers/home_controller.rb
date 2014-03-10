@@ -10,7 +10,7 @@ class HomeController < ApplicationController
     @time = Time.now
     @begin = @time.beginning_of_day
 
-# Getting unavailable sensors:
+	# Getting unavailable sensors:
     @datatype = DataType.all
     
     @stats = []

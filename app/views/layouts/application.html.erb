@@ -14,10 +14,10 @@
     <header class="row zindex-header">
       <div id="logo" class="col-sm-2 visible-sm visible-md visible-lg"><h3>Ecobox</h3></div>
       <div id="right_header" class="col-sm-10 zindex-settings bg-color">
-        <div id="logout" class="zindex-settings">
-          <span id="logout-icon" class="icon-switch"></span>
-          <span id="logout-text" class="visible-xs">Logout</span>
-        </div>
+		  <%= link_to signout_path, method: "delete", id: "logout", class: "zindex-settings"  do %>
+			  <span id="logout-icon" class="icon-switch"></span>
+			  <span id="logout-text" class="visible-xs">Logout</span>
+		  <% end %>
         <div id="user_settings">
           <p class="clear" style="width: 0;"></p>
           <span id="gear-icon" class="icon-cog visible-sm visible-md visible-lg"></span>
@@ -33,15 +33,12 @@
           </div>
           </a>
           <ul class="dropdown-menu pull-right" role="menu" aria-labelledby="dLabel">
-            <% if signed_in? %>   
               <li><%= link_to "Profil", current_user %></li>
               <li><%= link_to "Utilisateurs", users_path %></li>
               <li><%= link_to "Paramètres", edit_user_path(current_user)%></li>
-              <li><%= link_to "Déconnexion", signout_path, method: "delete" %></li>
               <% if current_user.admin? %>
                 <li><%= link_to "Ajouter un utilisateur", signup_path %></li>
               <% end %>
-            <% end%>
           </ul>
           <span id="username" class="visible-xs">Username</span>
         </div>

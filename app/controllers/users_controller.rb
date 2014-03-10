@@ -2,7 +2,6 @@ class UsersController < ApplicationController
 	before_action :signed_in_user, only: [:show, :index, :edit, :update, :destroy]
 	before_action :correct_user, only: [:edit, :update]
 	before_action :admin_user, only: [:destroy]
-	layout "login", :only => [:new, :edit]
 
 	def index
 		@users = User.paginate(page: params[:page])
@@ -13,11 +12,14 @@ class UsersController < ApplicationController
 	end
 
 	def new
-		if (!current_user and User.all.size > 0) or !current_user.admin? 
+		@user = User.new
+		if User.all.size == 0
+			render 'new', layout: "login"
+		elsif signed_in? and current_user.admin?
+			render 'new'
+		else
 			redirect_to signin_path, flash: { danger: "Seul l'administrateur a le droit d'ajouter des utilisateurs" }
 		end
-
-		@user = User.new
 	end
 
 	def create
@@ -48,7 +50,7 @@ class UsersController < ApplicationController
 			flash[:success] = "Mise a jour effectuée"
 			redirect_to @user
 		else
-			render 'edit', layout: "login";
+			render 'edit';
 		end
 	end
 	

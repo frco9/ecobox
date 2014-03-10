@@ -7,8 +7,8 @@ module HomeHelper
             sensors = Sensor.all
             sensors.each do |sensor|
                  datas = sensor.data_sensors.last
-# If a sensor have not sent a data from 2 min, It is considerate as unavailable 
-                 if datas.created_at < 2.minutes.ago
+				 # If a sensor have not sent a data from 2 min, It is considerate as unavailable 
+                 if !datas or datas.created_at < 2.minutes.ago
                      sensors_tab << sensor
                  end
             end

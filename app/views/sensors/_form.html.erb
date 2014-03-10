@@ -20,6 +20,10 @@
     <%= f.text_field :frequency %>
   </div>
   <div class="field">
+    <%= f.label :sensor_id %>
+    <%= collection_select(:sensors_data_types, :data_type_id, DataType.find(:all), :id, :name) %>
+  </div>
+  <div class="field">
     <%= f.label :modulation_id %>
     <%= collection_select(:sensor, :modulation_id, Modulation.find(:all), :id, :name) %>
   </div>

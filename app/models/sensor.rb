@@ -1,6 +1,7 @@
 class Sensor < ActiveRecord::Base
   belongs_to :modulation
   belongs_to :room
+  has_many :sensors_data_types
   has_many :data_sensors
   has_many :sensors_data_types
   has_many :data_types, :through => :sensors_data_types
