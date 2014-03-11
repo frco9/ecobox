@@ -1,7 +1,9 @@
 <%= form_for(@sensor) do |f| %>
   <% if @sensor.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@sensor.errors.count, "error") %> prohibited this sensor from being saved:</h2>
+		<div class="alert alert-danger ">
+	    	The form contains <%= pluralize(@sensor.errors.count, "error") %>.
+	    </div>
 
       <ul>
       <% @sensor.errors.full_messages.each do |msg| %>
@@ -12,23 +14,23 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :name %>
+    <%= f.label :name, "Nom" %>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :frequency %>
+    <%= f.label :frequency, "Fréquence" %>
     <%= f.text_field :frequency %>
   </div>
   <div class="field">
-    <%= f.label :sensor_id %>
+    <%= f.label :sensor_id, "Type" %>
     <%= collection_select(:sensors_data_types, :data_type_id, DataType.find(:all), :id, :name) %>
   </div>
   <div class="field">
-    <%= f.label :modulation_id %>
+    <%= f.label :modulation_id, "Modulation" %>
     <%= collection_select(:sensor, :modulation_id, Modulation.find(:all), :id, :name) %>
   </div>
   <div class="field">
-    <%= f.label :room_id %>
+    <%= f.label :room_id, "Pièce" %>
     <%= collection_select(:sensor, :room_id, Room.find(:all), :id, :name) %>
   </div>
   <div class="actions">

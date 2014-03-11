@@ -17,8 +17,10 @@
 		  <%= @sensor.frequency %>
 		</p>
 		<p>
-		  <strong>Type :</strong>
-		  <%= @sensor.data_types[0].name if @sensor.data_types[0] %>
+			<strong>Type :</strong>
+			<% @sensor.data_types.each do |type| %>
+				<%= type.name %>
+			<% end %>
 		</p>
 		<p>
 		  <strong>Modulation :</strong>

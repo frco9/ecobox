@@ -32,9 +32,9 @@ class SensorsController < ApplicationController
     # We select all sensors with a left outer join on data_type to get all possible associations
     @sensors = Sensor.joins(:data_types).select('sensors.*, data_types.id as data_type_id')
     # We set as max end_date the last data for each sensors
-    @maxDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").last[:created_at] if sensor.data_sensors}
+    @maxDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").last[:created_at] if sensor.data_sensors[0]}
     # We set as min start_date the first data for each sensors
-    @minDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").first[:created_at] if sensor.data_sensors}
+    @minDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").first[:created_at] if sensor.data_sensors[0]}
     respond_to do |format|
       format.html # list.html.erb
       format.json  # list.json.jbuilder
@@ -102,9 +102,9 @@ class SensorsController < ApplicationController
   # POST /sensors.json
   def create
 	@sensor = Sensor.new(sensor_params)
-	#sauvegarde des donnees du capteur avant de pouvoir accéder au champ data_types 
-	@sensor.save
-	@sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
+	#sauvegarde des donnees du capteur avant de pouvoir accéder au champ data_types
+	@sensor.update_attributes(id: params[:id])	
+	@sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id]) if @sensor.id
 
     respond_to do |format|
       if @sensor.save
@@ -120,6 +120,7 @@ class SensorsController < ApplicationController
   # PATCH/PUT /sensors/1
   # PATCH/PUT /sensors/1.json
   def update
+	@sensor.data_types = Array.new 
     @sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
 
     respond_to do |format|

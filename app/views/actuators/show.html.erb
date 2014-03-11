@@ -7,22 +7,28 @@
 <h1>Actionneur</h1>
 
 <section class="row">
-    <%= render 'layouts/flash' %>
+	<%= render 'layouts/flash' %>
 
     <div class="sec_header col-md-12">
         <h2>Detail de l'actionneur</h2>
     </div>
     <div class="sec_content col-md-12">
-        <p>
-            <strong>Nom :</strong>
+		<p>
+			<strong>Nom :</strong>
             <%= @actuator.name %>
         </p>
         <p>
             <strong>Frequence :</strong>
             <%= @actuator.frequency %>
         </p>
+		<p>
+			<strong>Type :</strong>
+			<% @actuator.data_types.each do |type| %>
+				<%= type.name %>
+			<% end %>
+		</p>
         <p>
-            <strong>Modulation :</strong>
+			<strong>Modulation :</strong>
             <%= @actuator.modulation.name if @actuator.modulation %>
         </p>
         <p>
