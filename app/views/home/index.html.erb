@@ -40,8 +40,8 @@ Home
 
       <% @stats.each do |daily_stats| %>
       <!-- <h1><%= daily_stats.typename %></h1> -->
-      <input type='text' name='compteur' value='<%= daily_stats.avg %>' class='compteur' data-min='<%= daily_stats.min %>' data-max='<%= daily_stats.max %>' 
-	     data-avg='<%= daily_stats.avg %>' data-color='#33cc00' data-taille='80' />
+      <input type='text' name='compteur' value='<%= daily_stats.current %>' class='compteur' data-min='<%= daily_stats.min %>' data-max='<%= daily_stats.max %>' 
+	     data-avg='<%= daily_stats.avg %>' data-cur='<%= daily_stats.current %>' data-color='#33cc00' data-taille='80' />
       
       
       
