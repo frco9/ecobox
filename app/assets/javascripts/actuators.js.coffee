@@ -1,4 +1,4 @@
 jQuery('document').ready ($) ->
-	$("[name='mycheckbox']").bootstrapSwitch()
-	$("[name='actuator[activated]']").bootstrapSwitch()
+	$('input:checkbox').bootstrapSwitch()
+	$('#dimension-switch').bootstrapSwitch('onColor', 'success');
 

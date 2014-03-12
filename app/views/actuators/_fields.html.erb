@@ -1,3 +1,7 @@
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
+<% end %>
+
 <% if @actuator.errors.any? %>
 	<div id="error_explanation">
 		<div class="alert alert-danger ">
@@ -32,6 +36,5 @@
 	<%= collection_select(:actuator, :room_id, Room.find(:all), :id, :name) %>
 </div>
 <div class="field">
-	<%= f.label :activated, "Etat" %>
-	<%= f.check_box :activated %>
+	<div id="button_edit"><%= f.check_box :activated %></div>
 </div>

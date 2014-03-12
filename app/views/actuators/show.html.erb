@@ -1,3 +1,7 @@
+<% content_for :head_css_includes do %>
+	<%= stylesheet_link_tag "actuators", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
 <% content_for :head_js_includes do %>
     <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
 <% end %>
@@ -35,15 +39,11 @@
             <strong>Pièce :</strong>
             <%= @actuator.room.name if @actuator.room %>
         </p>
-        <p>
-            <strong>Etat :</strong>
 			<% if @actuator.activated %>
-				<input type="checkbox" name="mycheckbox" checked disabled>
+				<div id="button"><input id="dimension-switch" type="checkbox" checked disabled></div>
 			<% else %>
-				<input type="checkbox" name="mycheckbox" disabled>
+				<div id="button"><input type="checkbox" disabled></div>
 			<% end %>
-        </p>
-
         <%= link_to 'Retour', actuators_url, class: "btn btn-large btn-success" %> 
         <% if current_user.admin? %> 
             <%= link_to 'Modification', edit_actuator_path(@actuator), class: "btn btn-large btn-primary" %>
