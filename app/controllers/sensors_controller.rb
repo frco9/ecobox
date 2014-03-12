@@ -120,17 +120,25 @@ class SensorsController < ApplicationController
   # PATCH/PUT /sensors/1
   # PATCH/PUT /sensors/1.json
   def update
-	@sensor.data_types = Array.new 
-    @sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
+    if (params[:sensor][:name] == "XUZDYGDBZGYDZDG112455")
+      @sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
+      @sensor.update_attributes(data_types: @sensor.data_types)
+      redirect_to @sensor, flash: { success: "Le type de capteur a correctement été ajouté."}
 
-    respond_to do |format|
-      if @sensor.update(sensor_params)
-        format.html { redirect_to @sensor, flash: { success: "Sensor was successfully updated." }}
-        format.json { head :no_content }
-      else
-        format.html { render action: 'edit' }
-        format.json { render json: @sensor.errors, status: :unprocessable_entity }
+    else
+      @sensor.data_types = Array.new 
+      @sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
+
+      respond_to do |format|
+        if @sensor.update(sensor_params)
+          format.html { redirect_to @sensor, flash: { success: "Le capteur est à jour." }}
+          format.json { head :no_content }
+        else
+          format.html { render action: 'edit' }
+          format.json { render json: @sensor.errors, status: :unprocessable_entity }
+        end
       end
+
     end
   end
 
