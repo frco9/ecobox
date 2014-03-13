@@ -35,6 +35,9 @@ class SensorsController < ApplicationController
     @maxDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").last[:created_at] if sensor.data_sensors}
     # We set as min start_date the first data for each sensors
     @minDate = @sensors.map { |sensor| sensor.data_sensors.order("created_at").first[:created_at] if sensor.data_sensors}
+
+    # All sensors without left outer join
+    @uniq_sensors = Sensor.all
     respond_to do |format|
       format.html # list.html.erb
       format.json  # list.json.jbuilder
@@ -48,6 +51,9 @@ class SensorsController < ApplicationController
 
   # GET /sensors/1/edit
   def edit
+    respond_to do |format|
+      format.js   # edit.js.erb
+    end
   end
 
   def active_sensor
@@ -101,11 +107,7 @@ class SensorsController < ApplicationController
   # POST /sensors
   # POST /sensors.json
   def create
-	@sensor = Sensor.new(sensor_params)
-	#sauvegarde des donnees du capteur avant de pouvoir accéder au champ data_types 
-	@sensor.save
-	@sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
-
+    @sensor = Sensor.new(sensor_params)
     respond_to do |format|
       if @sensor.save
         format.html { redirect_to @sensor, flash: { success: "Sensor was successfully created."} }
@@ -120,8 +122,6 @@ class SensorsController < ApplicationController
   # PATCH/PUT /sensors/1
   # PATCH/PUT /sensors/1.json
   def update
-    @sensor.data_types << DataType.find(params[:sensors_data_types][:data_type_id])
-
     respond_to do |format|
       if @sensor.update(sensor_params)
         format.html { redirect_to @sensor, flash: { success: "Sensor was successfully updated." }}
@@ -151,6 +151,6 @@ class SensorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def sensor_params
-      params.require(:sensor).permit(:frequency, :name, :modulation_id, :room_id, :data_types)
+      params.require(:sensor).permit(:frequency, :name, :modulation_id, :room_id, :data_type_ids =>[])
     end
 end

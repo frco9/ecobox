@@ -6,26 +6,32 @@
   <div class="sec_header col-md-12">
     <h2>Liste des capteurs</h2>
   </div>
-  <%= render 'layouts/flash' %>
   <div class="sec_content col-md-12">
+    <%= render 'layouts/flash' %>
+    <% @uniq_sensors.each_slice(3) do |s_sensors| %>
     <div class="row">
-      <div class="col-md-4">
-        <div class="row">
-        <% @sensors.each do |sensor| %>
-          <div class="col-xs-12">
-            <%= link_to "#{sensor.id}-#{sensor.data_type_id}", :remote => true do %>
-            <div style="background-color: #FFF; margin-bottom: 15px; padding: 15px;"> 
+      <% s_sensors.each do |sensor| %>
+        <div class="col-md-4">
+          <div style="background-color: #FFF; padding: 15px; width: 100%;"> 
+            <%= link_to sensor, :remote => true do %>
               <span><%= sensor.name %></span>
               <span><%= sensor.room.name if sensor.room %></span>
-            </div>  
             <% end %>
-          </div>
-        <% end %>
+            <% if current_user.admin? %> 
+              <%= link_to "", sensor, remote: true, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "glyphicon glyphicon-remove-circle pull-right", style: "font-size:14pt; margin-left:5px;" %>
+              <%= link_to "", edit_sensor_path(sensor), remote: true, class: "glyphicon glyphicon-edit pull-right", style: "font-size:14pt; margin-left:5px;" %>
+            <% end %>
+            <%= link_to "", sensor, remote: true, class: "glyphicon glyphicon-cog pull-right", style: "font-size:14pt;" %>
+            <span class="clearfix"></span>
+          </div>  
+          <div id="ajax_content_<%= sensor.id %>" style="margin-bottom: 15px;"></div>
         </div>
-      </div>
-      <div id="ajax_content" class="col-md-8">
-      </div>
+      <% end %>
     </div>
+    <% end %>
+  </div>
+</section>
+  
 
 
     <!-- <table class="table table-hover">
@@ -55,5 +61,4 @@
     </table>
     
     <%= link_to 'New Sensor', new_sensor_path %> -->  
-  </div>
-</section>
+
