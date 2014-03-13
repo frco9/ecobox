@@ -15,6 +15,6 @@ json.series(@sensors) do |sensor|
 	json.data_type_id sensor.data_type_id
 	json.color 'palette.color()'
 	json.renderer DataType.find(sensor.data_type_id).graph_render
-	json.minDate @minDate.shift
-	json.maxDate @maxDate.shift
+	json.minDate @minDate.shift.try(:created_at)
+	json.maxDate @maxDate.shift.try(:created_at)
 end
