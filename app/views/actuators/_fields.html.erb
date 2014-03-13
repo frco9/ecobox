@@ -1,3 +1,7 @@
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
+<% end %>
+
 <% if @actuator.errors.any? %>
 	<div id="error_explanation">
 		<div class="alert alert-danger ">
@@ -20,6 +24,10 @@
 	<%= f.text_field :frequency %>
 </div>
 <div class="field">
+	<%= f.label :actuator_id, "Type" %>
+	<%= collection_select(:actuators_data_types, :data_type_id, DataType.find(:all), :id, :name) %>
+</div>
+<div class="field">
 	<%= f.label :modulation_id, "Modulation" %>
 	<%= collection_select(:actuator, :modulation_id, Modulation.find(:all), :id, :name) %>
 </div>
@@ -28,6 +36,5 @@
 	<%= collection_select(:actuator, :room_id, Room.find(:all), :id, :name) %>
 </div>
 <div class="field">
-	<%= f.label :activated, "Etat" %>
-	<%= f.check_box :activated %>
+	<div id="button_edit"><%= f.check_box :activated %></div>
 </div>

@@ -17,6 +17,8 @@ class ActuatorsController < ApplicationController
 
 	def create
 		@actuator = Actuator.new(actuator_params)
+		@actuator.update_attributes(id: params[:id])	
+		@actuator.data_types << DataType.find(params[:actuators_data_types][:data_type_id]) if @actuator.id
 
 		if @actuator.save
 			flash[:success] = "L'actionneur #{@actuator.name} a bien été ajouté";
@@ -27,6 +29,9 @@ class ActuatorsController < ApplicationController
 	end
 
 	def update
+		@actuator.data_types = Array.new
+		@actuator.data_types << DataType.find(params[:actuators_data_types][:data_type_id])
+
 		if @actuator.update_attributes(actuator_params)
 			flash[:success] = "Mise à jour de l'actionneur effectuée !"
 			redirect_to @actuator
@@ -47,7 +52,7 @@ class ActuatorsController < ApplicationController
 		end
 
 		def actuator_params
-		  params.require(:actuator).permit(:frequency, :name, :modulation_id, :room_id, :activated)
+		  params.require(:actuator).permit(:frequency, :name, :modulation_id, :room_id, :activated, :data_types)
 		end
 		
 		def admin_user

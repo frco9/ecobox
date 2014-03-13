@@ -1,13 +1,17 @@
+<% content_for :head_css_includes do %>
+	<%= stylesheet_link_tag "sensors", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
 <% content_for :head_title do %>
   Capteur
 <% end %>
 
 <section class="row">
-	<%= render 'layouts/flash' %>
 	<div class="sec_header col-md-12">
 		<h2>Detail du capteur</h2>
 	</div>
 	<div class="sec_content col-md-12">
+    <%= render 'layouts/flash' %>
 		<p>
 		  <strong>Nom :</strong>
 		  <%= @sensor.name %>
@@ -16,10 +20,15 @@
 		  <strong>Fréquence :</strong>
 		  <%= @sensor.frequency %>
 		</p>
-		<p>
-		  <strong>Type :</strong>
-		  <%= @sensor.data_types[0].name if @sensor.data_types[0] %>
-		</p>
+    <p>
+      <strong>Type(s) de données :</strong>
+      <ul>
+      <% @sensor.data_types.each do |data_type| %>
+        <li><%= data_type.name %></li>
+      <% end %>
+      </ul>
+    </p>
+
 		<p>
 		  <strong>Modulation :</strong>
 		  <%= @sensor.modulation.name if @sensor.modulation %>
@@ -32,6 +41,7 @@
 		<%= link_to 'Retour', sensors_list_path, class: "btn btn-large btn-success" %> 
         <% if current_user.admin? %> 
             <%= link_to 'Modification', edit_sensor_path(@sensor), class: "btn btn-large btn-primary" %>
+            <%= link_to 'Ajouter un type', edit_sensor_path(@sensor.id, extra: "add_type"), class: "btn btn-large btn-info", id: "tes" %>
             <%= link_to "Supprimer", @sensor, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "btn btn-large btn-danger" %>
         <% end %>
 	</div>
