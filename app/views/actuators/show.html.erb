@@ -47,6 +47,7 @@
         <%= link_to 'Retour', actuators_url, class: "btn btn-large btn-success" %> 
         <% if current_user.admin? %> 
             <%= link_to 'Modification', edit_actuator_path(@actuator), class: "btn btn-large btn-primary" %>
+            <%= link_to "test", edit_actuator_path(@actuator), remote: true, class: "glyphicon glyphicon-edit pull-right", style: "font-size:14pt; margin-left:5px;" %>
             <%= link_to "Supprimer", @actuator, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer l'actionneur ?" }, class: "btn btn-large btn-danger" %>
         <% end %>
     </div>

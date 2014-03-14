@@ -1,0 +1,10 @@
+$("#ajax_content_<%= @actuator.id %>")
+  .html("<%= escape_javascript(render(:partial => "show"))%><a id=\"ajax_close_<%= @actuator.id %>\" class=\"pull-right\">Fermer  <span class=\"glyphicon glyphicon-chevron-up\"></span></a><span class=\"clearfix\"></span>")
+  .css({"background-color": "#FFF", "padding-left": "15px", "padding-right": "15px", "padding-bottom": "15px"});
+
+$("#ajax_close_<%= @actuator.id %>").click(function() {
+  $("#ajax_content_<%= @actuator.id %>").empty()
+    .css({"padding-left": "0px", "padding-right": "0px", "padding-bottom": "0px"});
+});
+
+$('#actuator_<%= @actuator.id %>').bootstrapSwitch();

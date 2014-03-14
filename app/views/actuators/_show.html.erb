@@ -1,0 +1,47 @@
+<% content_for :head_css_includes do %>
+	<%= stylesheet_link_tag "actuators", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
+<% end %>
+
+<section class="row">
+    <div class="col-md-12">
+        <%= render 'layouts/flash' %>
+        <div style="background-color: #FFF; padding: 15px;">
+    		<p>
+    			<strong>Nom :</strong>
+                <%= @actuator.name %>
+            </p>
+            <p>
+                <strong>Frequence :</strong>
+                <%= @actuator.frequency %>
+            </p>
+    		<p>
+    			<strong>Type :</strong>
+    			<% @actuator.data_types.each do |type| %>
+    				<%= type.name %>
+    			<% end %>
+    		</p>
+            <p>
+    			<strong>Modulation :</strong>
+                <%= @actuator.modulation.name if @actuator.modulation %>
+            </p>
+            <p>
+                <strong>Pièce :</strong>
+                <%= @actuator.room.name if @actuator.room %>
+            </p>
+
+    		<% if @actuator.activated %>
+    			<div id="button">
+                    <%= "<input id=\"actuator_#{@actuator.id}\" type=\"checkbox\" checked disabled>".html_safe %>
+                </div>
+    		<% else %>
+    			<div id="button">
+                    <%= "<input id=\"actuator_#{@actuator.id}\" type=\"checkbox\" disabled>".html_safe %>
+                </div>
+    		<% end %>
+        </div>
+    </div>
+</section>  
