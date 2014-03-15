@@ -3,6 +3,7 @@ namespace :db do
   task populate: :environment do
     modulations = ["ASK", "FSK", "PSK"]
     data_types = ["Temperature", "Pression", "Hygrometrie", "Consommation"]
+    data_render = ["line", "line", "bar", "bar"]
     rooms = ["Salon", "Cuisine", "Salle a manger", "Salle de bain", "Garage", "Chambre 1", "Chambre 2"]
     
     modulations.each do |mod|
@@ -10,7 +11,7 @@ namespace :db do
     end
 
     data_types.each do |type|
-      DataType.create!(name: type)
+      DataType.create!(name: type, graph_render: data_render.shift)
     end
 
     rooms.each do |type|
