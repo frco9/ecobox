@@ -12,7 +12,7 @@ Ecobox::Application.routes.draw do
   match '/signin',  to: 'sessions#new',     via: :get
   match '/signout', to: 'sessions#destroy',	via: :delete
 
-  resources :home
+  # resources :home
   match '/home',  to: 'home#index',     via: :get
   root 'home#index' 
 

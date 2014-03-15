@@ -49,24 +49,24 @@
     <div class="row">
       <nav class="col-xs-2 zindex-left">
         <ul>
-          <li class="row">
+          <li class="<%= active_link_to_class(home_path, :active => :inclusive) %> row">
             <div class="arrow right_arrow"></div>
-            <%= link_to '/home', :title => "Accueil", :class => "col-md-12" do %>
+            <%= link_to :home, :title => "Accueil", :class => "col-md-12" do %>
               <span class="li-icon icon-home col-xs-12 col-md-6"></span>
               <p class="li-title col-xs-12 col-md-6">Accueil</p>
             <% end %>
           </li>
-          <li class="active row">
+          <li class="<%= active_link_to_class(sensors_path, :active => :inclusive) %> row">
             <div class="arrow right_arrow"></div>
             <%= link_to :sensors, :title => "Capteurs", :class => "col-md-12" do %>
               <span class="li-icon icon-themo-01 col-xs-12 col-md-6"></span>
               <p class="li-title col-xs-12 col-md-6">Capteurs</p>
             <% end %>
           </li>
-          <li class="row">
+          <li class="<%= active_link_to_class(actuators_path, :active => :inclusive) %> row">
             <div class="arrow right_arrow"></div>
             <%= link_to :actuators, :title => "Actionneurs", :class => "col-md-12" do %>
-              <span class="li-icon icon-themo-01 col-xs-12 col-md-6"></span>
+              <span class="li-icon icon-actuators col-xs-12 col-md-6"></span>
               <p class="li-title col-xs-12 col-md-6">Actionneurs</p>
             <% end %>
           </li>
