@@ -51,9 +51,6 @@ class SensorsController < ApplicationController
 
   # GET /sensors/1/edit
   def edit
-    respond_to do |format|
-      format.js   # edit.js.erb
-    end
   end
 
   def active_sensor
@@ -138,6 +135,7 @@ class SensorsController < ApplicationController
   def destroy
     @sensor.destroy
     respond_to do |format|
+      format.js 
       format.html { redirect_to sensors_list_path }
       format.json { head :no_content }
     end
