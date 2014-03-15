@@ -37,23 +37,49 @@ Home
           </div>
           <% end %>
       </div>
-
-      <% @stats.each do |daily_stats| %>
-      <!-- <h1><%= daily_stats.typename %></h1> -->
-      <input type='text' name='compteur' value='<%= daily_stats.current %>' class='compteur' data-min='<%= daily_stats.min %>' data-max='<%= daily_stats.max %>' 
-	     data-avg='<%= daily_stats.avg %>' data-cur='<%= daily_stats.current %>' data-color='#33cc00' data-taille='80' />
-      
-      
       
       <div class="col-md-12">
-        <td><br><%= daily_stats.typename %> minimale de la journée dans votre maison: <%= daily_stats.min %> </td>
-        <td><br><%= daily_stats.typename %> maximale de la journée dans votre maison: <%= daily_stats.max %> </td>
-        <td><br><%= daily_stats.typename %> moyenne de la journée dans votre maison: <%= daily_stats.avg %></td>
-        <td><br><%= daily_stats.typename %> actuelle dans votre maison: <%= daily_stats.current %> <br></td>  
+        <% if !@unavailable_sensors.empty? %>
+	<div class="alert alert-info">
+	  <center><strong>Nouveaux Capteurs détéctés<br></strong></center>
+	  <a href="/sensors/list">
+	    <button type="button" class="btn btn-info">Ajouter un capteur</button>
+	  </a>
+	  <br>
+	  <% end %>
+	</div>
       </div>
       
-      <% end %>
+
+      <!-- <button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-placement="bottom"  -->
+      <!-- 		data-content="<% @new_sensors.each do |sensor| %> -->
+      <!-- 			      <li> -->
+      <!-- 				<td><%= sensor.id %> </td> -->
+      <!-- 			      </li> -->
+      <!-- 			      <% end %>"> -->
+      <!-- 	Nouveaux Capteurs détéctés</button> -->
+      
+      
+
+      <% @stats.each_slice(3) do |s_daily_stats| %>
+      <div class="row">
+	<% s_daily_stats.each do |daily_stats| %>
+	<div class="col-md-4">
+	  <center><h1><%= daily_stats.typename %></h1></center>
+	  <input type='text' name='compteur' value='<%= daily_stats.current %>' class='compteur' data-type='<%= daily_stats.typename %>' data-min='<%= daily_stats.min %>' data-max='<%= daily_stats.max %>' 
+		 data-avg='<%= daily_stats.avg %>' data-cur='<%= daily_stats.current %>' data-color='#33cc00' data-taille='125' />
+	  
+	</div>
+	<% end %>
+	<% end %>
+      </div>
+      <div class="row">
+	<div class="col-md-12">
+	  <canvas id="legende"></canvas>
+	</div>
+      </div>
       <%= javascript_include_tag "home", "data-turbolinks-track" => true %>
     </div>
-  </div>
+  </div>    
+
 </section>

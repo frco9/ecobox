@@ -24,6 +24,7 @@ class HomeController < ApplicationController
     end
    
     @unavailable_sensors =  unavailable_sensors
+    @new_sensors =  new_sensors
    
   end       
 end
