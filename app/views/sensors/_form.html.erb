@@ -1,4 +1,4 @@
-<%= form_for @sensor, remote: true, html: {class: "form-horizontal"} do |f| %>
+<%= form_for @sensor, remote: true, html: {class: "form-horizontal", novalidate: true} do |f| %>
   <% if @sensor.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@sensor.errors.count, "error") %> prohibited this sensor from being saved:</h2>
@@ -14,31 +14,36 @@
   <div class="form-group">
     <%= f.label :name, class: "col-sm-4 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :name, class: "form-control" %>
+      <%= f.text_field :name, class: "form-control", required: true %>
+      <p class="help-block"></p>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :frequency, class: "col-sm-4 control-label" %>
     <div class="col-sm-8">
-      <%= f.text_field :frequency, class: "form-control" %>
+      <%= f.number_field :frequency, class: "form-control", step: "0.01", required: true %>
+      <p class="help-block"></p>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :type, class: "col-sm-4 control-label" %>
     <div class="col-sm-8">
-        <%= collection_select(:sensor, :data_type_ids, DataType.find(:all), :id, :name, {:selected => @sensor.data_type_ids}, {:multiple => true, class: "form-control"}) %>
+      <%= collection_select(:sensor, :data_type_ids, DataType.find(:all), :id, :name, {:selected => @sensor.data_type_ids}, {:multiple => true, class: "form-control", required: true}) %>
+      <p class="help-block"></p>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :modulation_id, class: "col-sm-4 control-label" %>
     <div class="col-sm-8">
-      <%= collection_select(:sensor, :modulation_id, Modulation.find(:all), :id, :name, {}, {class: "form-control"}) %>
+      <%= collection_select(:sensor, :modulation_id, Modulation.find(:all), :id, :name, {}, {class: "form-control", required: true}) %>
+      <p class="help-block"></p>
     </div>
   </div>
   <div class="form-group">
     <%= f.label :room_id, class: "col-sm-4 control-label" %>
     <div class="col-sm-8">
-      <%= collection_select(:sensor, :room_id, Room.find(:all), :id, :name, {}, {class: "form-control"}) %>
+      <%= collection_select(:sensor, :room_id, Room.find(:all), :id, :name, {}, {class: "form-control", required: true}) %>
+      <p class="help-block"></p>
     </div>
   </div>
   <div class="form-group">

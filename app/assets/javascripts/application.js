@@ -15,3 +15,7 @@
 //= require turbolinks
 //= require bootstrap
 //= require bootstrap-switch
+//= require jqBootstrapValidation
+$(document).ready(function(){
+  $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+});

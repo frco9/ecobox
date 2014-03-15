@@ -38,7 +38,7 @@
     <% @uniq_sensors.each_slice(3) do |s_sensors| %>
     <div class="row">
       <% s_sensors.each do |sensor| %>
-        <div class="col-md-4">
+        <div class="col-md-4 col-sm-6">
           <div style="background-color: #FFF; padding: 15px; width: 100%;"> 
             <%= link_to sensor, :remote => true do %>
               <span><%= sensor.name %></span>
