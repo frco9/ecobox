@@ -26,7 +26,7 @@ class SensorsController < ApplicationController
     # otherwise we set one randomly
     if SensorsDataType.where(:is_activated => true).count() == 0
       random = SensorsDataType.all.shuffle.first
-      SensorsDataType.where(sensor_id: random.sensor_id, data_type_id: random.data_type_id).update_all(:is_activated => true)
+      SensorsDataType.where(sensor_id: random.try(:sensor_id), data_type_id: random.try(:data_type_id)).update_all(:is_activated => true)
     end
     
     # We select all sensors with a left outer join on data_type to get all possible associations
