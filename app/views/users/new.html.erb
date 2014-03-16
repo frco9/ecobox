@@ -1,9 +1,22 @@
-<% provide(:head_title, 'Inscription') %>
-<h1 class="center">Inscription</h1>
+<% provide(:head_title, 'Utilisateur') %>
 
-<%= form_for(@user) do |f| %>
-	<%= render 'fields', f: f %>
-	<%= f.submit "S'inscrire", class: "btn btn-large btn-success" %>
-<% end %>
-
-<p><%= link_to "Déjà inscrit : se connecter", signin_path %></p>
+<section class="row">
+  <div class="sec_header col-md-12">
+    <h2>Ajouter un utilisateur</h2>
+  </div>
+  <%= render 'layouts/flash' %>
+  <div class="sec_content col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <%= form_for @user, html: {novalidate: true} do |f| %>
+          <%= render 'fields', f: f %>
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <%= f.submit "Enregistrer", class: "btn btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>
