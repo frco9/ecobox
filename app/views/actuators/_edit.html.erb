@@ -3,6 +3,10 @@
 <%= form_for @actuator, remote: true, html: {class: "form-horizontal"} do |f| %>
 	<%= render 'fields', f: f %>
 	<div class="form-group">
+		<%= f.label :is_activated, "Etat", class: "col-sm-4 control-label" %>
+		<div id="button_edit" class="col-sm-8"><%= f.check_box :activated, id: "actuator_#{@actuator.id}" %></div>
+	</div>
+	<div class="form-group">
     	<div class="col-sm-offset-4 col-sm-8">
 			<%= f.submit "Enregistrer", class: "btn btn-large btn-primary" %>
 		</div>
