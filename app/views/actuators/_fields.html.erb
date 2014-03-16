@@ -14,14 +14,16 @@
 <div class="form-group">
 	<%= f.label :name, "Nom", class: "col-sm-4 control-label" %>
 	<div class="col-sm-8">
-		<%= f.text_field :name %>
+		<%= f.text_field :name, class: "form-control", required: true %>
+    <p class="help-block"></p>
 	</div>
 </div>
 
 <div class="form-group">
 	<%= f.label :frequency, "Fréquence", class: "col-sm-4 control-label" %>
 	<div class="col-sm-8">
-		<%= f.text_field :frequency %>
+		<%= f.text_field :frequency, class: "form-control", step: "0.01", required: true %>
+    <p class="help-block"></p>
 	</div>
 </div>
 
@@ -29,18 +31,21 @@
 	<%= f.label :actuator_id, "Type", class: "col-sm-4 control-label" %>
 	<div class="col-sm-8">
 		<%= collection_select(:actuator, :data_type_ids, DataType.find(:all), :id, :name, {:selected => @actuator.data_type_ids}, {:multiple => true, class: "form-control", required: true}) %>
+    <p class="help-block"></p>
 	</div>
 </div>
 <div class="form-group">
 	<%= f.label :modulation_id, "Modulation", class: "col-sm-4 control-label" %>
 	<div class="col-sm-8">
-		<%= collection_select(:actuator, :modulation_id, Modulation.find(:all), :id, :name) %>
+		<%= collection_select(:actuator, :modulation_id, Modulation.find(:all), :id, :name, {}, {class: "form-control", required: true}) %>
+    <p class="help-block"></p>
 	</div>
 </div>
 <div class="form-group">
 	<%= f.label :room_id, "Pièce", class: "col-sm-4 control-label" %>
 	<div class="col-sm-8">
-		<%= collection_select(:actuator, :room_id, Room.find(:all), :id, :name) %>
+		<%= collection_select(:actuator, :room_id, Room.find(:all), :id, :name, {}, {class: "form-control", required: true}) %>
+    <p class="help-block"></p>
 	</div>
 </div>
 
