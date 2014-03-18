@@ -5,6 +5,7 @@ namespace :db do
     data_types = ["Temperature", "Pression", "Hygrometrie", "Consommation"]
     data_render = ["line", "line", "bar", "bar"]
     rooms = ["Salon", "Cuisine", "Salle a manger", "Salle de bain", "Garage", "Chambre 1", "Chambre 2"]
+    details = ["tx29", "pt1000", "tx3th", "t35dth-id"]
     
     modulations.each do |mod|
       Modulation.create!(name: mod)
@@ -18,15 +19,25 @@ namespace :db do
       Room.create!(name: type)
     end
 
+    #DETAILS
+    details.each do |name|
+      modulation_id = Faker::Number.between(1, modulations.length)
+      Detail.create!(name: name,
+                    frequency: 868.3,
+                    modulation_id: modulation_id
+                    )
+    end
+
     #SENSORS
     10.times do |n|
-      modulation_id  = Faker::Number.between(1, modulations.length)
+      detail_id  = Faker::Number.between(1, details.length)
       room_id = Faker::Number.between(1, rooms.length)
+      hardware_address = Faker::Internet.ip_v6_address
       created_at  = Time.new.to_s(:db)
-      Sensor.create!(frequency: 868.3,
-                   name: "Capteur #{n}",
-                   modulation_id: modulation_id,
+      Sensor.create!(name: "Capteur #{n}",
+                   hardware_address: hardware_address,
                    room_id: room_id,
+                   detail_id: detail_id,
                    created_at: created_at,
                    updated_at: created_at)
     end
@@ -46,15 +57,16 @@ namespace :db do
 
     #ACTUATORS
     10.times do |n|
-      modulation_id  = Faker::Number.between(1, modulations.length)
+      detail_id  = Faker::Number.between(1, details.length)
       room_id = Faker::Number.between(1, rooms.length)
+      hardware_address = Faker::Internet.ip_v6_address
       created_at  = Faker::Date.between("01/01/2014", "02/02/2014")
-    rand_boolean = [true, false].sample
-      Actuator.create!(frequency: 868.3,
-                   name: "Actionneur #{n}",
-                   modulation_id: modulation_id,
+      rand_boolean = [true, false].sample
+      Actuator.create!(name: "Actionneur #{n}",
+                   hardware_address: hardware_address,
                    room_id: room_id,
-				   activated: rand_boolean,
+                   detail_id: detail_id,
+				           activated: rand_boolean,
                    created_at: created_at,
                    updated_at: created_at)
     end

@@ -22,8 +22,8 @@
             <%= @actuator.name %>
         </p>
         <p>
-            <strong>Frequence :</strong>
-            <%= @actuator.frequency %>
+            <strong>Modèle :</strong>
+            <%= @actuator.detail.name %>
         </p>
 		<p>
 			<strong>Type :</strong>
@@ -31,10 +31,6 @@
 				<%= type.name %>
 			<% end %>
 		</p>
-        <p>
-			<strong>Modulation :</strong>
-            <%= @actuator.modulation.name if @actuator.modulation %>
-        </p>
         <p>
             <strong>Pièce :</strong>
             <%= @actuator.room.name if @actuator.room %>
