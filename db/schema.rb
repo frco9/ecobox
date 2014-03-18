@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140318203412) do
+ActiveRecord::Schema.define(version: 20140318212041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -29,6 +29,12 @@ ActiveRecord::Schema.define(version: 20140318203412) do
   create_table "actuators_data_types", force: true do |t|
     t.integer  "actuator_id"
     t.integer  "data_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blacklists", force: true do |t|
+    t.string   "hardware_address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
