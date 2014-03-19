@@ -6,72 +6,139 @@ jQuery(document).ready(function($){
 	    
 	    var circle = $('<canvas width="'+(taille*2.5)+'px" height="'+(taille*2.5)+'px" />');
 	    element_div.append(circle);
-	    // on configure notre plan de travail : 2 dimentions
 	    var ctx = circle[0].getContext('2d');
 	    
 	}else{
 	    ctx = contexte;
 	}
 	
-	// beginning of the print
 	ctx.beginPath();
+	// Translate to the center of the circle
 	ctx.translate(taille*1.25,taille*1.25);
 	if(degrade){
-	    
+	    // Create a gradient:
 	    //var gradient = ctx.createRadialGradient(taille/100*78*Math.cos(debut_jauge + Math.PI/2),taille/100*78*Math.sin(debut_jauge + Math.PI/2),(taille/100*30),taille/100*78*Math.cos(debut_jauge + Math.PI/2),taille/100*78*Math.sin(debut_jauge + Math.PI/2),(taille/100*100));
-	    var gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge - Math.PI/2), - taille/100*80*Math.sin(debut_jauge - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + taille_jauge - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + taille_jauge - Math.PI/2));
-	    //gradient.addColorStop("0","#303030");
+	    
 	    switch(type){
-	    case 'Temperature':
-		gradient.addColorStop("0","blue");
-		gradient.addColorStop("0.25","green");
-		gradient.addColorStop("0.75","orange");
-		gradient.addColorStop("1","red");
-		//gradient.addColorStop("1","#303030");
-		break;
-	    case 'Pression':
-		gradient.addColorStop("0","blue");
-		gradient.addColorStop("0.25","green");
-		gradient.addColorStop("0.75","orange");
-		gradient.addColorStop("1","red");
-		//gradient.addColorStop("1","#303030");
-		break;
 	    case 'Hygrometrie':
+		var portion = taille_jauge/3;
+		var delta = taille_jauge/100;
+		var gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge - Math.PI/2), - taille/100*80*Math.sin(debut_jauge - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + portion + delta - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + portion + delta - Math.PI/2));
+		// Choose of the colors for the gradient
 		gradient.addColorStop("0","#87A5D8");
-		gradient.addColorStop("0.25","#1050BD");
-		gradient.addColorStop("0.75","#11157F");
+		gradient.addColorStop("1","#1050BD");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + Math.PI/2, debut_jauge + portion + delta + Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.stroke();
+		ctx.save();
+		
+		ctx.beginPath();
+		gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge + portion - Math.PI/2), - taille/100*80*Math.sin(debut_jauge + portion - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + 2*portion + delta - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + 2*portion + delta - Math.PI/2));
+		// Choose of the colors for the gradient
+		gradient.addColorStop("0","#1050BD");
+		gradient.addColorStop("1","#11157F");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + portion + Math.PI/2, debut_jauge + 2*portion + delta + Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.stroke();
+		ctx.save();
+
+		ctx.beginPath();
+		gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge + 2*portion - Math.PI/2), - taille/100*80*Math.sin(debut_jauge + 2*portion - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + taille_jauge - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + taille_jauge - Math.PI/2));
+		// Choose of the colors for the gradient
+		gradient.addColorStop("0","#11157F");
 		gradient.addColorStop("1","#010116");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + 2*portion + Math.PI/2, debut_jauge + taille_jauge + Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.save();
+		
 		//gradient.addColorStop("1","#303030");
 		break;
 	    case 'Consommation':
+		var portion = taille_jauge/3;
+		var delta = taille_jauge/100;
+		var gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge - Math.PI/2), - taille/100*80*Math.sin(debut_jauge - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + portion + delta - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + portion + delta - Math.PI/2));
+		// Choose of the colors for the gradient
 		gradient.addColorStop("0","white");
-		gradient.addColorStop("0.3","orange");
+		gradient.addColorStop("1","#EA9035");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + Math.PI/2, debut_jauge + portion + delta +Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.stroke();
+		ctx.save();
+
+		ctx.beginPath();
+		gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge + portion - Math.PI/2), - taille/100*80*Math.sin(debut_jauge + portion - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + 2*portion + delta - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + 2*portion + delta - Math.PI/2));
+		// Choose of the colors for the gradient
+		gradient.addColorStop("0","#EA9035");
+		gradient.addColorStop("1","#BF400A");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + portion + Math.PI/2, debut_jauge + 2*portion + delta + Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.stroke();
+		ctx.save();
+
+		ctx.beginPath();
+		gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge + 2*portion - Math.PI/2), - taille/100*80*Math.sin(debut_jauge + 2*portion - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + taille_jauge - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + taille_jauge - Math.PI/2));
+		// Choose of the colors for the gradient
+		gradient.addColorStop("0","#BF400A");
 		gradient.addColorStop("1","red");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + 2*portion + Math.PI/2, debut_jauge + taille_jauge + Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.stroke();
+		ctx.save();
+		break;
+	    default:
+		var portion = taille_jauge/3;
+		var delta = taille_jauge/100;
+		var gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge - Math.PI/2), - taille/100*80*Math.sin(debut_jauge - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + portion + delta - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + portion + delta - Math.PI/2));
+		// Choose of the colors for the gradient
+		gradient.addColorStop("0","blue");
+		gradient.addColorStop("1","green");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + Math.PI/2, debut_jauge + portion + delta + Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.stroke();
+		ctx.save();
+
+		ctx.beginPath();
+		gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge + portion - Math.PI/2), - taille/100*80*Math.sin(debut_jauge + portion - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + 2*portion + delta - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + 2*portion + delta - Math.PI/2));
+		// Choose of the colors for the gradient
+		gradient.addColorStop("0","green");
+		gradient.addColorStop("1","orange");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + portion + Math.PI/2, debut_jauge + 2*portion + delta + Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.stroke();
+		ctx.save();
+
+		ctx.beginPath();
+		gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge + 2*portion - Math.PI/2), - taille/100*80*Math.sin(debut_jauge + 2*portion - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + taille_jauge - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + taille_jauge + delta - Math.PI/2));
+		// Choose of the colors for the gradient
+		gradient.addColorStop("0","orange");
+		gradient.addColorStop("1","red");
+		ctx.arc(0,0,(taille/100*85),  debut_jauge + 2*portion + Math.PI/2, debut_jauge + taille_jauge + Math.PI/2,false); 
+		ctx.lineWidth = (taille/100*20);
+		ctx.strokeStyle = gradient;
+		ctx.save();
 		//gradient.addColorStop("1","#303030");
-	    break;
-	}
-	     ctx.strokeStyle = gradient;
+		break;
+	    }
 	}
 	else{
-	    ctx.strokeStyle = "#303030";
+	    ctx.strokeStyle = "#303030"; /*grey of ecobox*/
+	    ctx.arc(0,0,(taille/100*85),  debut_jauge + Math.PI/2, taille_jauge + debut_jauge + Math.PI/2,false); 
+	    ctx.lineWidth = (taille/100*20);
 	}
-	// printing of the empty circle
-	
-	
-	ctx.arc(0,0,(taille/100*85),  debut_jauge + Math.PI/2, taille_jauge + debut_jauge + Math.PI/2,false); 
-	// width of edge
-	ctx.lineWidth = (taille/100*20);
-	
-	
 	if(ombre){
-	    // position of the shadow
 	    ctx.shadowOffsetX = (taille/100*1.5);
-	    // width of the shadow
 	    ctx.shadowBlur = (taille/100*8);
-	    // color of shadow
 	    ctx.shadowColor='rgba(0,0,0,0.5)';
 	}
-	//fin du dessin
+
 	ctx.stroke();
 	
 	return ctx;
@@ -83,7 +150,7 @@ jQuery(document).ready(function($){
 	    
 	    var circle = $('<canvas width="'+(taille*2.5)+'px" height="'+(taille*2.5)+'px" />');
 	    element_div.append(circle);
-	    // on configure notre plan de travail : 2 dimentions
+	    
 	    var ctx = circle[0].getContext('2d');
 	    
 	}else{
@@ -94,17 +161,9 @@ jQuery(document).ready(function($){
 	ctx.beginPath();
 	ctx.strokeStyle= color;
 	ctx.lineWidth=4;	    
-	// avg line:
-	// (taille,taille) = center of circle
-	// taille/100*85 = radius of the circle
-	// taille/100*20 = width of the gauge
-	// taille/100*8 = width of the shadow
-	// taille/100*85 - taille/100*20 + taille/100*8 = taille/100*73 = width of the intern circle
 	ctx.moveTo(- taille/100*73*Math.cos(avg_angle - Math.PI/2),- taille/100*73*Math.sin(avg_angle - Math.PI/2));
-	// taille/100*85 + taille/100*20 - taille/100*8 = taille/100*97 = extern edge of the circle
 	ctx.lineTo(- taille/100*97*Math.cos(avg_angle - Math.PI/2),- taille/100*97*Math.sin(avg_angle - Math.PI/2));
-
-	//fin du dessin
+	
 	ctx.stroke();
 	
 	return ctx;
@@ -117,7 +176,6 @@ jQuery(document).ready(function($){
 	    
 	    var circle = $('<canvas width="'+(taille*2.5)+'px" height="'+(taille*2.5)+'px" />');
 	    element_div.append(circle);
-	    // on configure notre plan de travail : 2 dimentions
 	    var ctx = circle[0].getContext('2d');
 	    
 	}else{
@@ -126,23 +184,14 @@ jQuery(document).ready(function($){
 	
 	ctx.beginPath();
 	ctx.translate(taille*1.25,taille*1.25);
-
 	ctx.strokeStyle= color;
 	ctx.globalAlpha=0.65;
 	ctx.lineWidth=3;
-	// (taille,taille) = center of circle
-	// taille/100*85 = radius of the circle
-	// taille/100*20 = width of the gauge
-	// taille/100*8 = width of the shadow
-	// taille/100*85 - taille/100*20 + taille/100*8 = taille/100*73 = width of the intern circle
 	ctx.moveTo(- taille/100*75*Math.cos(cur_angle - Math.PI/2),- taille/100*75*Math.sin(cur_angle - Math.PI/2));
 	ctx.lineTo(- taille/100*50*Math.cos(cur_angle+(Math.PI/16) - Math.PI/2),- taille/100*50*Math.sin(cur_angle+(Math.PI/16) - Math.PI/2));
 	ctx.moveTo(- taille/100*75*Math.cos(cur_angle - Math.PI/2),- taille/100*75*Math.sin(cur_angle - Math.PI/2));
 	ctx.lineTo(- taille/100*50*Math.cos(cur_angle-(Math.PI/16) - Math.PI/2),- taille/100*50*Math.sin(cur_angle-(Math.PI/16) - Math.PI/2));
 	
-
-
-	//fin du dessin
 	ctx.stroke();
 	
 	return ctx;
@@ -156,7 +205,6 @@ jQuery(document).ready(function($){
 	    
 	    var circle = $('<canvas width="'+(taille*2.5)+'px" height="'+(taille*2.5)+'px" />');
 	    element_div.append(circle);
-	    // on configure notre plan de travail : 2 dimentions
 	    var ctx = circle[0].getContext('2d');
 	    
 	}else{
@@ -165,16 +213,9 @@ jQuery(document).ready(function($){
 	
 	ctx.beginPath();
 	ctx.translate(taille*1.25,taille*1.25);
-	//ctx.rotate(Math.PI);
-	
 	ctx.strokeStyle= color;
 	ctx.globalAlpha=0.60;
 	ctx.lineWidth=3;
-	// (taille,taille) = center of circle
-	// taille/100*85 = radius of the circle
-	// taille/100*20 = width of the gauge
-	// taille/100*8 = width of the shadow
-	// taille/100*85 - taille/100*20 + taille/100*8 = taille/100*73 = width of the intern circle
 	ctx.moveTo(- taille/100*95*Math.cos(ext_angle - Math.PI/2),- taille/100*95*Math.sin(ext_angle - Math.PI/2));
 	ctx.lineTo(- taille/100*118*Math.cos(ext_angle+(Math.PI/32) - Math.PI/2),- taille/100*118*Math.sin(ext_angle+(Math.PI/32) - Math.PI/2));
 	ctx.moveTo(- taille/100*95*Math.cos(ext_angle - Math.PI/2),- taille/100*95*Math.sin(ext_angle - Math.PI/2));
@@ -186,7 +227,7 @@ jQuery(document).ready(function($){
 	ctx.textAlign="center"; 
 	ctx.fillText(ext,- taille/100*125*Math.cos(ext_angle - Math.PI/2),- taille/100*125*Math.sin(ext_angle  - Math.PI/2));
         ctx.fill();
-	//fin du dessin
+
 	ctx.stroke();
 	
 	return ctx;
@@ -199,7 +240,6 @@ jQuery(document).ready(function($){
 	    
 	    var circle = $('<canvas width="'+(taille*2.5)+'px" height="'+(taille*2.5)+'px" />');
 	    element_div.append(circle);
-	    // on configure notre plan de travail : 2 dimentions
 	    var ctx = circle[0].getContext('2d');
 	    
 	}else{
@@ -361,7 +401,7 @@ jQuery(document).ready(function($){
 	    break;
 	case 'Hygrometrie':
 	    var born_min = Math.min(0,min,out);
-	    var born_max = Math.max(1000,max,out);
+	    var born_max = Math.max(100,max,out);
 	    break;
 	case 'Consommation':
 	    var born_min = Math.min(30,min,out);

@@ -1,13 +1,15 @@
 <% provide(:head_title, "Utilisateurs") %>
-<h1>Listes des utilisateurs</h1>
 
-<%= render 'layouts/flash' %>         
-
-<%= will_paginate %>
-
-<ul class="users">
-	<%= render @users %>
-</ul>
-
-<%= will_paginate %>
-
+<section class="row">
+  <div class="sec_header col-md-12">
+    <h2>Listes des utilisateurs</h2>
+  </div>
+  <%= render 'layouts/flash' %>
+  <div class="sec_content col-md-12">
+    <%= will_paginate %>
+      <ul class="users">
+        <%= render @users %>
+      </ul>
+    <%= will_paginate %>
+  </div>
+</section>

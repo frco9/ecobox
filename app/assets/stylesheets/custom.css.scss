@@ -1,2 +1,20 @@
+$alert-success-bg: #DFFFD2;
 @import "bootstrap";
 
+/*Bootstrap overrides*/
+.alert {
+padding: 15px;
+padding-bottom: 8px;
+margin-bottom: 20px;
+border: none; 
+border-radius: 0;
+font-size: 12pt;
+font-family: 'helvetica_neuecondensed_bold';
+}
+.alert-dismissable {
+padding-right: 20px;
+}
+
+.alert-dismissable .close {
+right: -15px;
+}

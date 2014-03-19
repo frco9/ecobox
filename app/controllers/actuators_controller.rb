@@ -15,20 +15,14 @@ class ActuatorsController < ApplicationController
 	end
 
 	def edit
-		respond_to do |format|
-			format.js
-		end	
 	end
 
 	def index
-		@rooms = Room.all
 		@actuators = Actuator.all		 
 	end
 
 	def create
 		@actuator = Actuator.new(actuator_params)
-		@actuator.update_attributes(id: params[:id])	
-		@actuator.data_types << DataType.find(params[:actuators_data_types][:data_type_id]) if @actuator.id
 
 		if @actuator.save
 			flash[:success] = "L'actionneur #{@actuator.name} a bien été ajouté";
@@ -39,9 +33,6 @@ class ActuatorsController < ApplicationController
 	end
 
 	def update
-		@actuator.data_types = Array.new
-		@actuator.data_types << DataType.find(params[:actuators_data_types][:data_type_id])
-
 		if @actuator.update_attributes(actuator_params)
 			flash[:success] = "Mise à jour de l'actionneur effectuée !"
 			redirect_to @actuator
@@ -52,8 +43,10 @@ class ActuatorsController < ApplicationController
 
 	def destroy
 		@actuator.destroy
-		flash[:success] = "Actionneur supprimé !"
-		redirect_to actuators_url
+		respond_to do |format|
+	      format.js 
+	      format.html { redirect_to actuators_url }
+    	end
 	end
 
 	private
@@ -62,7 +55,7 @@ class ActuatorsController < ApplicationController
 		end
 
 		def actuator_params
-		  params.require(:actuator).permit(:frequency, :name, :modulation_id, :room_id, :activated, :data_types)
+		  params.require(:actuator).permit(:name, :room_id, :activated, :data_type_ids =>[])
 		end
 		
 		def admin_user

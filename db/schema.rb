@@ -11,24 +11,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140309173356) do
+ActiveRecord::Schema.define(version: 20140318212041) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "actuators", force: true do |t|
-    t.boolean  "activated",     default: false
-    t.float    "frequency"
+    t.boolean  "activated",        default: false
     t.string   "name"
-    t.integer  "modulation_id"
     t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "hardware_address"
+    t.integer  "detail_id"
   end
 
   create_table "actuators_data_types", force: true do |t|
     t.integer  "actuator_id"
     t.integer  "data_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "blacklists", force: true do |t|
+    t.string   "hardware_address"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -57,6 +63,14 @@ ActiveRecord::Schema.define(version: 20140309173356) do
     t.string "graph_render"
   end
 
+  create_table "details", force: true do |t|
+    t.string   "name"
+    t.integer  "modulation_id"
+    t.float    "frequency"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "modulations", force: true do |t|
     t.string "name"
   end
@@ -68,15 +82,14 @@ ActiveRecord::Schema.define(version: 20140309173356) do
   end
 
   create_table "sensors", force: true do |t|
-    t.float    "frequency"
     t.string   "name"
-    t.integer  "modulation_id"
     t.integer  "room_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "hardware_address"
+    t.integer  "detail_id"
   end
 
-  add_index "sensors", ["modulation_id"], name: "index_sensors_on_modulation_id", using: :btree
   add_index "sensors", ["room_id"], name: "index_sensors_on_room_id", using: :btree
 
   create_table "sensors_data_types", id: false, force: true do |t|

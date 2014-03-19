@@ -154,10 +154,10 @@
 
 html,
 body {
-  height: 100%;
-  background-color: #e3e4e4;
-  font-family: 'helvetica_neuelight';
-  color: #797979
+    height: 100%;
+    background-color: #e3e4e4;
+    font-family: 'helvetica_neuelight';
+    color: #797979
 }
 a {
     color: #797979;
@@ -194,7 +194,7 @@ a:hover
 .right_arrow {
     border-left: 10px solid #81d869;
     left: 23px;
-    top: 15px;
+    top: 25px;
 }
 .active a{
     color: #81d869;
@@ -335,6 +335,14 @@ h4{
     border-left: solid 1px #797979;
     transition: color 0.5s ease;
 }
+#params{
+    height: inherit;
+    color: #797979;
+    text-decoration: none;
+    cursor:pointer;
+    font-size: 12pt;
+    float: left;
+}
 #logout:hover{
     color: #81d869;
 }
@@ -352,15 +360,16 @@ h4{
 }
 nav{
 	color: #797979;
-    position: relative;
-    float: left;
-    padding-top: 15px;
-    padding-left: 15px;
-    min-height: 290px;  /*logo_min_height-(header_height+footer_height)*/
-    background-color: #3d3d3d;
-    margin-bottom: -9999px;
-    padding-bottom: 9999px;
+  position: relative;
+  float: left;
+  padding-top: 15px;
+  padding-left: 15px;
+  min-height: 290px;  /*logo_min_height-(header_height+footer_height)*/
+  background-color: #3d3d3d;
+  margin-bottom: -9999px;
+  padding-bottom: 9999px;
 }
+
 @media (min-width: 992px) {
     #wrap{
 
@@ -430,7 +439,7 @@ section div.sec_header{
   padding-right: 5px;
 }
 .selectorUL {
-  width: 237px;
+  width: 247px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -524,21 +533,22 @@ input, textarea, select, .uneditable-input {
         height: 50px;
     }
     .li-title {
-        padding: 0;
-        width: auto;
-        margin-left: 13px;
-        margin-top: 15px;
+        margin-top: 3px;
     }
-    .li-icon {
-        width: auto;
-        padding: 0;
-        padding-left: 10px;
+    .active a{
+        position: absolute;
+        left: 0;
     }
-    .active a {
-        margin-top: -20px;
+    nav{
+      text-align: center;
+      padding-top: 4px;
+      padding-left: 0px;
+      min-height: 320px;  /*logo_min_height-(header_height+footer_height)*/
     }
-    nav ul li {
-        margin-top: 6px;
+
+    nav ul li{
+      height: 80px;
+      padding-top: 6px;
     }
 }
 @media (max-width: 767px){

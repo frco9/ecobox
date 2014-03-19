@@ -1,5 +1,10 @@
+html {
+  overflow: auto;
+  height: 100%;
+}
 
 body {
+  overflow: auto;
   background: #9F9F9F;
   background-attachment: scroll;
   background-clip: border-box;
@@ -34,6 +39,8 @@ body {
   vertical-align: middle;
   max-width: 350px;
   width: 99%;
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 .left {

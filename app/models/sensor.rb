@@ -1,10 +1,10 @@
 class Sensor < ActiveRecord::Base
 	validates :name, presence: true, uniqueness: { case_sensitive: false }
-	validates :frequency, presence: true
-	validates :modulation_id, presence: true
+  validates :hardware_address, presence: true
+	validates :detail_id, presence: true
 	validates :room_id, presence: true
 
-  belongs_to :modulation
+  belongs_to :detail
   belongs_to :room
   has_many :sensors_data_types, :dependent => :delete_all
   has_many :data_sensors, :dependent => :delete_all

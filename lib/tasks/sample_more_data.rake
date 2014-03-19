@@ -14,7 +14,7 @@ namespace :db do
             when 2
           	 value = Faker::Number.between(950, 1050)
             when 3
-            	 value = Faker::Number.between(0, 500)
+            	 value = Faker::Number.between(0, 100)
             else
                  value = Faker::Number.between(50, 300)
             end

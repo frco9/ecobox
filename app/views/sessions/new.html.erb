@@ -1,17 +1,22 @@
-<% provide(:head_title, "Connexion") %>
 <h1 class="center">Connexion</h1>
 
 <%= render 'layouts/flash' %>
 
-<%= form_for(:session, url: sessions_path) do |f| %>
+<%= form_for :session, url: sessions_path, html: {novalidate: true} do |f| %>
 
-	<%= f.label :email %>
-	<%= f.text_field :email %>
+	<div class="form-group">
+		<%= f.label :email, class: "control-label" %>
+		<%= f.email_field :email, class: 'form-control', required: true %>
+	</div>
 
-	<%= f.label :password %>
-	<%= f.password_field :password %>
+	<div class="form-group">
+		<%= f.label :password, class: "control-label" %>
+		<%= f.password_field :password, class: 'form-control', required: true %>
+	</div>
 
-	<%= f.submit "Se connecter", class: "btn btn-large btn-success" %>
+	<div class="form-group">
+		<%= f.submit "Se connecter", class: "btn btn-large btn-success" %>
+	</div>
 <% end %>
 
 <p><%= link_to "Première connexion", signup_path %></p>

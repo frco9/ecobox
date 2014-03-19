@@ -15,19 +15,17 @@
                 <%= @actuator.name %>
             </p>
             <p>
-                <strong>Frequence :</strong>
-                <%= @actuator.frequency %>
+                <strong>Modèle :</strong>
+                <%= @actuator.detail.name %>
             </p>
     		<p>
-    			<strong>Type :</strong>
-    			<% @actuator.data_types.each do |type| %>
-    				<%= type.name %>
-    			<% end %>
+                <strong>Type(s) de données :</strong>
+                <ul>
+                <% @actuator.data_types.each do |data_type| %>
+                  <li><%= data_type.name %></li>
+                <% end %>
+                </ul>
     		</p>
-            <p>
-    			<strong>Modulation :</strong>
-                <%= @actuator.modulation.name if @actuator.modulation %>
-            </p>
             <p>
                 <strong>Pièce :</strong>
                 <%= @actuator.room.name if @actuator.room %>
