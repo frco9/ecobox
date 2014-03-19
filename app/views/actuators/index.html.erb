@@ -52,7 +52,7 @@
               <span><%= actuator.room.name if actuator.room %></span>
             <% end %>
             <% if current_user.admin? %> 
-              <%= link_to "", actuator, remote: true, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "glyphicon glyphicon-remove-circle pull-right", style: "font-size:14pt; margin-left:5px;" %>
+              <%= link_to "", actuator, remote: true, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "icon-remove pull-right", style: "font-size:14pt; margin-left:5px;" %>
               <%= link_to "", edit_actuator_path(actuator), remote: true, class: "glyphicon glyphicon-edit pull-right", style: "font-size:14pt; margin-left:5px;" %>
             <% end %>
             <%= link_to "", actuator, remote: true, class: "glyphicon glyphicon-cog pull-right", style: "font-size:14pt;" %>
