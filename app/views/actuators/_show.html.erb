@@ -16,19 +16,19 @@
             </p>
             <p>
                 <strong>Modèle :</strong>
-                <%= @actuator.detail.name %>
+                <%= @actuator.detail.try(:name) %>
             </p>
     		<p>
                 <strong>Type(s) de données :</strong>
                 <ul>
                 <% @actuator.data_types.each do |data_type| %>
-                  <li><%= data_type.name %></li>
+                  <li><%= data_type.try(:name) %></li>
                 <% end %>
                 </ul>
     		</p>
             <p>
                 <strong>Pièce :</strong>
-                <%= @actuator.room.name if @actuator.room %>
+                <%= @actuator.room.try(:name) %>
             </p>
 
     		<% if @actuator.activated %>

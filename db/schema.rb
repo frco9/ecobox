@@ -77,7 +77,6 @@ ActiveRecord::Schema.define(version: 20140318212041) do
 
   create_table "rooms", force: true do |t|
     t.string  "name"
-    t.boolean "outside"
     t.integer "surface"
   end
 
