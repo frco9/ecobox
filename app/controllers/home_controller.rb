@@ -15,12 +15,22 @@ class HomeController < ApplicationController
     
     @stats = []
     @datatype.each do |data_type|
-       min = DataSensor.where(:created_at => @begin..@time, :data_type_id => data_type.id).order('value ASC').take!.value
-       max = DataSensor.where(:created_at => @begin..@time, :data_type_id => data_type.id).order('value DESC').take!.value
-       avg = DataSensor.select('AVG(value) as value').where(:created_at => @begin..@time, :data_type_id => data_type.id).take!.value 
-       cur = DataSensor.select('AVG(value) as value').where(:created_at => 2.minutes.ago..@time, :data_type_id => data_type.id).take!.value 
-       tmp = DailyStats.new(data_type.name,min,max,number_with_precision(avg, :precision => 2),number_with_precision(cur, :precision => 2))
-       @stats << tmp
+       req = DataSensor.where(:created_at => @begin..@time, :data_type_id => data_type.id).joins(sensor: :room).where("rooms.outside = ?",false)
+       ext = DataSensor.where(:created_at => 2.minutes.ago..@time, :data_type_id => data_type.id).joins(sensor: :room).where("rooms.outside = ?",true)
+       if !req.empty?
+           min = req.order('value ASC').take!.value
+           max = req.order('value DESC').take!.value
+           avg = DataSensor.select('AVG(value) as value').where(:created_at => @begin..@time, :data_type_id => data_type.id).joins(sensor: :room).where("rooms.outside = ?",false).take!.value 
+           curin = DataSensor.select('AVG(value) as value').where(:created_at => 2.minutes.ago..@time, :data_type_id => data_type.id).joins(sensor: :room).where("rooms.outside = ?",false).take!.value 
+           if !ext.empty?
+               curout = ext.select('AVG(value) as value').take!.value
+               curout = number_with_precision(curout, :precision => 2)
+           else
+               curout = "null"
+           end  
+           tmp = DailyStats.new(data_type.name,min,max,number_with_precision(avg, :precision => 2),number_with_precision(curin, :precision => 2),curout)
+           @stats << tmp
+       end
     end
    
     @unavailable_sensors =  unavailable_sensors

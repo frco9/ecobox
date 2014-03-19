@@ -66,8 +66,8 @@ Home
 	<% s_daily_stats.each do |daily_stats| %>
 	<div class="col-md-4">
 	  <center><h1><%= daily_stats.typename %></h1></center>
-	  <input type='text' name='compteur' value='<%= daily_stats.current %>' class='compteur' data-type='<%= daily_stats.typename %>' data-min='<%= daily_stats.min %>' data-max='<%= daily_stats.max %>' 
-		 data-avg='<%= daily_stats.avg %>' data-cur='<%= daily_stats.current %>' data-color='#33cc00' data-taille='125' />
+	  <input type='text' name='compteur' value='<%= daily_stats.curin %>' class='compteur' data-type='<%= daily_stats.typename %>' data-min='<%= daily_stats.min %>' data-max='<%= daily_stats.max %>' 
+		 data-avg='<%= daily_stats.avg %>' data-curin='<%= daily_stats.curin %>' data-curout='<%= daily_stats.curout %>' data-color='#33cc00' data-taille='125' />
 	  
 	</div>
 	<% end %>

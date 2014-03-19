@@ -1,6 +1,6 @@
 jQuery(document).ready(function($){
 
-    function print_gauge(element_div , taille , taille_jauge, debut_jauge, color , ombre, contexte, degrade){
+    function print_gauge(element_div , taille , taille_jauge, debut_jauge, type , ombre, contexte, degrade){
 	
 	if(contexte===true){
 	    
@@ -15,23 +15,50 @@ jQuery(document).ready(function($){
 	
 	// beginning of the print
 	ctx.beginPath();
+	ctx.translate(taille*1.25,taille*1.25);
 	if(degrade){
-	    //ctx.translate(taille,taille)
-	    //var gradient = ctx.createRadialGradient(taille*1.25 - taille/100*85*Math.cos(debut_jauge + Math.PI), taille*1.25 - taille/100*85*Math.sin(debut_jauge + Math.PI),debut_jauge + Math.PI, taille*1.25 - taille/100*85*Math.cos(debut_jauge + taille_jauge + Math.PI), taille*1.25 - taille/100*85*Math.sin(debut_jauge + taille_jauge + Math.PI), debut_jauge + taille_jauge + Math.PI);
-	    var gradient = ctx.createLinearGradient(taille*1.25 - taille/100*80*Math.cos(debut_jauge+ (3/4)*Math.PI), taille*1.25 - taille/100*80*Math.sin(debut_jauge+ (3/4)*Math.PI), taille*1.25 - taille/100*80*Math.cos(debut_jauge+taille_jauge+ (5/4)*Math.PI), taille*1.25 - taille/100*80*Math.sin(debut_jauge+taille_jauge + (5/4)*Math.PI));
+	    
+	    //var gradient = ctx.createRadialGradient(taille/100*78*Math.cos(debut_jauge + Math.PI/2),taille/100*78*Math.sin(debut_jauge + Math.PI/2),(taille/100*30),taille/100*78*Math.cos(debut_jauge + Math.PI/2),taille/100*78*Math.sin(debut_jauge + Math.PI/2),(taille/100*100));
+	    var gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge - Math.PI/2), - taille/100*80*Math.sin(debut_jauge - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + taille_jauge - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + taille_jauge - Math.PI/2));
 	    //gradient.addColorStop("0","#303030");
-	    gradient.addColorStop("0","blue");
-	    gradient.addColorStop("0.13","green");
-	    gradient.addColorStop("0.80","orange");
-	    gradient.addColorStop("1","red");
-	    //gradient.addColorStop("1","#303030");
-	    ctx.strokeStyle = gradient;
+	    switch(type){
+	    case 'Temperature':
+		gradient.addColorStop("0","blue");
+		gradient.addColorStop("0.25","green");
+		gradient.addColorStop("0.75","orange");
+		gradient.addColorStop("1","red");
+		//gradient.addColorStop("1","#303030");
+		break;
+	    case 'Pression':
+		gradient.addColorStop("0","blue");
+		gradient.addColorStop("0.25","green");
+		gradient.addColorStop("0.75","orange");
+		gradient.addColorStop("1","red");
+		//gradient.addColorStop("1","#303030");
+		break;
+	    case 'Hygrometrie':
+		gradient.addColorStop("0","#87A5D8");
+		gradient.addColorStop("0.25","#1050BD");
+		gradient.addColorStop("0.75","#11157F");
+		gradient.addColorStop("1","#010116");
+		//gradient.addColorStop("1","#303030");
+		break;
+	    case 'Consommation':
+		gradient.addColorStop("0","white");
+		gradient.addColorStop("0.3","orange");
+		gradient.addColorStop("1","red");
+		//gradient.addColorStop("1","#303030");
+	    break;
+	}
+	     ctx.strokeStyle = gradient;
 	}
 	else{
-	    ctx.strokeStyle = color;
+	    ctx.strokeStyle = "#303030";
 	}
 	// printing of the empty circle
-	ctx.arc(taille*1.25,taille*1.25,(taille/100*85),  debut_jauge, taille_jauge + debut_jauge); 
+	
+	
+	ctx.arc(0,0,(taille/100*85),  debut_jauge + Math.PI/2, taille_jauge + debut_jauge + Math.PI/2,false); 
 	// width of edge
 	ctx.lineWidth = (taille/100*20);
 	
@@ -62,7 +89,8 @@ jQuery(document).ready(function($){
 	}else{
 	    ctx = contexte;
 	}
-	
+	ctx.translate(taille*1.25,taille*1.25);
+
 	ctx.beginPath();
 	ctx.strokeStyle= color;
 	ctx.lineWidth=4;	    
@@ -72,9 +100,9 @@ jQuery(document).ready(function($){
 	// taille/100*20 = width of the gauge
 	// taille/100*8 = width of the shadow
 	// taille/100*85 - taille/100*20 + taille/100*8 = taille/100*73 = width of the intern circle
-	ctx.moveTo(taille*1.25 - taille/100*73*Math.cos(avg_angle), taille*1.25 - taille/100*73*Math.sin(avg_angle));
+	ctx.moveTo(- taille/100*73*Math.cos(avg_angle - Math.PI/2),- taille/100*73*Math.sin(avg_angle - Math.PI/2));
 	// taille/100*85 + taille/100*20 - taille/100*8 = taille/100*97 = extern edge of the circle
-	ctx.lineTo(taille*1.25 - taille/100*97*Math.cos(avg_angle), taille*1.25 - taille/100*97*Math.sin(avg_angle));
+	ctx.lineTo(- taille/100*97*Math.cos(avg_angle - Math.PI/2),- taille/100*97*Math.sin(avg_angle - Math.PI/2));
 
 	//fin du dessin
 	ctx.stroke();
@@ -83,7 +111,7 @@ jQuery(document).ready(function($){
     }
     
     
-    function print_cur(element_div, taille, taille_jauge, debut_jauge, cur_angle, color, contexte){
+    function print_curin(element_div, taille, taille_jauge, debut_jauge, cur_angle, color, contexte){
 	
 	if(contexte===true){
 	    
@@ -97,7 +125,9 @@ jQuery(document).ready(function($){
 	}
 	
 	ctx.beginPath();
-	ctx.strokeStyle= "#33cc00";
+	ctx.translate(taille*1.25,taille*1.25);
+
+	ctx.strokeStyle= color;
 	ctx.globalAlpha=0.65;
 	ctx.lineWidth=3;
 	// (taille,taille) = center of circle
@@ -105,13 +135,57 @@ jQuery(document).ready(function($){
 	// taille/100*20 = width of the gauge
 	// taille/100*8 = width of the shadow
 	// taille/100*85 - taille/100*20 + taille/100*8 = taille/100*73 = width of the intern circle
-	ctx.moveTo(taille*1.25 - taille/100*75*Math.cos(cur_angle), taille*1.25 - taille/100*75*Math.sin(cur_angle));
-	ctx.lineTo(taille*1.25 - taille/100*50*Math.cos(cur_angle+(Math.PI/16)), taille*1.25 - taille/100*50*Math.sin(cur_angle+(Math.PI/16)));
-	ctx.moveTo(taille*1.25 - taille/100*75*Math.cos(cur_angle), taille*1.25 - taille/100*75*Math.sin(cur_angle));
-	ctx.lineTo(taille*1.25 - taille/100*50*Math.cos(cur_angle-(Math.PI/16)), taille*1.25 - taille/100*50*Math.sin(cur_angle-(Math.PI/16)));
-	ctx.moveTo(taille*1.25 - taille/100*50*Math.cos(cur_angle-(Math.PI/16)), taille*1.25 - taille/100*50*Math.sin(cur_angle-(Math.PI/16)));
+	ctx.moveTo(- taille/100*75*Math.cos(cur_angle - Math.PI/2),- taille/100*75*Math.sin(cur_angle - Math.PI/2));
+	ctx.lineTo(- taille/100*50*Math.cos(cur_angle+(Math.PI/16) - Math.PI/2),- taille/100*50*Math.sin(cur_angle+(Math.PI/16) - Math.PI/2));
+	ctx.moveTo(- taille/100*75*Math.cos(cur_angle - Math.PI/2),- taille/100*75*Math.sin(cur_angle - Math.PI/2));
+	ctx.lineTo(- taille/100*50*Math.cos(cur_angle-(Math.PI/16) - Math.PI/2),- taille/100*50*Math.sin(cur_angle-(Math.PI/16) - Math.PI/2));
+	
 
 
+	//fin du dessin
+	ctx.stroke();
+	
+	return ctx;
+    }
+
+
+    
+    function print_curext(element_div, taille, taille_jauge, debut_jauge, ext, ext_angle, color, contexte){
+	
+	if(contexte===true){
+	    
+	    var circle = $('<canvas width="'+(taille*2.5)+'px" height="'+(taille*2.5)+'px" />');
+	    element_div.append(circle);
+	    // on configure notre plan de travail : 2 dimentions
+	    var ctx = circle[0].getContext('2d');
+	    
+	}else{
+	    ctx = contexte;
+	}
+	
+	ctx.beginPath();
+	ctx.translate(taille*1.25,taille*1.25);
+	//ctx.rotate(Math.PI);
+	
+	ctx.strokeStyle= color;
+	ctx.globalAlpha=0.60;
+	ctx.lineWidth=3;
+	// (taille,taille) = center of circle
+	// taille/100*85 = radius of the circle
+	// taille/100*20 = width of the gauge
+	// taille/100*8 = width of the shadow
+	// taille/100*85 - taille/100*20 + taille/100*8 = taille/100*73 = width of the intern circle
+	ctx.moveTo(- taille/100*95*Math.cos(ext_angle - Math.PI/2),- taille/100*95*Math.sin(ext_angle - Math.PI/2));
+	ctx.lineTo(- taille/100*118*Math.cos(ext_angle+(Math.PI/32) - Math.PI/2),- taille/100*118*Math.sin(ext_angle+(Math.PI/32) - Math.PI/2));
+	ctx.moveTo(- taille/100*95*Math.cos(ext_angle - Math.PI/2),- taille/100*95*Math.sin(ext_angle - Math.PI/2));
+	ctx.lineTo(- taille/100*118*Math.cos(ext_angle-(Math.PI/32) - Math.PI/2),- taille/100*118*Math.sin(ext_angle-(Math.PI/32) - Math.PI/2));
+	
+	ctx.save();
+	ctx.fillStyle= color;
+	ctx.font = "10pt Arial";
+	ctx.textAlign="center"; 
+	ctx.fillText(ext,- taille/100*125*Math.cos(ext_angle - Math.PI/2),- taille/100*125*Math.sin(ext_angle  - Math.PI/2));
+        ctx.fill();
 	//fin du dessin
 	ctx.stroke();
 	
@@ -133,13 +207,16 @@ jQuery(document).ready(function($){
 	}
 
 	// Print of graduation:
-	for (var i=0; i<12; i++){
+	ctx.beginPath();
+	ctx.translate(taille*1.25,taille*1.25);
+	ctx.save();
+	for (var i=0; i<8; i++){
 	    ctx.beginPath();
 	    ctx.fillStyle= "#303030";
 	    ctx.font = "10pt Arial";
 	    ctx.textAlign="center"; 
-	    var grad = i*(born_max-born_min)/12 + born_min;
-	    ctx.fillText(grad,taille*1.25 - taille/100*105*Math.cos(i*Math.PI/6+debut_jauge+taille_jauge), taille*1.25 - taille/100*105*Math.sin(i*Math.PI/6+debut_jauge+taille_jauge));
+	    var grad = (i*(born_max-born_min)/8) + born_min;
+	    ctx.fillText(Math.round(grad*10)/10,- taille/100*105*Math.cos(i*Math.PI/4 - Math.PI/2),- taille/100*105*Math.sin(i*Math.PI/4 - Math.PI/2));
 	}
 	
 	ctx.save();
@@ -148,15 +225,15 @@ jQuery(document).ready(function($){
 	ctx.fillStyle= "blue";
 	ctx.font = "10pt Arial";
 	ctx.textAlign="center"; 
-	ctx.fillText(min,taille*1.25 - taille/100*60*Math.cos(debut_jauge+Math.PI), taille*1.25 - taille/100*60*Math.sin(debut_jauge+Math.PI));
-ctx.save();
-	
+	ctx.fillText(min,- taille/100*60*Math.cos(debut_jauge - Math.PI/2),- taille/100*60*Math.sin(debut_jauge - Math.PI/2));
+         
+	ctx.save();
 	// Print of max number:
 	ctx.beginPath();
 	ctx.fillStyle= "red";
 	ctx.font = "10pt Arial";
 	ctx.textAlign="center"; 
-	ctx.fillText(max,taille*1.25 - taille/100*60*Math.cos(debut_jauge+taille_jauge+Math.PI), taille*1.25 - taille/100*60*Math.sin(debut_jauge+taille_jauge+Math.PI));
+	ctx.fillText(max,- taille/100*60*Math.cos(debut_jauge+taille_jauge - Math.PI/2),- taille/100*60*Math.sin(debut_jauge+taille_jauge - Math.PI/2));
 	
 	ctx.save();
 	// Print of avg number:
@@ -164,7 +241,7 @@ ctx.save();
 	ctx.fillStyle= "orange";
 	ctx.font = "10pt Arial";
 	ctx.textAlign="center"; 
-	ctx.fillText(avg,taille*1.25 - taille/100*60*Math.cos(avg_angle), taille*1.25 - taille/100*60*Math.sin(avg_angle));
+	ctx.fillText(avg,- taille/100*60*Math.cos(avg_angle - Math.PI/2),-taille/100*60*Math.sin(avg_angle - Math.PI/2));
 
 	ctx.stroke();
     }
@@ -203,8 +280,8 @@ ctx.save();
 	context.beginPath();
 	var gradient = context.createLinearGradient(0, 0, 0, 100);
 	gradient.addColorStop("1","blue");
-	gradient.addColorStop("0.70","green");
-	gradient.addColorStop("0.30","orange");
+	gradient.addColorStop("0.85","green");
+	gradient.addColorStop("0.15","orange");
 	gradient.addColorStop("0","red");
 	context.fillStyle = gradient;
 	context.fillRect(50, 0, 30, 100);
@@ -267,36 +344,29 @@ ctx.save();
 	var max = element_input.data('max');
 	// la moyenne
 	var avg = element_input.data('avg');
-	// et l'actuel
-	var cur = element_input.data('cur');
+	// l'actuel
+	var cur = element_input.data('curin');
+	// et l'exterieure
+	var ext = element_input.data('curout');
 	
-
+	var out = ext ? (typeof ext == "number"): min 
 	switch(type){
 	case 'Temperature':
-            var born_min = 0;
-	    var born_max = 60;
+            var born_min = Math.min(0,min,out);
+	    var born_max = Math.max(40,max,out);
 	    break;
 	case 'Pression':
-	    var born_min = 0;
-	    var born_max = 60;
+	    var born_min = Math.min(940,min,out);
+	    var born_max = Math.max(1060,max,out);
 	    break;
 	case 'Hygrometrie':
-	    var born_min = 0;
-	    var born_max = 60;
+	    var born_min = Math.min(0,min,out);
+	    var born_max = Math.max(1000,max,out);
 	    break;
 	case 'Consommation':
-	    var born_min = 0;
-	    var born_max = 60;
+	    var born_min = Math.min(30,min,out);
+	    var born_max = Math.max(500,max,out);
 	    break;
-	}
-	// On modifie la born min et la born max selon les valeurs min et max
-	
-	if (min < born_min){
-	    born_min = min;
-	}
-        
-	if (max > born_max){
-	    born_max = max;
 	}
 	
 	//la couleur de la jauge
@@ -314,28 +384,30 @@ ctx.save();
 	    .css("color","#33cc00");
 	
 	
-	var taille_jauge = (max - min)/(born_max - born_min)*2*Math.PI;
-	var debut_jauge = (Math.PI)*((1/2) + 2*(min - born_min)/(born_max - born_min));
-	var avg_angle = (avg/(born_max - born_min))*2*Math.PI + debut_jauge + taille_jauge;
-	var cur_angle = (cur/(born_max - born_min))*2*Math.PI + debut_jauge + taille_jauge;
+	var taille_jauge = 2*(Math.PI)*(max - min)/(born_max - born_min);
+	var debut_jauge = 2*(Math.PI)*(min - born_min)/(born_max - born_min);
+	var avg_angle = 2*(Math.PI)*(avg - born_min)/(born_max - born_min);
+	var cur_angle = 2*(Math.PI)*(cur - born_min)/(born_max - born_min);
 	
 	//on dessine la jauge circulaire à l'aide du canevas
-	print_gauge(element_div , taille , 2*Math.PI - taille_jauge, debut_jauge + taille_jauge, "#303030" , true , true,false);
+	print_gauge(element_div , taille , 2*Math.PI - taille_jauge, debut_jauge + taille_jauge, type , true , true,false);
 	//on dessine le niveau de la jauge circulaire
-	print_gauge(element_div , taille , taille_jauge, debut_jauge, color ,false , true, true);
+	print_gauge(element_div , taille , taille_jauge, debut_jauge, type ,false , true, true);
 	//on dessine la moyenne sur la jauge
 	print_avg(element_div , taille ,taille_jauge, debut_jauge, avg_angle, 'orange' , true);
 	print_nb(element_div, taille, taille_jauge, debut_jauge, born_min, born_max, min, max, avg, cur, avg_angle, cur_angle, true);
-	
-	var contexte = print_cur(element_div , taille ,taille_jauge, debut_jauge, cur_angle, 'red' , true);
+	if (typeof ext == "number"){
+	    var ext_angle = 2*(Math.PI)*(ext - born_min)/(born_max - born_min);
+	    print_curext(element_div , taille ,taille_jauge, debut_jauge, ext, ext_angle, 'red' , true);
+	}
+	var contexte = print_curin(element_div , taille ,taille_jauge, debut_jauge, cur_angle, "#33cc00" , true);
 	
     });
     
 
     print_legende();
     print_anneau(1);   
-    print_anneau(0);    
-    //$('input.legende').wrap('<div class="legende" />').each(function(){
+    print_anneau(0);  
    
 });
 

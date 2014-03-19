@@ -21,7 +21,7 @@
 
 /config/database.yml.pi
 
-/lib/tasks/sample_data.rake
+# /lib/tasks/sample_data.rake
 
 /dump.sql
 
