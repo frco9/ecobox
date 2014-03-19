@@ -17,9 +17,13 @@
       <h2>Relev&eacute de temp&eacuterature</h2>
   </div>
   <%= render 'layouts/flash' %>
+
   <div class="sec_content col-md-12">
     <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-12" style="margin-bottom: 15px;">
+        <div id="legend"></div>
+      </div>
+      <div class="col-md-12" style="padding-top: 10px;">
         <div id="yAxis" style="position: absolute; width: 20px;"></div>
         <div id="temp_chart" style="margin-left:20px;"></div>
         <div id="selectorContainer" class="row">
@@ -31,9 +35,7 @@
           <div id="freqSelector" class="col-xs-12"></div>
         </div>
       </div>
-      <div class="col-md-12">
-        <div id="legend"></div>
-      </div>
+
     </div>
   </div>
 </section>

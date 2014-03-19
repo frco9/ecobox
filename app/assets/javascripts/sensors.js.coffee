@@ -45,8 +45,9 @@ jQuery(document).ready ($) ->
             detail = new Rickshaw.Graph.HoverDetail(
               graph: graph
             )
-            legend = new Rickshaw.Graph.Legend(
+            legend = new Rickshaw.Graph.Legend.Typed(
               graph: graph
+              introText: "Selectionner un capteur"
               element: document.querySelector("#legend")
             )       
             shelving = new Rickshaw.Graph.Behavior.Series.Toggle(
