@@ -320,8 +320,8 @@ jQuery(document).ready(function($){
 	context.beginPath();
 	var gradient = context.createLinearGradient(0, 0, 0, 100);
 	gradient.addColorStop("1","blue");
-	gradient.addColorStop("0.85","green");
-	gradient.addColorStop("0.15","orange");
+	gradient.addColorStop("0.80","green");
+	gradient.addColorStop("0.20","orange");
 	gradient.addColorStop("0","red");
 	context.fillStyle = gradient;
 	context.fillRect(50, 0, 30, 100);
