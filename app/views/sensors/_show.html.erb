@@ -8,19 +8,19 @@
   		</p>
   		<p>
   		  <strong>Modèle :</strong>
-  		  <%= @sensor.detail.name %>
+  		  <%= @sensor.detail.try(:name) %>
   		</p>
       <p>
         <strong>Type(s) de données :</strong>
         <ul>
         <% @sensor.data_types.each do |data_type| %>
-          <li><%= data_type.name %></li>
+          <li><%= data_type.try(:name) %></li>
         <% end %>
         </ul>
       </p>
   		<p>
   		  <strong>Pièce :</strong>
-  		  <%= @sensor.room.name if @sensor.room %>
+  		  <%= @sensor.room.try(:name) %>
   		  
   		</p>
     </div>
