@@ -295,8 +295,8 @@ jQuery(document).ready(function($){
 	    context.beginPath();
 	    context.strokeStyle = "orange";
 	    context.lineWidth=4;	    
-	    context.moveTo(50,70);
-	    context.lineTo(80,70);
+	    context.moveTo(48,70);
+	    context.lineTo(82,70);
 	}
 	else{
 	    context.beginPath();
@@ -332,7 +332,7 @@ jQuery(document).ready(function($){
 	context.fillStyle= "blue";
 	context.font = "12pt Calibri";
 	context.textAlign="rigth"; 
-	context.fillText("Donnée minimale de la journée dans votre maison",85, 99);
+	context.fillText("Donnée minimale de la journée dans votre maison",120, 99);
 	
 
 	context.save();
@@ -341,7 +341,7 @@ jQuery(document).ready(function($){
 	context.fillStyle= "red";
 	context.font = "12pt Calibri";
 	context.textAlign="rigth"; 
-	context.fillText("Donnée maximale de la journée dans votre maison",85, 12)
+	context.fillText("Donnée maximale de la journée dans votre maison",120, 12)
 
 	context.save();
 	// Legend of avg
@@ -349,7 +349,7 @@ jQuery(document).ready(function($){
 	context.fillStyle= "orange";
 	context.font = "12pt Calibri";
 	context.textAlign="rigth"; 
-	context.fillText("Donnée moyenne de la journée dans votre maison",85, 75)
+	context.fillText("Donnée moyenne de la journée dans votre maison",120, 75)
 
 	context.save();
 	// Legend of current
