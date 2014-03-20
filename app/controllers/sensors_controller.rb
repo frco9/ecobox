@@ -36,6 +36,8 @@ class SensorsController < ApplicationController
     # We set as min start_date the first data for each sensors
     @minDate = @sensors.map { |sensor| sensor.data_sensors.select(:created_at).order(:created_at).first}
 
+    @minValue = DataSensor.select(:value).order(:value).first.try(:value)
+
     # All sensors without left outer join
     @uniq_sensors = Sensor.all
     respond_to do |format|

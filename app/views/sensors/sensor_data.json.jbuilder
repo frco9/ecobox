@@ -6,7 +6,7 @@ json.array!(@selected_data) do |selected_data|
 			json.y data.value.to_f
 		end
 		json.is_data true
-		json.disabled false
+		# json.disabled false
 	else
 		json.data (Array(1..1)) do |index|
 			json.x @maxDate

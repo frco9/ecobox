@@ -18,3 +18,4 @@ json.series(@sensors) do |sensor|
 	json.minDate @minDate.shift.try(:created_at)
 	json.maxDate @maxDate.shift.try(:created_at)
 end
+json.minValue @minValue
