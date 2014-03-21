@@ -27,7 +27,7 @@ namespace :db do
      end
 
 
-    2000.times do |n|
+    4000.times do |n|
       value = Faker::Number.between(-10, 25)
       data_type_id = 1
       sensor_id = Sensor.last.id

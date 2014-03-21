@@ -264,15 +264,25 @@ jQuery(document).ready(function($){
 	ctx.beginPath();
 	ctx.fillStyle= "blue";
 	ctx.font = "10pt Arial";
-	ctx.textAlign="center"; 
+	if (min == born_min){
+	    ctx.textAlign="right"; 
+	}
+	else{
+	    ctx.textAlign="center"; 
+	}
 	ctx.fillText(min,- taille/100*60*Math.cos(debut_jauge - Math.PI/2),- taille/100*60*Math.sin(debut_jauge - Math.PI/2));
-         
+        
 	ctx.save();
 	// Print of max number:
 	ctx.beginPath();
 	ctx.fillStyle= "red";
 	ctx.font = "10pt Arial";
-	ctx.textAlign="center"; 
+	if (max == born_max){
+	    ctx.textAlign="left"; 
+	}
+	else{
+	    ctx.textAlign="center"; 
+	}
 	ctx.fillText(max,- taille/100*60*Math.cos(debut_jauge+taille_jauge - Math.PI/2),- taille/100*60*Math.sin(debut_jauge+taille_jauge - Math.PI/2));
 	
 	ctx.save();
