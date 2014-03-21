@@ -26,7 +26,7 @@ jQuery(document).ready ($) ->
         leftElement: $("#leftFreq")[0]
         rightElement: $("#rightFreq")[0]
         selectorElement: $("#freqSelector")[0]
-        selectedFrequency: 'month'
+        selectedFrequency: 'week'
         minDate: ajax.minDate
         maxDate: ajax.maxDate
 
