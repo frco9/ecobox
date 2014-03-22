@@ -30,7 +30,7 @@ namespace :db do
     4000.times do |n|
       value = Faker::Number.between(-10, 25)
       data_type_id = 1
-      sensor_id = Sensor.last.id
+      sensor_id = Sensor.all.length
       created_at  = Faker::Time.between(Time.now.beginning_of_day, Time.now.end_of_day)
       DataSensor.create!(value: value,
                    sensor_id: sensor_id,
@@ -38,6 +38,5 @@ namespace :db do
                    created_at: created_at,
                    updated_at: created_at)
     end
-    
   end
 end

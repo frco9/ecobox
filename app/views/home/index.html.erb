@@ -28,8 +28,8 @@ Home
             <ul>
               <% @unavailable_sensors.each do |sensor| %>
               <li>
-            <td><%= sensor.room.name %>: </td>
-            <td> <%= sensor.name %> </td>
+		<td><%= sensor.room.name %>: </td>
+		<td> <%= sensor.name %> </td>
               </li>
               <% end %>
             </ul>
@@ -39,18 +39,20 @@ Home
       </div>
       
       <div class="col-md-12">
-        <% if !@unavailable_sensors.empty? %>
+        <% if !@new_sensors.empty? %>
 	<div class="alert alert-info">
-	  <center><strong>Nouveaux Capteurs détéctés<br></strong></center>
-	  <a href="/sensors/list">
-	    <button type="button" class="btn btn-info">Ajouter un capteur</button>
+	  <div class="col-xs-offset-5">
+	    <a href="/sensors/list">
+	      <button type="button" class="btn btn-info">
+		<strong>Nouveaux Capteurs détéctés</strong>
+	      </button>
 	  </a>
+	  </div>
+	  <br>
 	  <br>
 	  <% end %>
 	</div>
       </div>
-      
-
       <!-- <button type="button" class="btn btn-info" data-container="body" data-toggle="popover" data-placement="bottom"  -->
       <!-- 		data-content="<% @new_sensors.each do |sensor| %> -->
       <!-- 			      <li> -->
@@ -59,26 +61,44 @@ Home
       <!-- 			      <% end %>"> -->
       <!-- 	Nouveaux Capteurs détéctés</button> -->
       
+      <div class="row">
+	<div class="col-md-7">
+	  <center><h1><strong>Température</strong></h1></center>  
+	  <% @temp.each_slice(3) do |s_temp| %>
+	  <div class="col">
+	    <% s_temp.each do |temp| %>
+	    <input type='text' name='temp' value='<%= temp.typename %>' class='temp' data-min='<%= temp.min %>' data-max='<%= temp.max %>' 
+		   data-avg='<%= temp.avg %>' data-curin='<%= temp.curin %>' data-curout='<%= temp.curout %>' data-color='#33cc00' data-taille='125' />
+	    <% end %>
+	  </div>
+	  <% end %>
+	</div>
+	<div class="col-md-5">
+	  <center><h1><strong>Consommation</strong></h1></center>
+	  <input type='text' name='conso' value='<%= @conso.cum %>' class='conso' data-min='<%= @conso.min %>' data-max='<%= @conso.max %>' 
+		 data-cur='<%= @conso.cur %>' data-cum='<%= @conso.cum %>' data-color='#33cc00' data-taille='100' />
+	</div>
+      </div>
       
 
+      
       <% @stats.each_slice(3) do |s_daily_stats| %>
       <div class="row">
 	<% s_daily_stats.each do |daily_stats| %>
 	<div class="col-md-4">
-	  <center><h1><%= daily_stats.typename %></h1></center>
+	  <center><h1><strong><%= daily_stats.typename %></h1></strong></center>
 	  <input type='text' name='compteur' value='<%= daily_stats.curin %>' class='compteur' data-type='<%= daily_stats.typename %>' data-min='<%= daily_stats.min %>' data-max='<%= daily_stats.max %>' 
-		 data-avg='<%= daily_stats.avg %>' data-curin='<%= daily_stats.curin %>' data-curout='<%= daily_stats.curout %>' data-color='#33cc00' data-taille='125' />
-	  
+		 data-avg='<%= daily_stats.avg %>' data-curin='<%= daily_stats.curin %>' data-curout='<%= daily_stats.curout %>' data-='false' data-color='#33cc00' data-taille='100' />
 	</div>
 	<% end %>
-	<% end %>
+	<!-- <div class="row"> -->
+      	<!--   <div class="col-md-12"> -->
+      	<!--     <canvas id="legende" width="500" height="150"></canvas> -->
+      	<!--   </div> -->
+	<!-- </div> -->
       </div>
-      <div class="row">
-	<div class="col-md-12">
-	  <canvas id="legende" width="500" height="150"></canvas>
-	</div>
-      </div>
-      <%= javascript_include_tag "home", "data-turbolinks-track" => true %>
+      <% end %>
+      <%= javascript_include_tag "home_conso","home_temp","home_other_type", "data-turbolinks-track" => true %>
     </div>
   </div>    
 

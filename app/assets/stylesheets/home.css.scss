@@ -6,10 +6,60 @@ div.compteur{
  float:left;
  display:inline;
  position:relative;
- margin:50px;
+ margin:0px;
+ left:50px;
  width:200px;
  height:200px;
 }
+
+div.conso{
+ float:left;
+ display:inline;
+ position:relative;
+ margin:0px;
+ left:100px;
+ width:200px;
+ height:200px;
+}
+
+
+div.temp{
+ float:left;
+ display:inline;
+ position:relative;
+ margin:0px;
+ left:0px;
+ width:200px;
+ height:250px;
+}
+
+
+div.conso input{
+ position:absolute;
+ top:0px;
+ left:0px;
+ font-size:30px;
+ text-align:center;
+ width:70px;
+ border:none;
+ background:none;
+ outline:none;
+ line-height:1em;
+}
+
+div.temp input{
+ position:absolute;
+ top:65px;
+ left:50px;
+ font-size:30px;
+ text-align:center;
+ width:70px;
+ border:none;
+ background:none;
+ outline:none;
+ line-height:1em;
+}
+
  
 div.compteur input{
  position:absolute;
@@ -25,6 +75,22 @@ div.compteur input{
 }
  
 div.compteur canvas{
+ position:absolute;
+ top:0;
+ left:0px;
+ right:0px;
+ bottom:0px;
+}
+
+div.temp canvas{
+ position:absolute;
+ top:0;
+ left:0px;
+ right:0px;
+ bottom:0px;
+}
+
+div.conso canvas{
  position:absolute;
  top:0;
  left:0px;
