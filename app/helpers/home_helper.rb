@@ -9,7 +9,9 @@ module HomeHelper
                  datas = sensor.data_sensors.last
 	# If a sensor have not sent a data from 10 min, It is considerate as unavailable 
                  if !datas or datas.created_at < 10.minutes.ago
-                     sensors_tab << sensor
+                     if(sensor.room_id and !sensor.name.empty?)
+                         sensors_tab << sensor
+                     end
                  end
             end
             return sensors_tab

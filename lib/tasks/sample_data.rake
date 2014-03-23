@@ -52,6 +52,8 @@ namespace :db do
                    updated_at: created_at)
     end
 
+    Sensor.create!(hardware_address: Faker::Internet.ip_v6_address)
+
     10.times do |n|
       data_type_id = Faker::Number.between(1, data_types.length)
       SensorsDataType.create!(sensor_id: n,
