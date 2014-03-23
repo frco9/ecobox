@@ -1,8 +1,5 @@
 class Actuator < ActiveRecord::Base
-	validates :name, presence: true, uniqueness: { case_sensitive: false }
 	validates :hardware_address, presence: true
-	validates :detail_id, presence: true
-	validates :room_id, presence: true
 
 	belongs_to :detail
 	belongs_to :room
