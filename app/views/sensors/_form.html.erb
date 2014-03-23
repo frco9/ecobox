@@ -18,13 +18,24 @@
       <p class="help-block"></p>
     </div>
   </div>
-  <div class="form-group">
-    <%= f.label :type, class: "col-sm-4 control-label" %>
-    <div class="col-sm-8">
-      <%= collection_select(:sensor, :data_type_ids, DataType.find(:all), :id, :name, {:selected => @sensor.data_type_ids}, {:multiple => true, class: "form-control", required: true}) %>
-      <p class="help-block"></p>
+
+  <% if !@sensor.detail %>
+    <div class="form-group">
+      <%= f.label :room_id, class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= collection_select(:sensor, :room_id, Room.find(:all), :id, :name, {}, {class: "form-control", required: true}) %>
+        <p class="help-block"></p>
+      </div>
     </div>
-  </div>
+    <div class="form-group">
+      <%= f.label :type, class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= collection_select(:sensor, :data_type_ids, DataType.find(:all), :id, :name, {:selected => @sensor.data_type_ids}, {:multiple => true, class: "form-control", required: true}) %>
+        <p class="help-block"></p>
+      </div>
+    </div>
+  <% end %>
+
   <div class="form-group">
     <%= f.label :room_id, class: "col-sm-4 control-label" %>
     <div class="col-sm-8">

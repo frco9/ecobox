@@ -19,7 +19,7 @@ module HomeHelper
             sensors_tab = []
             sensors = Sensor.all
             sensors.each do |sensor|
-                 if sensor.name.empty?
+                 if !sensor.name or sensor.name.empty?
                      sensors_tab << sensor
                  end
             end
