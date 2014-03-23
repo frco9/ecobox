@@ -19,13 +19,22 @@
 	</div>
 </div>
 
-<div class="form-group">
-	<%= f.label :actuator_id, "Type", class: "col-sm-4 control-label" %>
-	<div class="col-sm-8">
-		<%= collection_select(:actuator, :data_type_ids, DataType.find(:all), :id, :name, {:selected => @actuator.data_type_ids}, {:multiple => true, class: "form-control", required: true}) %>
-    <p class="help-block"></p>
+<% if is_new?(@actuator) %>
+    <div class="form-group">
+      <%= f.label :detail_id, "Modèle", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= collection_select(:actuator, :detail_id, Detail.find(:all), :id, :name, {}, {class: "form-control", required: true}) %>
+        <p class="help-block"></p>
+      </div>
+    </div>
+	<div class="form-group">
+		<%= f.label :actuator_id, "Type", class: "col-sm-4 control-label" %>
+		<div class="col-sm-8">
+			<%= collection_select(:actuator, :data_type_ids, DataType.find(:all), :id, :name, {:selected => @actuator.data_type_ids}, {:multiple => true, class: "form-control", required: true}) %>
+	    <p class="help-block"></p>
+		</div>
 	</div>
-</div>
+<% end %>
 
 <div class="form-group">
 	<%= f.label :room_id, "Pièce", class: "col-sm-4 control-label" %>

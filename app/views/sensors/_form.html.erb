@@ -19,11 +19,11 @@
     </div>
   </div>
 
-  <% if !@sensor.detail %>
+  <% if is_new?(@sensor) %>
     <div class="form-group">
-      <%= f.label :room_id, class: "col-sm-4 control-label" %>
+      <%= f.label :detail_id, "Modèle", class: "col-sm-4 control-label" %>
       <div class="col-sm-8">
-        <%= collection_select(:sensor, :room_id, Room.find(:all), :id, :name, {}, {class: "form-control", required: true}) %>
+        <%= collection_select(:sensor, :detail_id, Detail.find(:all), :id, :name, {}, {class: "form-control", required: true}) %>
         <p class="help-block"></p>
       </div>
     </div>

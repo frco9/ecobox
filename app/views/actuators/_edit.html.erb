@@ -1,16 +1,30 @@
 <% provide(:head_title, "Modification actionneur #{@actuator.name}") %>
 
-<%= form_for @actuator, remote: true, html: {class: "form-horizontal", novalidate: true} do |f| %>
-	<%= render 'fields', f: f %>
-	<div class="form-group">
-		<%= f.label :is_activated, "Etat", class: "col-sm-4 control-label" %>
-		<div id="button_edit" class="col-sm-8">
-	      <%= f.check_box :activated, id: "actuator_#{@actuator.id}" %>
-	    </div>
+<section class="row">
+ 	<div class="sec_content col-md-12">
+
+		<%= render 'layouts/flash' %>
+		<% if is_new?(@actuator) %>
+			<div class="alert alert-info alert-dismissable col-xs-12">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				Aidez-nous à reconnaître l'actionneur ajouté en renseignant son modèle et ses types de données !
+				</div>
+		<% end %>
+
+		<%= form_for @actuator, remote: true, html: {class: "form-horizontal", novalidate: true} do |f| %>
+			<%= render 'fields', f: f %>
+			<div class="form-group">
+				<%= f.label :is_activated, "Etat", class: "col-sm-4 control-label" %>
+				<div id="button_edit" class="col-sm-8">
+			      <%= f.check_box :activated, id: "actuator_#{@actuator.id}" %>
+			    </div>
+			</div>
+			<div class="form-group">
+		    	<div class="col-sm-offset-4 col-sm-8">
+					<%= f.submit "Enregistrer", class: "btn btn-large btn-primary" %>
+				</div>
+			</div>
+		<% end %>
+
 	</div>
-	<div class="form-group">
-    	<div class="col-sm-offset-4 col-sm-8">
-			<%= f.submit "Enregistrer", class: "btn btn-large btn-primary" %>
-		</div>
-	</div>
-<% end %>
+</section>

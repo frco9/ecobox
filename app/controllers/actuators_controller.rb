@@ -55,7 +55,7 @@ class ActuatorsController < ApplicationController
 		end
 
 		def actuator_params
-		  params.require(:actuator).permit(:name, :room_id, :activated, :data_type_ids =>[])
+		  params.require(:actuator).permit(:name, :room_id, :detail_id, :activated, :data_type_ids =>[])
 		end
 		
 		def admin_user
