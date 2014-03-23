@@ -75,8 +75,11 @@ Home
 	</div>
 	<div class="col-md-5">
 	  <center><h1><strong>Consommation</strong></h1></center>
-	  <input type='text' name='conso' value='<%= @conso.cum %>' class='conso' data-min='<%= @conso.min %>' data-max='<%= @conso.max %>' 
-		 data-cur='<%= @conso.cur %>' data-cum='<%= @conso.cum %>' data-color='#33cc00' data-taille='100' />
+    <% if @conso %>
+      <input type='text' name='conso' value='<%= @conso.cum %>' class='conso' data-min='<%= @conso.min %>' data-max='<%= @conso.max %>' data-cur='<%= @conso.cur %>' data-cum='<%= @conso.cum %>' data-color='#33cc00' data-taille='100' />
+    <% else %>
+      <input type='text' name='conso' value=0 class='conso' data-min=0 data-max=0 data-cur=0 data-cum=0 data-color='#33cc00' data-taille='100' />
+    <% end %>
 	</div>
       </div>
       
