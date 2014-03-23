@@ -241,30 +241,30 @@ jQuery(document).ready(function($){
 	ctx.stroke();
     }
     
-    function print_anneau(num){
-	var canvas = document.getElementById("legende");
-	var context = canvas.getContext("2d");
+    // function print_anneau(num){
+    // 	var canvas = document.getElementById("legende");
+    // 	var context = canvas.getContext("2d");
 	
-	if(num == 1){
-	    context.beginPath();
-	    context.strokeStyle = "orange";
-	    context.lineWidth=4;	    
-	    context.moveTo(48,70);
-	    context.lineTo(82,70);
-	}
-	else{
-	    context.beginPath();
-	    context.strokeStyle = "#33cc00";
-	    context.lineWidth=3;	    
-	    context.moveTo(82,40);
-	    context.lineTo(110,50);
-	    context.moveTo(82,40);
-	    context.lineTo(110,30);
-	}
-	context.stroke();
-	return context;
+    // 	if(num == 1){
+    // 	    context.beginPath();
+    // 	    context.strokeStyle = "orange";
+    // 	    context.lineWidth=4;	    
+    // 	    context.moveTo(48,70);
+    // 	    context.lineTo(82,70);
+    // 	}
+    // 	else{
+    // 	    context.beginPath();
+    // 	    context.strokeStyle = "#33cc00";
+    // 	    context.lineWidth=3;	    
+    // 	    context.moveTo(82,40);
+    // 	    context.lineTo(110,50);
+    // 	    context.moveTo(82,40);
+    // 	    context.lineTo(110,30);
+    // 	}
+    // 	context.stroke();
+    // 	return context;
 
-    }
+    // }
 
     // function print_legende(){
     // 	var canvas = document.getElementById("legende");
@@ -375,9 +375,9 @@ jQuery(document).ready(function($){
     });
     
     //Legende si besoin:
-    print_legende();
-    print_anneau(1);   
-    print_anneau(0);  
+    //print_legende();
+    //print_anneau(1);   
+    //print_anneau(0);  
    
 });
 
