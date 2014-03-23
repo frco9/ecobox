@@ -265,51 +265,52 @@ jQuery(document).ready(function($){
 	return context;
 
     }
-    function print_legende(){
-	var canvas = document.getElementById("legende");
-	var context = canvas.getContext("2d");
+
+    // function print_legende(){
+    // 	var canvas = document.getElementById("legende");
+    // 	var context = canvas.getContext("2d");
 	
-	context.beginPath();
-	var gradient = context.createLinearGradient(0, 0, 0, 100);
-	gradient.addColorStop("1","blue");
-	gradient.addColorStop("0.80","green");
-	gradient.addColorStop("0.20","orange");
-	gradient.addColorStop("0","red");
-	context.fillStyle = gradient;
-	context.fillRect(50, 0, 30, 100);
-	context.save();
+    // 	context.beginPath();
+    // 	var gradient = context.createLinearGradient(0, 0, 0, 100);
+    // 	gradient.addColorStop("1","blue");
+    // 	gradient.addColorStop("0.80","green");
+    // 	gradient.addColorStop("0.20","orange");
+    // 	gradient.addColorStop("0","red");
+    // 	context.fillStyle = gradient;
+    // 	context.fillRect(50, 0, 30, 100);
+    // 	context.save();
 
-	context.beginPath();
-	context.fillStyle= "blue";
-	context.font = "12pt Calibri";
-	context.textAlign="rigth"; 
-	context.fillText("Donnée minimale de la journée dans votre maison",120, 99);
-	context.save();
+    // 	context.beginPath();
+    // 	context.fillStyle= "blue";
+    // 	context.font = "12pt Calibri";
+    // 	context.textAlign="rigth"; 
+    // 	context.fillText("Donnée minimale de la journée dans votre maison",120, 99);
+    // 	context.save();
 
-	context.beginPath();
-	context.fillStyle= "red";
-	context.font = "12pt Calibri";
-	context.textAlign="rigth"; 
-	context.fillText("Donnée maximale de la journée dans votre maison",120, 12)
-	context.save();
+    // 	context.beginPath();
+    // 	context.fillStyle= "red";
+    // 	context.font = "12pt Calibri";
+    // 	context.textAlign="rigth"; 
+    // 	context.fillText("Donnée maximale de la journée dans votre maison",120, 12)
+    // 	context.save();
 
-	context.beginPath();
-	context.fillStyle= "orange";
-	context.font = "12pt Calibri";
-	context.textAlign="rigth"; 
-	context.fillText("Donnée moyenne de la journée dans votre maison",120, 75)
-	context.save();
+    // 	context.beginPath();
+    // 	context.fillStyle= "orange";
+    // 	context.font = "12pt Calibri";
+    // 	context.textAlign="rigth"; 
+    // 	context.fillText("Donnée moyenne de la journée dans votre maison",120, 75)
+    // 	context.save();
 
-	context.beginPath();
-	context.fillStyle= "#33cc00";
-	context.font = "12pt Calibri";
-	context.textAlign="rigth"; 
-	context.fillText("Donnée actuelle de la journée dans votre maison",120, 45)
+    // 	context.beginPath();
+    // 	context.fillStyle= "#33cc00";
+    // 	context.font = "12pt Calibri";
+    // 	context.textAlign="rigth"; 
+    // 	context.fillText("Donnée actuelle de la journée dans votre maison",120, 45)
 
-	context.stroke();
-	return context;
+    // 	context.stroke();
+    // 	return context;
 	
-    }
+    // }
 
 
     $('input.compteur').wrap('<div class="compteur" />').each(function(){
