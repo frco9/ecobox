@@ -32,11 +32,13 @@ class SensorsController < ApplicationController
     # We select all sensors with a left outer join on data_type to get all possible associations
     @sensors = Sensor.joins(:data_types).select('sensors.*, data_types.id as data_type_id')
     # We set as max end_date the last data for each sensors
-    @maxDate = @sensors.map { |sensor| sensor.data_sensors.select(:created_at).order(:created_at).last}
+    @maxDate = @sensors.map { |sensor| sensor.data_sensors.select(:created_at).order(:created_at).last.try(:created_at)}
     # We set as min start_date the first data for each sensors
-    @minDate = @sensors.map { |sensor| sensor.data_sensors.select(:created_at).order(:created_at).first}
-
-    @minValue = DataSensor.select(:value).order(:value).first.try(:value)
+    @minDate = @sensors.map { |sensor| sensor.data_sensors.select(:created_at).order(:created_at).first.try(:created_at)}
+    # We set min value for each sensors
+    @minValue = @sensors.map { |sensor| sensor.data_sensors.select(:value).order(:value).first.try(:value)}
+    # We set max value for each sensors
+    @maxValue = @sensors.map { |sensor| sensor.data_sensors.select(:value).order(:value).last.try(:value)}
 
     # All sensors without left outer join
     @uniq_sensors = Sensor.all

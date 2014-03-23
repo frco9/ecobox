@@ -24,8 +24,11 @@
         <div id="legend"></div>
       </div>
       <div class="col-md-12" style="padding-top: 10px;">
-        <div id="yAxis" style="position: absolute; width: 30px;"></div>
-        <div id="temp_chart" style="margin-left:30px;"></div>
+        <div id="graphContainer" class="row">
+          <div id="leftMarginFix" class="col-xs-2" style="width: 0; padding-left: 0; padding-right: 0; margin-left:15px;"></div>
+          <div id="temp_chart" class="col-xs-8" style="width:inherit; padding-left: 0; padding-right: 0;"></div>
+          <div id="rightMarginFix" class="col-xs-2" style="width: 0; padding-left: 0; padding-right: 0; margin-right:15px;"></div>
+        </div>
         <div id="selectorContainer" class="row">
           <div id="leftFreq" class="col-xs-1"></div>
           <div id="preview" class="col-xs-10"></div>

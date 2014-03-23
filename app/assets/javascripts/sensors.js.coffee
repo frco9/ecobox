@@ -7,14 +7,108 @@
 
 jQuery(document).ready ($) ->
   palette = new Rickshaw.Color.Palette()
+  scales = {} 
+  
+  initYaxis = (graph) ->
+    graph.series.active().forEach (serie) ->
+      # Create one left yAxis for the first active serie
+      if $("#temp_chart").index() == 1
+        $("<div id=\"yAxis_"+serie.data_type_id+"\" class=\"col-xs-1\" style=\"width: 35px; height:410px; padding-left: 0; padding-right: 0;\"></div>").insertBefore("#temp_chart");
+        yAxis = new Rickshaw.Graph.Axis.Y.Scaled
+          graph: graph
+          orientation: 'left'
+          element: $("#yAxis_"+serie.data_type_id)[0]
+          scale: scales[serie.data_type_id]
+        yAxis.render()
+      # Right yAxis for the others
+      else
+        $("<div id=\"yAxis_"+serie.data_type_id+"\" class=\"col-xs-1\" style=\"width: 35px; height:410px; padding-left: 0; padding-right: 0;\"></div>").insertBefore("#graphContainer #rightMarginFix");
+        yAxis = new Rickshaw.Graph.Axis.Y.Scaled
+          graph: graph
+          grid: false
+          orientation: 'right'
+          element: $("#yAxis_"+serie.data_type_id)[0]
+          scale: scales[serie.data_type_id]
+        yAxis.render()
+    # Adapt graph width to new yAxis
+    graph.configure
+      width: $("#graphContainer").width()-($("#graphContainer .col-xs-1").width()*$("#graphContainer .col-xs-1").length  + parseInt($("#graphContainer .col-xs-2").css("margin-left"))*$("#graphContainer .col-xs-2").length) # Container width - with of each Y axis (Yaxis width + margins)*number_of_yAxis
+    graph.render()
+    return
+
+  updateYAxis = (url, is_activated, graph) ->
+    # Serie enabled
+    if is_activated
+      url.split(",").forEach (item) ->
+        data_type = item.split("-")[1]
+        # Check if yAxis already displayed
+        if !$("#yAxis_"+data_type).length
+          $("<div id=\"yAxis_"+data_type+"\" class=\"col-xs-1\" style=\"width: 35px; height:410px; padding-left: 0; padding-right: 0;\"></div>").insertBefore("#graphContainer #rightMarginFix");
+          yAxis = new Rickshaw.Graph.Axis.Y.Scaled
+            graph: graph
+            grid: false
+            orientation: 'right'
+            element: $("#yAxis_"+data_type)[0]
+            scale: scales[data_type]
+          yAxis.render()
+    else
+      url.split(",").forEach (item) ->
+        data_type = item.split("-")[1]
+        id = item.split("-")[0]
+        lastActivated = true
+        # Check if there are other series activated with the same type
+        graph.series.active().forEach (serie) ->
+          if parseInt(data_type) == serie.data_type_id
+            lastActivated = false
+        # If it the last, can be removed
+        if lastActivated
+          $("#yAxis_"+data_type).remove()
+          # If left axis was removed, the right one is moved to the left
+          if $("#temp_chart").index() == 1
+            # Remove the grid
+            $(".y_grid").remove()
+            # Select the first right yAxis get its id 
+            rightAxisId = parseInt($("#temp_chart").next().attr("id").split("_")[1])
+            # Empty it and moves it to the left
+            $("#temp_chart").next().empty().insertBefore($("#temp_chart"))
+            # Left yAxis new instance
+            yAxis = new Rickshaw.Graph.Axis.Y.Scaled
+              graph: graph
+              orientation: 'left'
+              element: $("#yAxis_"+rightAxisId)[0]
+              scale: scales[rightAxisId]
+            yAxis.render()
+    
+    # Adapt graph width to new yAxis
+    graph.configure
+      width: $("#graphContainer").width()-($("#graphContainer .col-xs-1").width()*$("#graphContainer .col-xs-1").length  + parseInt($("#graphContainer .col-xs-2").css("margin-left"))*$("#graphContainer .col-xs-2").length) # Container width - with of each Y axis (Yaxis width + margins)*number_of_yAxis
+    graph.render()
+    return
+  
   $.get '/sensors/list'
     , (ajax) ->
+
       ajax.series.forEach (s) ->
+        # Fill scales hash array with min and max value of each series type.
+        # Key doesn't exist yet ?
+        if scales[s.data_type_id] == undefined
+          scales[s.data_type_id] = {"max": s.maxValue, "min": s.minValue}
+        else
+          scales[s.data_type_id]["max"] = Math.max(scales[s.data_type_id]["max"], s.maxValue)
+          scales[s.data_type_id]["min"] = Math.min(scales[s.data_type_id]["min"], s.minValue)
+      
+      for key of scales
+        scales[key] = d3.scale.linear().domain([scales[key]["min"], scales[key]["max"]]).nice()
+      
+      ajax.series.forEach (s) ->
+        # Set color to the serie
         s.color = palette.color()
+        # Set correct scale
+        s.scale = scales[s.data_type_id]
 
       window.ajaxGraph = new Rickshaw.Graph.Ajax.PointFrequency(
         element: $("#temp_chart")[0]
-        width: $("#temp_chart").width()
+        width: $("#graphContainer").width()-($("#graphContainer .col-xs-1").width()*$("#graphContainer .col-xs-1").length  + parseInt($("#graphContainer .col-xs-2").css("margin-left"))*$("#graphContainer .col-xs-2").length) # Container width - with of each Y axis (Yaxis width + margins)*number_of_yAxis
         height: $("#temp_chart").height()
         renderer: "multi"
         interpolation: "linear"
@@ -22,7 +116,6 @@ jQuery(document).ready ($) ->
         dataType: "json"
         is_init:false
         series: ajax.series
-        min: ajax.minValue || 0
         leftElement: $("#leftFreq")[0]
         rightElement: $("#rightFreq")[0]
         selectorElement: $("#freqSelector")[0]
@@ -38,7 +131,7 @@ jQuery(document).ready ($) ->
           graph = transport.graph
           if !transport.args.is_init
             transport.args.is_init = true
-            preview = new Rickshaw.Graph.RangeSlider.Preview(
+            window.preview = new Rickshaw.Graph.RangeSlider.Preview(
               graph: graph
               width: $("#selectorContainer").width()-($("#leftFreq").width()+$("#rightFreq").width()+40)
               height: 80
@@ -59,6 +152,7 @@ jQuery(document).ready ($) ->
               callback : (url, value) ->
                 $.post "/sensors/"+url+"/active_sensor", 
                   is_activated: value
+                  updateYAxis(url, value, graph)
             )
             highlighter = new Rickshaw.Graph.Behavior.Series.Highlight(
               graph: graph
@@ -68,18 +162,14 @@ jQuery(document).ready ($) ->
               graph: graph
             )
             xAxis.render()
-            yAxis = new Rickshaw.Graph.Axis.Y(
-              graph: graph
-              orientation: 'left'
-              element: $("#yAxis")[0]
-            )
-            yAxis.render()
+            # Automatically create yAxis for all series activated.
+            initYaxis graph
 
             previewXAxis = new Rickshaw.Graph.Axis.Time(
               graph: preview.previews[0]
               timeFixture: new Rickshaw.Fixtures.Time.Local()
             )
-            previewXAxis.render();
+            previewXAxis.render()
 
 
           return
