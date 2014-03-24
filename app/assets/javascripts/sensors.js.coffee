@@ -20,8 +20,8 @@ jQuery(document).ready ($) ->
           element: $("#yAxis_"+serie.data_type_id)[0]
           scale: scales[serie.data_type_id]
         yAxis.render()
-      # Right yAxis for the others
-      else
+      # Right yAxis for the others if not already created
+      else if !$("#yAxis_"+serie.data_type_id).length
         $("<div id=\"yAxis_"+serie.data_type_id+"\" class=\"col-xs-1\" style=\"width: 35px; height:410px; padding-left: 0; padding-right: 0;\"></div>").insertBefore("#graphContainer #rightMarginFix");
         yAxis = new Rickshaw.Graph.Axis.Y.Scaled
           graph: graph
