@@ -1,5 +1,9 @@
 module SensorsHelper
 	def is_new?(sensor)
-		!sensor.detail or !sensor.data_types
+		!sensor.try(:name)
 	end
+
+  def is_unknown?(sensor)
+    !sensor.try(:detail)
+  end
 end
