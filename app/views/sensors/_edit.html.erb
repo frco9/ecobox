@@ -2,6 +2,12 @@
   <div class="sec_content col-md-12">
     <%= render 'layouts/flash' %>
     <% if is_new?(@sensor) %>
+    <div class="alert alert-info alert-dismissable col-xs-12">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      Un nouveau capteur à été détecté par l'ecobox, veuillez completer les champs suivant.
+    </div>
+    <% end %>
+    <% if is_unknown?(@sensor) %>
 		<div class="alert alert-info alert-dismissable col-xs-12">
 			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 			Aidez-nous à reconnaître le capteur ajouté en renseignant son modèle et ses types de données !

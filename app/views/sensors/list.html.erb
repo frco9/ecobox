@@ -7,8 +7,7 @@
       <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title">Ajouter un capteur</h4>
+                <h4 class="modal-title">Ajout d'un capteur</h4>
             </div>
             <div class="modal-body">
                 <p>Loading...</p>
@@ -28,7 +27,7 @@
         <h2>Liste des capteurs</h2>
       </div>
       <div class="col-md-6">
-        <h4><%= link_to "Ajouter un capteur", new_sensor_path, remote: true, data: { target: "#bootstrap_modal", toggle: "modal"}, class: "pull-right", role: "button" %></h4>
+        <!-- <h4><%#= link_to "Ajouter un capteur", new_sensor_path, remote: true, data: { target: "#bootstrap_modal", toggle: "modal"}, class: "pull-right", role: "button" %></h4> -->
         <span class="clearfix"></span>
       </div>
     </div>
@@ -38,21 +37,55 @@
     <% @uniq_sensors.each_slice(3) do |s_sensors| %>
     <div class="row">
       <% s_sensors.each do |sensor| %>
-        <div class="col-md-4 col-sm-6">
-          <div style="background-color: #FFF; padding: 15px; width: 100%;"> 
-            <%= link_to sensor, :remote => true do %>
-              <span><%= sensor.name %></span>
-              <span><%= sensor.room.name if sensor.room %></span>
-            <% end %>
-            <% if current_user.admin? %> 
-              <%= link_to "", sensor, remote: true, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "icon-remove pull-right", style: "font-size:14pt; margin-left:5px;" %>
-              <%= link_to "", edit_sensor_path(sensor), remote: true, class: "glyphicon glyphicon-edit pull-right", style: "font-size:14pt; margin-left:5px;" %>
-            <% end %>
-            <%= link_to "", sensor, remote: true, class: "glyphicon glyphicon-cog pull-right", style: "font-size:14pt;" %>
-            <span class="clearfix"></span>
-          </div>  
-          <div id="ajax_content_<%= sensor.id %>" style="margin-bottom: 15px;"></div>
-        </div>
+        <!-- Check if this is a new sensor -->
+        <% if sensor.try(:name) %>
+          <div class="col-md-4 col-sm-6">
+            <div style="background-color: #FFF; padding: 15px; width: 100%;"> 
+              <%= link_to sensor, :remote => true do %>
+                <span><%= sensor.name %></span>
+                <span><%= sensor.room.name if sensor.room %></span>
+              <% end %>
+              <% if current_user.admin? %> 
+                <%= link_to "", sensor, remote: true, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "icon-remove pull-right", style: "font-size:14pt; margin-left:5px;" %>
+                <%= link_to "", edit_sensor_path(sensor), remote: true, class: "glyphicon glyphicon-edit pull-right", style: "font-size:14pt; margin-left:5px;" %>
+              <% end %>
+              <%= link_to "", sensor, remote: true, class: "glyphicon glyphicon-cog pull-right", style: "font-size:14pt;" %>
+              <span class="clearfix"></span>
+            </div>  
+            <div id="ajax_content_<%= sensor.id %>" style="margin-bottom: 15px;"></div>
+          </div>
+        <% else %>
+          <!-- Else we show modal box, to complete sensor missing attributes. -->
+          <script id="new_sensor_js" type="text/javascript">
+            jQuery( document ).ready(function( $ ) {
+              $("#bootstrap_modal .modal-body")
+                .html("<%= escape_javascript(render(:partial => "edit", :locals => {:@sensor => sensor}))%>")
+              $('#bootstrap_modal').modal({
+                keyboard: false,
+                backdrop: 'static'
+              });
+              $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+
+              $("#edit_sensor_<%= sensor.id %>").on("ajax:success", function(e, data, status, xhr) {
+                  // $("#content .row .sec_content").load( "list #content .row .sec_content .row", function( response, status, xhr ) {
+                  //   $(this).prepend("<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Ajout du capteur réalisé avec succès.</div>"); 
+                  //   console.log(response.find($("#new_sensor_js")));
+                  // });
+                  $.get('list', function(result){
+                      $result = $(result);
+
+                      $("#content .row .sec_content").html("<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Ajout du capteur réalisé avec succès.</div>"); 
+                      $result.find("#content .row .sec_content").appendTo("#content .row .sec_content");
+                  }, 'html');
+                  $('#bootstrap_modal').modal('hide');
+                  
+                }).bind("ajax:error", function(e, xhr, status, error) {
+                  $("#modal-body .row .sec_content")
+                    .prepend("<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Something wrong happend during the update.</div>"); 
+              });
+            });
+          </script>  
+        <% end %>
       <% end %>
     </div>
     <% end %>

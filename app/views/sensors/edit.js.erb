@@ -1,3 +1,4 @@
+// Display content in content grid
 $("#ajax_content_<%= @sensor.id %>")
   .html("<%= escape_javascript(render(:partial => "edit"))%> <a id=\"ajax_close_<%= @sensor.id %>\" class=\"pull-right\">Fermer  <span class=\"glyphicon glyphicon-chevron-up\"></span></a><span class=\"clearfix\"></span>")
   .css({"background-color": "#FFF", "padding-left": "15px", "padding-right": "15px", "padding-bottom": "15px"});

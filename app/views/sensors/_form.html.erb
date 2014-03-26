@@ -19,7 +19,7 @@
     </div>
   </div>
 
-  <% if is_new?(@sensor) %>
+  <% if is_unknown?(@sensor) %>
     <div class="form-group">
       <%= f.label :detail_id, "Modèle", class: "col-sm-4 control-label" %>
       <div class="col-sm-8">
@@ -31,6 +31,14 @@
       <%= f.label :type, class: "col-sm-4 control-label" %>
       <div class="col-sm-8">
         <%= collection_select(:sensor, :data_type_ids, DataType.find(:all), :id, :name, {:selected => @sensor.data_type_ids}, {:multiple => true, class: "form-control", required: true}) %>
+        <p class="help-block"></p>
+      </div>
+    </div>
+  <% else %>
+    <div class="form-group">
+      <%= f.label :detail_id, "Modèle", class: "col-sm-4 control-label" %>
+      <div class="col-sm-8">
+        <%= collection_select(:sensor, :detail_id, Detail.find(:all), :id, :name, {}, {class: "form-control", required: true, disabled: true}) %>
         <p class="help-block"></p>
       </div>
     </div>
