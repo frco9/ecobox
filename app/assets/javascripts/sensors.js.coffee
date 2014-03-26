@@ -9,6 +9,20 @@ jQuery(document).ready ($) ->
   palette = new Rickshaw.Color.Palette()
   scales = {} 
   
+  # This function return a string with a unit corresponding to data type
+  # It would be cleanner by doing it server side.
+  getAxisUnit = (data_type_id) ->
+    switch data_type_id
+      when 1
+        return "°C"
+      when 2
+        return "hPa"
+      when 3
+        return "%"
+      when 4
+        return "kWh"
+    
+  
   initYaxis = (graph) ->
     graph.series.active().forEach (serie) ->
       # Create one left yAxis for the first active serie
@@ -19,6 +33,13 @@ jQuery(document).ready ($) ->
           orientation: 'left'
           element: $("#yAxis_"+serie.data_type_id)[0]
           scale: scales[serie.data_type_id]
+          label:
+            text: getAxisUnit serie.data_type_id
+            color: 'black'
+            opacity: 0.5
+            fontSize: '12px'
+            offsetX: '1em'
+            offsetY: '0em'
         yAxis.render()
       # Right yAxis for the others if not already created
       else if !$("#yAxis_"+serie.data_type_id).length
@@ -29,6 +50,13 @@ jQuery(document).ready ($) ->
           orientation: 'right'
           element: $("#yAxis_"+serie.data_type_id)[0]
           scale: scales[serie.data_type_id]
+          label:
+            text: getAxisUnit serie.data_type_id
+            color: 'black'
+            opacity: 0.5
+            fontSize: '12px'
+            offsetX: '1em'
+            offsetY: '0em'
         yAxis.render()
     # Adapt graph width to new yAxis
     graph.configure
@@ -50,6 +78,13 @@ jQuery(document).ready ($) ->
             orientation: 'right'
             element: $("#yAxis_"+data_type)[0]
             scale: scales[data_type]
+            label:
+              text: getAxisUnit data_type
+              color: 'black'
+              opacity: 0.5
+              fontSize: '12px'
+              offsetX: '1em'
+              offsetY: '0em'
           yAxis.render()
     else
       url.split(",").forEach (item) ->
@@ -77,6 +112,13 @@ jQuery(document).ready ($) ->
               orientation: 'left'
               element: $("#yAxis_"+rightAxisId)[0]
               scale: scales[rightAxisId]
+              label:
+                text: getAxisUnit data_type
+                color: 'black'
+                opacity: 0.5
+                fontSize: '12px'
+                offsetX: '1em'
+                offsetY: '0em'
             yAxis.render()
     
     # Adapt graph width to new yAxis
