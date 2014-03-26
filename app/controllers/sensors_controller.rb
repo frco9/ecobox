@@ -64,7 +64,7 @@ class SensorsController < ApplicationController
     if SensorsDataType.where(:is_activated => true).count() == 1 and !params[:is_activated]
       return
     end
-
+    # param id format : 1-1,2-1,3-2 => sensor_id-data_type_id,sensor_id-data_type_id,....
     params[:id].split(",").map do |i|
       SensorsDataType.where(sensor_id: i.split("-")[0], data_type_id: i.split("-")[1]).update_all(:is_activated => params[:is_activated])
     end
