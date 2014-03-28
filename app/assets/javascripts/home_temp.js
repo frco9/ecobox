@@ -79,7 +79,7 @@ jQuery(document).ready(function($){
 	element_div.width(200)
 	    .height(250);
 	element_input.width(taille)
-	    .css("font-size","20px")
+	    .css("font-size","22px")
 	    .css("top","0px")
 	    .css("left","0px")
 	    .css("color","#303030");	
