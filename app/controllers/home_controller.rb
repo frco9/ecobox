@@ -19,8 +19,6 @@ class HomeController < ApplicationController
     @temp = get_temp
     @unavailable_sensors =  unavailable_sensors
     @new_sensors =  new_sensors
-    @requette = Sensor.where(:data_type => @temptype)
-    
-    logger.debug @requette
+    @requette = Sensor.where(:data_type => @temptype)    
   end       
 end

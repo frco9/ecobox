@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 	def new
 		@user = User.new
 		if User.all.size == 0
-			render 'new', layout: "login"
+			render 'new_admin', layout: "login"
 		elsif signed_in? and current_user.admin?
 			render 'new'
 		else
