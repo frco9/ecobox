@@ -4,6 +4,7 @@ Ecobox::Application.routes.draw do
   match "/sensors/list" => "sensors#list", via: :get
   match "/sensors/:id/sensor_data" => "sensors#sensor_data", via: [:get, :post]
   match "/sensors/:id/active_sensor" => "sensors#active_sensor", via: :post
+  match "/sensors/:id/blacklist" => "sensors#blacklist_sensor", via: :get, :as => "blacklist"
   resources :sensors
   resources :actuators
 
