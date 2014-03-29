@@ -1,0 +1,18 @@
+<% provide(:head_title, 'Utilisateur') %>
+
+<section class="row">
+  <div class="col-md-12">
+    <h1 style="text-align: center; font-size:24pt;">Création du compte administrateur</h1>
+  </div>
+  <%= render 'layouts/flash' %>
+  <div class="sec_content col-md-12">
+    <%= form_for @user, html: {novalidate: true} do |f| %>
+      <%= render 'fields', f: f %>
+      <div class="form-group">
+        <div class="col-sm-offset-4 col-sm-8">
+          <%= f.submit "Enregistrer", class: "btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
