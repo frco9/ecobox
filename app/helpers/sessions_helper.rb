@@ -1,7 +1,7 @@
 module SessionsHelper
 
-	# sign_in crée une session pour un utilisateur, en lui créant un cookie contenant sa valeur de jeton d'identification
-	# et en stockant une version hachée de celui ci dans la base
+
+  # Creates a session for one user and a cookie to keep his token. This token is also hashed and stored in DB
 	def sign_in(user)
 		remember_token = User.new_remember_token
 		cookies.permanent[:remember_token] = remember_token
@@ -17,7 +17,7 @@ module SessionsHelper
 		@current_user = user
 	end
 
-	# current_user récupère l'utilisateur correspondant à la session courante
+  # Retrieves user matching openned session.
 	def current_user
 		remember_token = User.encrypt(cookies[:remember_token])
 		@current_user ||= User.find_by(remember_token: remember_token) 
@@ -27,20 +27,19 @@ module SessionsHelper
 		user == current_user
 	end
 
-	# sign_out détruit le cookie contenant le jeton de l'utilisateur et termine la session,
-	# attribution d'un nouveau jeton dans la base pour sécuriser d'avantage
+  # Destroys user cookie and session. Plus adds a new token in the DB for more security
 	def sign_out
 		current_user.update_attribute(:remember_token, User.encrypt(User.new_remember_token))
 		cookies.delete(:remember_token)
 		self.current_user = nil
 	end
 
-	# store_location stocke l'url courante dans une variable de session
+  # Store current url in session cache
 	def store_location
 		session[:return_to] = request.url if request.get?
 	end
 
-	# redirect_back_or redirige l'utilisateur vers la variable de session si elle existe, sinon vers l'url en paramètre
+  # Redirects user to the "return_to" session variable if exists otherwise redirects to the given url
 	def redirect_back_or(default)
 		redirect_to(session[:return_to] || default)
 		session.delete(:return_to)

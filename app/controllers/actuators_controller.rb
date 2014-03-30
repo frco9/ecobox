@@ -9,20 +9,20 @@ class ActuatorsController < ApplicationController
 	end
 
 	def show
-		#selon la requête http, transmet à une vue différente
+    # Redirect to the right view depending on request
 		respond_to do |format|
-	      format.html # show.html.erb
-	      format.js   # show.js.erb
-    	end
+      format.html # show.html.erb
+      format.js   # show.js.erb
+  	end
 	end
 
 	def edit
 	end
 
-	#index permet la récupération de la liste des actionneurs pour les transmettre à la vue index.html.erb correspondante
-	def index
-		@actuators = Actuator.all		 
-	end
+	# Get all actuators and pass it to the view
+  def index
+	 @actuators = Actuator.all		 
+  end
 
 	def create
 		@actuator = Actuator.new(actuator_params)
@@ -57,8 +57,8 @@ class ActuatorsController < ApplicationController
 			@actuator = Actuator.find(params[:id])
 		end
 
-		# actuator_params spécifie les attributs qui peuvent êtres mis a jour (pour la méthode update par exemple)
-		def actuator_params
+		# Set allowed parameters given through GET or POST
+    def actuator_params
 		  params.require(:actuator).permit(:name, :room_id, :detail_id, :activated, :data_type_ids =>[])
 		end
 		

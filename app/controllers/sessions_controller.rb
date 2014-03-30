@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 	
 	end
 
-	# creer une nouvelle session pour un utilisateur s'il est correctement authentifié
+	# Create new session for current user if successfully logged-in
 	def create
 		user = User.find_by(email: params[:session][:email].downcase)
 		if user && user.authenticate(params[:session][:password])
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
 		end
 	end
 
-	# détruit la session de l'utilisateur courant 
+	# Destroy current user's session
 	def destroy
 		sign_out 
 		redirect_to signin_path 

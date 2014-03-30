@@ -4,8 +4,7 @@ class ApplicationController < ActionController::Base
 	protect_from_forgery with: :exception
 	include SessionsHelper
 
-	# signed_in_user sauvegarde l'url saisi de l'utilisateur non authentifié pour permettre de le rediriger automatiquement
-	# vers cette url un fois identifé.
+	# signed_in_user saves the incomming url to redirect the user to it after beeing successfully logged-in
 	def signed_in_user
 		unless signed_in?
 			store_location

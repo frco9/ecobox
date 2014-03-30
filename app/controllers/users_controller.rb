@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	# contraintes sur les méthodes
+  # Actions to execute before executing one of these methods
 	before_action :signed_in_user, only: [:show, :index, :edit, :update, :destroy]
 	before_action :correct_user, only: [:edit, :update]
 	before_action :admin_user, only: [:destroy]
@@ -14,7 +14,7 @@ class UsersController < ApplicationController
 
 	def new
 		@user = User.new
-		# Vérification que l'utilisateur qui tente de créer un compte est soit admin, soit qu'aucun compte n'a encore été crée
+    # Check if user is admin and thus can create user account or if any admin was created. 
 		if User.all.size == 0
 			render 'new_admin', layout: "login"
 		elsif signed_in? and current_user.admin?
@@ -67,7 +67,7 @@ class UsersController < ApplicationController
 			params.require(:user).permit(:firstname, :name, :email, :password, :password_confirmation)    
 		end
 
-		# correct_user, true si l'utilisateur courant correspond à l'utilisateur auquel il tente d'accéder
+    # correct_user true if the current user match the one he is trying to access.
 		def correct_user
 			@user = User.find(params[:id])
 			redirect_to(root_url) unless current_user?(@user)
