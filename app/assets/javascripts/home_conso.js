@@ -204,7 +204,7 @@ jQuery(document).ready(function($){
 	
 	var min = element_input.data('min');
 	var max = element_input.data('max');
-	var cur = element_input.data('cur');
+	var cur = element_input.data('cur') ? element_input.data('cur') : min;
 	var cum = element_input.data('cum');
 	var born_min = Math.min(30,min);
 	var born_max = Math.max(500,max);

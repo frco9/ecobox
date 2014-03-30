@@ -8,7 +8,7 @@ jQuery(document).ready(function($){
 
 	context.beginPath();
 	var taille = 150;
-	var largeur = 30;
+	var largeur = 25;
 	var decalage = 75;
 	var debut = 65;
 	// degradé:
