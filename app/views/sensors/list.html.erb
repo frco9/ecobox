@@ -65,20 +65,13 @@
                 backdrop: 'static'
               });
               $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
-
+              
               $("#edit_sensor_<%= sensor.id %>").on("ajax:success", function(e, data, status, xhr) {
-                  // $("#content .row .sec_content").load( "list #content .row .sec_content .row", function( response, status, xhr ) {
-                  //   $(this).prepend("<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Ajout du capteur réalisé avec succès.</div>"); 
-                  //   console.log(response.find($("#new_sensor_js")));
-                  // });
-                  $.get('list', function(result){
-                      $result = $(result);
-
-                      $("#content .row .sec_content").html("<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Ajout du capteur réalisé avec succès.</div>"); 
-                      $result.find("#content .row .sec_content").appendTo("#content .row .sec_content");
-                  }, 'html');
-                  $('#bootstrap_modal').modal('hide');
-                  
+                  $('#bootstrap_modal').modal('hide')
+                  $('#bootstrap_modal').on('hidden.bs.modal', function (e) {
+                    // Refresh page with new content, and reexecute js in case there are other sensors to add.
+                    $("#content .row .sec_content").html($(data).find("#content .row .sec_content"));
+                  });
                 }).bind("ajax:error", function(e, xhr, status, error) {
                   $("#modal-body .row .sec_content")
                     .prepend("<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Something wrong happend during the update.</div>"); 

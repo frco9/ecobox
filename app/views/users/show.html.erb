@@ -28,7 +28,7 @@
 	<% if current_user.admin? or current_user?(@user) %>
 		<%= link_to 'Modification', edit_user_path(@user), class: "btn btn-large btn-primary" %>
 	<% end %>
-	<% if current_user.admin? %>
+	<% if current_user.admin? and !@user.admin %>
 		<%= link_to "Supprimer", @user, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer l'utilisateur?" }, class: "btn btn-large btn-danger" %>
 	<% end %>
 </div>

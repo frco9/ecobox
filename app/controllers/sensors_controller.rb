@@ -1,6 +1,7 @@
+# coding: utf-8
 class SensorsController < ApplicationController	
 	before_action :signed_in_user
-  before_action :set_sensor, only: [:show, :edit, :update, :destroy]
+  before_action :set_sensor, only: [:show, :edit, :blacklist_sensor, :update, :destroy]
 
   # GET /sensors
   # GET /sensors.json
@@ -46,11 +47,22 @@ class SensorsController < ApplicationController
       format.html # list.html.erb
       format.json  # list.json.jbuilder
     end
-
   end
+  
   # GET /sensors/new
-  def new
-    @sensor = Sensor.new
+  # def new
+  #   @sensor = Sensor.new
+  # end
+
+  def blacklist_sensor
+    @sensor.destroy
+    respond_to do |format|
+      if Blacklist.find_or_create_by(hardware_address: @sensor.try(:hardware_address))
+        format.html { redirect_to sensors_list_path, flash: { warning: "Blacklistage du capteur réalisé avec succès."} }
+      else
+        format.html { redirect_to sensors_list_path, flash: { danger: "Une erreur s'est produite lors du blacklistage du capteur."} }
+      end
+    end
   end
 
   # GET /sensors/1/edit
@@ -125,11 +137,9 @@ class SensorsController < ApplicationController
   def update
     respond_to do |format|
       if @sensor.update(sensor_params)
-        format.html { redirect_to @sensor, flash: { success: "Sensor was successfully updated." }}
-        format.json { head :no_content }
+        format.html { redirect_to sensors_list_path, flash: { success: "Enregistrement des informations réalisé avec succès." }}
       else
-        format.html { render action: 'edit' }
-        format.json { render json: @sensor.errors, status: :unprocessable_entity }
+        format.html { redirect_to sensors_list_path, flash: { danger: "Une erreur s'est produite lors de la mise à jour des informations."} }
       end
     end
   end
