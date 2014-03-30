@@ -159,7 +159,7 @@ jQuery(document).ready(function($){
 	ctx.lineTo(- taille/100*105*Math.cos(ext_angle-(Math.PI/64) - Math.PI/2),- taille/100*105*Math.sin(ext_angle-(Math.PI/64) - Math.PI/2));
 	ctx.save();
 	ctx.fillStyle= color;
-	ctx.font = "10pt";
+	ctx.font = "10pt helvetica_neuelight";
 	ctx.textAlign="center"; 
 	ctx.fillText(ext,- taille/100*112*Math.cos(ext_angle - Math.PI/2),- taille/100*125*Math.sin(ext_angle  - Math.PI/2));
         ctx.fill();
@@ -186,7 +186,7 @@ jQuery(document).ready(function($){
 	// for (var i=0; i<8; i++){
 	//     ctx.beginPath();
 	//     ctx.fillStyle= "#303030";
-	//     ctx.font = "10pt";
+	//     ctx.font = "10pt helvetica_neuelight";
 	//     ctx.textAlign="center"; 
 	//     var grad = (i*(born_max-born_min)/8) + born_min;
 	//     ctx.fillText(Math.round(grad*10)/10,- taille/100*105*Math.cos(i*Math.PI/4 - Math.PI/2),- taille/100*105*Math.sin(i*Math.PI/4 - Math.PI/2));
@@ -196,7 +196,7 @@ jQuery(document).ready(function($){
 
 	ctx.beginPath();
 	ctx.fillStyle= "#33cc00";
-	ctx.font = "20pt";
+	ctx.font = "20pt helvetica_neuelight";
 	ctx.textAlign="center"; 
 	switch(type){
 	case "Hygrometrie":
@@ -210,7 +210,7 @@ jQuery(document).ready(function($){
 
 	ctx.beginPath();
 	ctx.fillStyle= "blue";
-	ctx.font = "10pt";
+	ctx.font = "10pt helvetica_neuelight";
 	if (min == born_min){
 	    ctx.textAlign="right"; 
 	}
@@ -222,7 +222,7 @@ jQuery(document).ready(function($){
 
 	ctx.beginPath();
 	ctx.fillStyle= "red";
-	ctx.font = "10pt";
+	ctx.font = "10pt helvetica_neuelight";
 	if (max == born_max){
 	    ctx.textAlign="left"; 
 	}
@@ -234,7 +234,7 @@ jQuery(document).ready(function($){
 
 	ctx.beginPath();
 	ctx.fillStyle= "orange";
-	ctx.font = "10pt";
+	ctx.font = "10pt helvetica_neuelight";
 	ctx.textAlign="center"; 
 	ctx.fillText(avg,- taille/100*110*Math.cos(avg_angle - Math.PI/2),-taille/100*110*Math.sin(avg_angle - Math.PI/2));
 
@@ -282,28 +282,28 @@ jQuery(document).ready(function($){
 
     // 	context.beginPath();
     // 	context.fillStyle= "blue";
-    // 	context.font = "12pt";
+    // 	context.font = "12pt helvetica_neuelight";
     // 	context.textAlign="rigth"; 
     // 	context.fillText("Donnée minimale de la journée dans votre maison",120, 99);
     // 	context.save();
 
     // 	context.beginPath();
     // 	context.fillStyle= "red";
-    // 	context.font = "12pt";
+    // 	context.font = "12pt helvetica_neuelight";
     // 	context.textAlign="rigth"; 
     // 	context.fillText("Donnée maximale de la journée dans votre maison",120, 12)
     // 	context.save();
 
     // 	context.beginPath();
     // 	context.fillStyle= "orange";
-    // 	context.font = "12pt";
+    // 	context.font = "12pt helvetica_neuelight";
     // 	context.textAlign="rigth"; 
     // 	context.fillText("Donnée moyenne de la journée dans votre maison",120, 75)
     // 	context.save();
 
     // 	context.beginPath();
     // 	context.fillStyle= "#33cc00";
-    // 	context.font = "12pt";
+    // 	context.font = "12pt helvetica_neuelight";
     // 	context.textAlign="rigth"; 
     // 	context.fillText("Donnée actuelle de la journée dans votre maison",120, 45)
 
