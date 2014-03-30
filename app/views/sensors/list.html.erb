@@ -36,8 +36,8 @@
     <%= render 'layouts/flash' %>
     <% @uniq_sensors.each_slice(3) do |s_sensors| %>
     <div class="row">
+      <%# Check if this is a new sensor %>
       <% s_sensors.each do |sensor| %>
-        <!-- Check if this is a new sensor -->
         <% if sensor.try(:name) %>
           <div class="col-md-4 col-sm-6">
             <div style="background-color: #FFF; padding: 15px; width: 100%;"> 
@@ -54,8 +54,8 @@
             </div>  
             <div id="ajax_content_<%= sensor.id %>" style="margin-bottom: 15px;"></div>
           </div>
+        <%# Else we show modal box, to complete sensor missing attributes. %>
         <% else %>
-          <!-- Else we show modal box, to complete sensor missing attributes. -->
           <script id="new_sensor_js" type="text/javascript">
             jQuery( document ).ready(function( $ ) {
               $("#bootstrap_modal .modal-body")
@@ -70,7 +70,8 @@
                   $('#bootstrap_modal').modal('hide')
                   $('#bootstrap_modal').on('hidden.bs.modal', function (e) {
                     // Refresh page with new content, and reexecute js in case there are other sensors to add.
-                    $("#content .row .sec_content").html($(data).find("#content .row .sec_content"));
+                    $("#content .row").html($(data).find("#content .row .sec_content"));
+                    eval($("#new_sensor_js").html());
                   });
                 }).bind("ajax:error", function(e, xhr, status, error) {
                   $("#modal-body .row .sec_content")
