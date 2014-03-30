@@ -148,7 +148,8 @@ jQuery(document).ready ($) ->
         # Set correct scale
         s.scale = scales[s.data_type_id]
 
-      window.ajaxGraph = new Rickshaw.Graph.Ajax.PointFrequency(
+      # Graph initialization
+      ajaxGraph = new Rickshaw.Graph.Ajax.PointFrequency(
         element: $("#temp_chart")[0]
         width: $("#graphContainer").width()-($("#graphContainer .col-xs-1").width()*$("#graphContainer .col-xs-1").length  + parseInt($("#graphContainer .col-xs-2").css("margin-left"))*$("#graphContainer .col-xs-2").length) # Container width - with of each Y axis (Yaxis width + margins)*number_of_yAxis
         height: $("#temp_chart").height()
@@ -165,15 +166,18 @@ jQuery(document).ready ($) ->
         minDate: ajax.minDate
         maxDate: ajax.maxDate
 
+        # When needed, fill missing data with an avarage of next and previous value. 
         onData: (d) ->
           Rickshaw.Graph.Ajax.PointFrequency.fillAvg(d,0)
           d
 
+        # Data specified un dataURL is now in series array
+        # Pluggins can now be initialize
         onComplete: (transport) ->
           graph = transport.graph
           if !transport.args.is_init
             transport.args.is_init = true
-            window.preview = new Rickshaw.Graph.RangeSlider.Preview(
+            preview = new Rickshaw.Graph.RangeSlider.Preview(
               graph: graph
               width: $("#selectorContainer").width()-($("#leftFreq").width()+$("#rightFreq").width()+40)
               height: 80
@@ -207,13 +211,12 @@ jQuery(document).ready ($) ->
             # Automatically create yAxis for all series activated.
             initYaxis graph
 
+            # xAxis for graph slider preview
             previewXAxis = new Rickshaw.Graph.Axis.Time(
               graph: preview.previews[0]
               timeFixture: new Rickshaw.Fixtures.Time.Local()
             )
             previewXAxis.render()
-
-
           return
       )
     , 'json'

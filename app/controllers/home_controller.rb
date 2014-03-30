@@ -4,7 +4,7 @@ class HomeController < ApplicationController
     include HomeHelper
 	before_action :signed_in_user
 
-# Main fonction of the Home page
+# Home page main function
   def index
 
     @time = Time.now
@@ -14,14 +14,14 @@ class HomeController < ApplicationController
     @consotype = DataType.where(:name => "Consommation").take!
     @temptype = DataType.where(:name => "Temperature").take!
     
-    # Get statistics of temperature and consommation:
+    # Get temperature and consumption statistics
     @temp = get_temp
     @conso = get_conso    
-    # Get statistics of others types:
+    # Get others types statistics
     @stats = get_stats
-    # Get unavailable sensors:
+    # Get unavailable sensors
     @unavailable_sensors = unavailable_sensors
-    # Get new sensors:
+    # Get new sensors
     @new_sensors =  new_sensors
   end       
 end

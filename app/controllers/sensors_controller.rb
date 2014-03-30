@@ -11,6 +11,7 @@ class SensorsController < ApplicationController
   # GET /sensors/1
   # GET /sensors/1.json
   def show
+    # Get id parameters
     @sensors = Sensor.find(params[:id].split(','))
     #Little hack : when many ids are given, only the first is shown for html response format.
     @sensor = @sensors[0]
@@ -50,13 +51,17 @@ class SensorsController < ApplicationController
   end
   
   # GET /sensors/new
+  # Unused to meet client expectations
   # def new
   #   @sensor = Sensor.new
   # end
 
+  # GET /sensors/1/blacklist
   def blacklist_sensor
+    # Sensor and all its datas are erased
     @sensor.destroy
     respond_to do |format|
+      # Add sensor to the blacklist with its hardware adress
       if Blacklist.find_or_create_by(hardware_address: @sensor.try(:hardware_address))
         format.html { redirect_to sensors_list_path, flash: { warning: "Blacklistage du capteur réalisé avec succès."} }
       else
@@ -76,13 +81,15 @@ class SensorsController < ApplicationController
     if SensorsDataType.where(:is_activated => true).count() == 1 and !params[:is_activated]
       return
     end
-    # param id format : 1-1,2-1,3-2 => sensor_id-data_type_id,sensor_id-data_type_id,....
+    # param id format : 1-1,2-1,3-2 => "sensor_id"-"data_type_id","sensor_id"-"data_type_id",....
+    # Set sensor status to param is_activated
     params[:id].split(",").map do |i|
       SensorsDataType.where(sensor_id: i.split("-")[0], data_type_id: i.split("-")[1]).update_all(:is_activated => params[:is_activated])
     end
   end
 
   def sensor_data
+    # Get post parameters and asign them to variables
     @start_date = DateTime.parse(params[:startDate]).to_s(:db) if params[:startDate]
     @end_date = DateTime.parse(params[:endDate]).to_s(:db) if params[:endDate]
     points_frequency = params[:pointFrequency]
@@ -92,6 +99,7 @@ class SensorsController < ApplicationController
     @ids = Array.new
     @data_type_ids = Array.new
     params[:id].split(",").map do |i|
+      # Create custom query depending on params given
       query = Sensor.find(i.split("-")[0]).data_sensors
       query = query.where(:data_type_id => i.split("-")[1])
       query = query.select('round(AVG(value)::numeric,2) as value, sensor_id, data_type_id').group(:sensor_id, :data_type_id) if valid_frequency
@@ -119,18 +127,19 @@ class SensorsController < ApplicationController
 
   # POST /sensors
   # POST /sensors.json
-  def create
-    @sensor = Sensor.new(sensor_params)
-    respond_to do |format|
-      if @sensor.save
-        format.html { redirect_to @sensor, flash: { success: "Sensor was successfully created."} }
-        format.json { render action: 'show', status: :created, location: @sensor }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @sensor.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  # Unused to meet client expectations
+  # def create
+  #   @sensor = Sensor.new(sensor_params)
+  #   respond_to do |format|
+  #     if @sensor.save
+  #       format.html { redirect_to @sensor, flash: { success: "Ajout du capteur réalisé avec succès."} }
+  #       format.json { render action: 'show', status: :created, location: @sensor }
+  #     else
+  #       format.html { render action: 'new' }
+  #       format.json { render json: @sensor.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PATCH/PUT /sensors/1
   # PATCH/PUT /sensors/1.json
