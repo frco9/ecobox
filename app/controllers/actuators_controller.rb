@@ -1,4 +1,5 @@
 class ActuatorsController < ApplicationController
+	#contraintes sur les méthodes
 	before_action :signed_in_user
 	before_action :set_actuator, only: [:show, :edit, :update, :destroy]
 	before_action :admin_user, only: [:destroy]
@@ -8,6 +9,7 @@ class ActuatorsController < ApplicationController
 	end
 
 	def show
+		#selon la requête http, transmet à une vue différente
 		respond_to do |format|
 	      format.html # show.html.erb
 	      format.js   # show.js.erb
@@ -17,6 +19,7 @@ class ActuatorsController < ApplicationController
 	def edit
 	end
 
+	#index permet la récupération de la liste des actionneurs pour les transmettre à la vue index.html.erb correspondante
 	def index
 		@actuators = Actuator.all		 
 	end
@@ -54,6 +57,7 @@ class ActuatorsController < ApplicationController
 			@actuator = Actuator.find(params[:id])
 		end
 
+		# actuator_params spécifie les attributs qui peuvent êtres mis a jour (pour la méthode update par exemple)
 		def actuator_params
 		  params.require(:actuator).permit(:name, :room_id, :detail_id, :activated, :data_type_ids =>[])
 		end
