@@ -13,25 +13,27 @@ jQuery(document).ready(function($){
 	}
 	
 	ctx.beginPath();
-	// Translation du repère au niveau du centre du cercle:
+	// Translate to the center of the circle
 	ctx.translate(taille*1.25,taille*1.25);
 	if(degrade){
 	    
+	    // Production of three part to create the gradient of the gauge:
 	    var portion = taille_jauge/3;
 	    var delta = taille_jauge/100;
-	    // dégradé:
+	    // Creation of the gradient:
 	    var gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge - Math.PI/2), - taille/100*80*Math.sin(debut_jauge - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + portion + delta - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + portion + delta - Math.PI/2));
-	    // on choisis les couleurs du dégradé:
+	    // Choose of the colors for the gradient
 	    gradient.addColorStop("0","white");
 	    gradient.addColorStop("1","#EA9035");
+	    // Print of an arc of circle
 	    ctx.arc(0,0,(taille/100*85),  debut_jauge + Math.PI/2, debut_jauge + portion + delta +Math.PI/2,false); 
 	    ctx.lineWidth = (taille/100*20);
 	    ctx.strokeStyle = gradient;
 	    ctx.stroke();
-	    // On sauvegarde:
+	    // saving of the actual drawing
 	    ctx.save();
 
-	    // Et on recommence:
+	    // We do the same for next parts
 	    ctx.beginPath();
 	    gradient = ctx.createLinearGradient(- taille/100*80*Math.cos(debut_jauge + portion - Math.PI/2), - taille/100*80*Math.sin(debut_jauge + portion - Math.PI/2),- taille/100*80*Math.cos(debut_jauge + 2*portion + delta - Math.PI/2),- taille/100*80*Math.sin(debut_jauge + 2*portion + delta - Math.PI/2));
 	    gradient.addColorStop("0","#EA9035");
@@ -53,8 +55,9 @@ jQuery(document).ready(function($){
 	    ctx.save();
 	}
 	else{
+	    // Color for the rest of the circle
 	    ctx.strokeStyle = "#303030"; /*grey of ecobox*/
-	    //On trace un arc de cercle de taille (taille/100*85)
+	    // Print of the rest of the circle:
 	    ctx.arc(0,0,(taille/100*85),  debut_jauge + Math.PI/2, taille_jauge + debut_jauge + Math.PI/2,false); 
 	    ctx.lineWidth = (taille/100*20);
 	}
@@ -69,6 +72,7 @@ jQuery(document).ready(function($){
 	return ctx;
     }
     
+    //Print of the current data ring
     function print_cur(element_div, taille, taille_jauge, debut_jauge, cur_angle, color, contexte){
 	
 	if(contexte==true){
@@ -78,6 +82,7 @@ jQuery(document).ready(function($){
 	}else{
 	    ctx = contexte;
 	}
+	
 	ctx.translate(taille*1.25,taille*1.25);
 	ctx.beginPath();
 	ctx.strokeStyle= color;
@@ -87,29 +92,8 @@ jQuery(document).ready(function($){
 	ctx.stroke();
 	return ctx;
     }
-    
-    // function print_cum(element_div, taille, taille_jauge, debut_jauge, cum_angle, color, contexte){
-	
-    // 	if(contexte==true){
-    // 	    var mycanvas = $('<canvas width="'+(taille*2.5)+'px" height="'+(taille*2.5)+'px" />');
-    // 	    element_div.append(mycanvas);
-    // 	    var ctx = mycanvas[0].getContext('2d');
-    // 	}else{
-    // 	    ctx = contexte;
-    // 	}
-    // 	ctx.beginPath();
-    // 	ctx.translate(taille*1.25,taille*1.25);
-    // 	ctx.strokeStyle= color;
-    // 	ctx.globalAlpha=0.65;
-    // 	ctx.lineWidth=3;
-    // 	ctx.moveTo(- taille/100*75*Math.cos(cum_angle - Math.PI/2),- taille/100*75*Math.sin(cum_angle - Math.PI/2));
-    // 	ctx.lineTo(- taille/100*65*Math.cos(cum_angle+(Math.PI/32) - Math.PI/2),- taille/100*65*Math.sin(cum_angle+(Math.PI/32) - Math.PI/2));
-    // 	ctx.moveTo(- taille/100*75*Math.cos(cum_angle - Math.PI/2),- taille/100*75*Math.sin(cum_angle - Math.PI/2));
-    // 	ctx.lineTo(- taille/100*65*Math.cos(cum_angle-(Math.PI/32) - Math.PI/2),- taille/100*65*Math.sin(cum_angle-(Math.PI/32) - Math.PI/2));
-    // 	ctx.stroke();
-    // 	return ctx;
-    // }
 
+// Print of the currency or the consumption unity:
     function print_devise(element_div, taille, contexte, aff){
 	if(contexte===true){
 	    var mycanvas = $('<canvas width="'+(taille*2.5)+'px" height="'+(taille*2.5)+'px" />');
@@ -133,7 +117,7 @@ jQuery(document).ready(function($){
 	return ctx;
     }
 
-    
+    //Print of the value around the circle
     function print_nb(element_div, taille, taille_jauge, debut_jauge, born_min, born_max, min, max, cur, cum, cur_angle, cum_angle, contexte){
 	
 	if(contexte==true){
@@ -202,22 +186,28 @@ jQuery(document).ready(function($){
 	var element_input = $(this);
 	var element_div = element_input.parent();
 	
+	// Get of the data:
 	var min = element_input.data('min');
 	var max = element_input.data('max');
 	var cur = element_input.data('cur') ? element_input.data('cur') : min;
 	var cum = element_input.data('cum');
 	var born_min = Math.min(30,min);
 	var born_max = Math.max(500,max);
-	var color = element_input.data('color') ? element_input.data('color') : "#33cc00"/*= vert*/ ;
+	var color = element_input.data('color') ? element_input.data('color') : "#33cc00"/*= green*/ ;
 	var taille = element_input.data('taille') ? element_input.data('taille') : 100 ;
+	// booleen to manage the print of the currency or the consumption unity
 	var aff = false;
+	//  Cumulative value in euro:
 	var cum_elec = Math.round(cum*0.00014*100)/100;
-		
+	
+	// calcul of angles by values:
 	var taille_jauge = 2*(Math.PI)*(max - min)/(born_max - born_min);
 	var debut_jauge = 2*(Math.PI)*(min - born_min)/(born_max - born_min);
 	var cur_angle = 2*(Math.PI)*(cur - born_min)/(born_max - born_min);
 	var cum_angle = 2*(Math.PI)*(cum - born_min)/(born_max - born_min);
 
+
+	// configuration of the text inside the circle
 	element_div.width(taille*2.5)
 	    .height(taille*2.5);
 	element_input.width(130)
@@ -227,16 +217,18 @@ jQuery(document).ready(function($){
 	    .css("text-align","center")
 	    .css("color","#33cc00");
 	
-	//on dessine la jauge circulaire à l'aide du canevas
+
+	// Print of the circle
 	print_gauge(element_div , taille , 2*Math.PI - taille_jauge, debut_jauge + taille_jauge, true , true,false);
-	//on dessine le niveau de la jauge circulaire
+	// Print of the gauge
 	print_gauge(element_div , taille , taille_jauge, debut_jauge,false , true, true);
-	//on dessine les nombres autour du cercle:
+
+	// Print of value around circle:
 	print_cur(element_div , taille ,taille_jauge, debut_jauge, cur_angle, 'orange' , true);
 	print_nb(element_div, taille, taille_jauge, debut_jauge, born_min, born_max, min, max, cur, cum, cur_angle, cum_angle, true);
 	var contexte = print_devise(element_div, taille, true, aff);
 	
-	//Changement d'affichage au clic de la souris €/Wh
+	//Change of print by the mouse clic (€/Wh)
 	element_div.mousedown(function(event){ 
 	    event.preventDefault();	    
 	    if (aff == false){

@@ -11,6 +11,7 @@ jQuery(document).ready(function($){
 	var largeur = 25;
 	var decalage = 75;
 	var debut = 65;
+	var pos = (taille-10)*(cur-min)/(max-min);
 	// degradé:
 	var gradient = context.createLinearGradient(0, debut, 0, debut + taille);
 	gradient.addColorStop("1","blue");
@@ -18,10 +19,10 @@ jQuery(document).ready(function($){
 	gradient.addColorStop("0.20","orange");
 	gradient.addColorStop("0","red");
 	context.fillStyle = gradient;
-	// Barre:
+	// Graph:
 	context.fillRect(decalage, debut, largeur, taille);
 	
-	// Affichage des données:
+	// Print of datas:
 	context.save();
 	context.beginPath();
 	context.fillStyle= "blue";
@@ -45,7 +46,6 @@ jQuery(document).ready(function($){
 
 	context.save();
 	context.beginPath();
-	var pos = (taille-10)*(cur-min)/(max-min);
 	context.fillStyle= "#33cc00";
 	context.font = "10pt helvetica_neuelight";
 	context.textAlign="left"; 
@@ -69,18 +69,17 @@ jQuery(document).ready(function($){
 	return context;
     }
 
-    
     $('input.temp').wrap('<div class="temp" />').each(function(index){
+
   var element_input = $(this);
   var element_div = element_input.parent();
   var taille = element_input.data('taille') ? element_input.data('taille') : 100 ;
   
-
-
-    element_div.width(200)
+  element_div.width(200)
       .height(250);
   
   
+// Configuration of the text inside the circle:
   element_input.width(taille)
       .css("font-size","22px")
       .css("top","0px")
@@ -88,6 +87,7 @@ jQuery(document).ready(function($){
       .css("color","#303030");
 
 
+// Get the different datas:
   var min = element_input.data('min');
   var max = element_input.data('max');
   var avg = element_input.data('avg');

@@ -1,12 +1,15 @@
 module HomeHelper
 
+      # Structure to stock every statistics by type
       DailyStats = Struct.new(:typename, :min, :max, :avg, :curin, :curout)
+      # Structure to stock statistics of the consommation (need less datas than DailyStats)
       ConsoStats = Struct.new(:min, :max, :cur, :cum)
       # Get unavailable sensors
       def unavailable_sensors
             sensors_tab = []
             sensors = Sensor.all
             sensors.each do |sensor|
+                 # Get the last data for each sensor and check the datetime of its creation
                  datas = sensor.data_sensors.last
 	               # If a sensor have not sent a data within 10 min, It is considerated unavailable 
                  if !datas or datas.created_at < 10.minutes.ago
@@ -53,7 +56,7 @@ module HomeHelper
                   else
                       curout = "null"
                   end  
-                  tmp = DailyStats.new(area.name,min,max,number_with_precision(avg, :precision => 1),number_with_precision(curin, :precision => 1),curout)
+                  tmp = DailyStats.new(area.name,number_with_precision(min, :precision => 1),number_with_precision(max, :precision => 1),number_with_precision(avg, :precision => 1),number_with_precision(curin, :precision => 1),curout)
                   temps << tmp
               end
            end
@@ -68,7 +71,7 @@ module HomeHelper
               max = req.order('value DESC').take!.value
               cur = DataSensor.select('AVG(value) as value').where(:created_at => 2.minutes.ago..@time, :data_type_id => @consotype.id).take!.value    
               cum = DataSensor.select('SUM(value) as value').where(:created_at => @begin..@time, :data_type_id => @consotype.id).take!.value 
-              tmp = ConsoStats.new(min,max,number_with_precision(cur, :precision => 1),number_with_precision(cum, :precision => 1))
+              tmp = ConsoStats.new(number_with_precision(min, :precision => 1),number_with_precision(max, :precision => 1),number_with_precision(cur, :precision => 1),number_with_precision(cum, :precision => 1))
            end
            return tmp
      end
@@ -90,7 +93,7 @@ module HomeHelper
                   else
                       curout = "null"
                   end  
-                  tmp = DailyStats.new(data_type.name,min,max,number_with_precision(avg, :precision => 1),number_with_precision(curin, :precision => 1),curout)
+                  tmp = DailyStats.new(data_type.name,number_with_precision(min, :precision => 1),number_with_precision(max, :precision => 1),number_with_precision(avg, :precision => 1),number_with_precision(curin, :precision => 1),curout)
                   stats << tmp
               end
            end
