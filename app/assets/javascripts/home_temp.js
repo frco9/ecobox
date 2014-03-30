@@ -9,7 +9,7 @@ jQuery(document).ready(function($){
 	context.beginPath();
 	var taille = 150;
 	var largeur = 30;
-	var decalage = 70;
+	var decalage = 75;
 	var debut = 65;
 	// degradé:
 	var gradient = context.createLinearGradient(0, debut, 0, debut + taille);
@@ -25,21 +25,21 @@ jQuery(document).ready(function($){
 	context.save();
 	context.beginPath();
 	context.fillStyle= "blue";
-	context.font = "12pt Calibri";
+	context.font = "12pt";
 	context.textAlign="right"; 
 	context.fillText("min: " + min, decalage-5, debut + taille - 2);
 
 	context.save();
 	context.beginPath();
 	context.fillStyle= "red";
-	context.font = "12pt Calibri";
+	context.font = "12pt";
 	context.textAlign="right"; 
 	context.fillText("max: " + max, decalage-5, debut + 12);
 
 	context.save();
 	context.beginPath();
 	context.fillStyle= "orange";
-	context.font = "12pt Calibri";
+	context.font = "12pt";
 	context.textAlign="right"; 
 	context.fillText("moy: " + avg, decalage-5, debut + taille/2);
 
@@ -47,21 +47,21 @@ jQuery(document).ready(function($){
 	context.beginPath();
 	var pos = (taille-12)*(cur-min)/(max-min);
 	context.fillStyle= "#33cc00";
-	context.font = "12pt Calibri";
+	context.font = "12pt";
 	context.textAlign="left"; 
 	context.fillText(cur,decalage+largeur+2, debut + taille - pos);
 	
 	context.save();
 	context.beginPath();
 	context.fillStyle= "#33cc00";
-	context.font = "12pt Calibri";
+	context.font = "12pt";
 	context.textAlign="left"; 
 	context.fillText("act:", decalage + largeur +2, debut - 2);
 
 	context.save();
 	context.beginPath();
 	context.fillStyle= "#303030";
-	context.font = "12pt Calibri";
+	context.font = "12pt";
 	context.textAlign="center"; 
 	context.fillText("°C", decalage + largeur/2, debut - 2);
 	

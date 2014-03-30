@@ -9,18 +9,20 @@ class HomeController < ApplicationController
 
     @time = Time.now
     @begin = @time.beginning_of_day
-    @datatype = DataType.where("data_types.name != ? and data_types.name != ?","Temperature","Consommation")
     @areas = Area.all
-    
+    @datatype = DataType.where("data_types.name != ? and data_types.name != ?","Temperature","Consommation")
     @consotype = DataType.where(:name => "Consommation").take!
     @temptype = DataType.where(:name => "Temperature").take!
-    @stats = get_stats
-    @conso = get_conso
-    @temp = get_temp
-    @unavailable_sensors =  unavailable_sensors
-    @new_sensors =  new_sensors
-    @requette = Sensor.where(:data_type => @temptype)
     
-    logger.debug @requette
+    # Get statistics of temperature and consommation:
+    @temp = get_temp
+    @conso = get_conso    
+    # Get statistics of others types:
+    @stats = get_stats
+    # Get unavailable sensors:
+    @unavailable_sensors = unavailable_sensors
+    # Get new sensors:
+    @new_sensors =  new_sensors
+   
   end       
 end

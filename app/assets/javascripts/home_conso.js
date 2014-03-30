@@ -121,7 +121,7 @@ jQuery(document).ready(function($){
 	}
 	ctx.beginPath();
 	ctx.fillStyle= "#33cc00";
-	ctx.font = "20pt Arial";
+	ctx.font = "20pt";
 	ctx.textAlign="center"; 
 	if(aff){
 	    ctx.fillText("€",0,40);
@@ -151,7 +151,7 @@ jQuery(document).ready(function($){
 	// for (var i=0; i<8; i++){
 	//     ctx.beginPath();
 	//     ctx.fillStyle= "#303030";
-	//     ctx.font = "10pt Arial";
+	//     ctx.font = "10pt";
 	//     ctx.textAlign="center"; 
 	//     var grad = (i*(born_max-born_min)/8) + born_min;
 	//     if (i == 4){
@@ -165,7 +165,7 @@ jQuery(document).ready(function($){
 
 	ctx.beginPath();
 	ctx.fillStyle= "blue";
-	ctx.font = "10pt Arial";
+	ctx.font = "10pt";
 	if (min == born_min){
 	    ctx.textAlign="right"; 
 	}
@@ -177,7 +177,7 @@ jQuery(document).ready(function($){
 
 	ctx.beginPath();
 	ctx.fillStyle= "red";
-	ctx.font = "10pt Arial";
+	ctx.font = "10pt";
 	if (max == born_max){
 	    ctx.textAlign="left"; 
 	}
@@ -189,7 +189,7 @@ jQuery(document).ready(function($){
 	ctx.save();
 	ctx.beginPath();
 	ctx.fillStyle= "orange";
-	ctx.font = "10pt Arial";
+	ctx.font = "10pt";
 	ctx.textAlign="center"; 
 	ctx.fillText(cur,- taille/100*110*Math.cos(cur_angle - Math.PI/2),-taille/100*110*Math.sin(cur_angle - Math.PI/2));
 
