@@ -179,7 +179,7 @@ jQuery(document).ready ($) ->
             transport.args.is_init = true
             preview = new Rickshaw.Graph.RangeSlider.Preview(
               graph: graph
-              width: $("#selectorContainer").width()-($("#leftFreq").width()+$("#rightFreq").width()+40)
+              width: $("#selectorContainer").width()-($("#leftFreq").width()+$("#rightFreq").width()+45)
               height: 80
               element: $("#preview")[0]
             )

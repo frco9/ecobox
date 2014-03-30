@@ -461,6 +461,7 @@ footer{
     border-top: solid 1px #797979;
     margin: 0 0 0 170px !important;
     padding: 0 !important;
+    width: 90% !important;
 }
 .clearfix:before,
 .clearfix:after {
@@ -519,6 +520,13 @@ input, textarea, select, .uneditable-input {
         float: inherit !important;
         width: inherit !important;
     }
+    footer{
+      height: 30px;
+      width: 83.3333333333% !important;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      margin: 0 !important;
+    }
     nav,#logo{
         width: 170px !important;
     }
@@ -550,7 +558,7 @@ input, textarea, select, .uneditable-input {
 }
 @media (max-width: 767px){
     #foreground{
-        left: -142px;
+        left: -160px;
     }
     nav{
         width: 150px !important;
@@ -566,14 +574,12 @@ input, textarea, select, .uneditable-input {
         font-size: 11pt;
         color: #e3e4e4;
     }
-    #wrap{
-        left:8px;
-    }
     #logout {
         width: auto;
         right: 32px;
         top: 29px;
         border-left: none;
+        z-index: 10;
     }
     #logout-icon {
         font-size: 12pt;
@@ -620,6 +626,7 @@ input, textarea, select, .uneditable-input {
         color: #e3e4e4;
         left: 40px;
         font-size: 20pt;
+        cursor: pointer;
     }
     h3 {
         font-size: 26pt;
@@ -629,6 +636,13 @@ input, textarea, select, .uneditable-input {
     }
     .main-offset{
         left:150px !important;
+    }
+    footer{
+      width: 100% !important;
+      height: 30px;
+      padding-left: 15px !important;
+      padding-right: 15px !important;
+      margin: 0 !important;
     }
 
 }

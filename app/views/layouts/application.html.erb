@@ -60,7 +60,7 @@
                 <li><%= link_to "Ajouter un utilisateur", signup_path %></li>
               <% end %>
           </ul>
-          <span id="username" class="visible-xs">Username</span>
+          <span id="username" class="visible-xs"><%= current_user.try(:name) %></span>
         </div>
       </div>
     </header>
@@ -122,8 +122,8 @@
           </div>
         </div>
       </div>
-
-      <footer class="row col-sm-12"></footer>
+      <div class="col-sm-2 visible-sm"></div> 
+      <footer class="col-sm-10"></footer>
     </div>
   </div>
   <%= yield :bottom_includes %>
