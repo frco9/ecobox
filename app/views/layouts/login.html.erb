@@ -5,6 +5,7 @@
   <%= yield :head_css_includes %>
 
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
   <%= yield :head_js_includes %>
   
   <%= csrf_meta_tags %>
