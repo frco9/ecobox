@@ -19,4 +19,5 @@ json.series(@sensors) do |sensor|
 	json.maxDate @maxDate.shift
 	json.minValue @minValue.shift
 	json.maxValue @maxValue.shift
+	json.opacity 0.7
 end

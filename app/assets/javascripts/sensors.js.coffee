@@ -38,8 +38,8 @@ jQuery(document).ready ($) ->
             color: 'black'
             opacity: 0.5
             fontSize: '12px'
-            offsetX: '1em'
-            offsetY: '0em'
+            offsetX: '1.6em'
+            offsetY: '2.5em'
         yAxis.render()
       # Right yAxis for the others if not already created
       else if !$("#yAxis_"+serie.data_type_id).length
@@ -55,8 +55,8 @@ jQuery(document).ready ($) ->
             color: 'black'
             opacity: 0.5
             fontSize: '12px'
-            offsetX: '1em'
-            offsetY: '0em'
+            offsetX: '1.6em'
+            offsetY: '2em'
         yAxis.render()
     # Adapt graph width to new yAxis
     graph.configure
@@ -83,8 +83,8 @@ jQuery(document).ready ($) ->
               color: 'black'
               opacity: 0.5
               fontSize: '12px'
-              offsetX: '1em'
-              offsetY: '0em'
+              offsetX: '1.6em'
+              offsetY: '2em'
           yAxis.render()
     else
       url.split(",").forEach (item) ->
@@ -117,8 +117,8 @@ jQuery(document).ready ($) ->
                 color: 'black'
                 opacity: 0.5
                 fontSize: '12px'
-                offsetX: '1em'
-                offsetY: '0em'
+                offsetX: '1.6em'
+                offsetY: '2.5em'
             yAxis.render()
     
     # Adapt graph width to new yAxis
