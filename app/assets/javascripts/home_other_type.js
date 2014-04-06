@@ -1,4 +1,4 @@
-jQuery(document).ready(function($){
+$(document).on('page:change', function(){
 
     function print_gauge(element_div , taille , taille_jauge, debut_jauge, type , ombre, contexte, degrade){
 	

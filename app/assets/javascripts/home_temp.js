@@ -1,4 +1,4 @@
-jQuery(document).ready(function($){
+$(document).on('page:change', function(){
 
     function print_temp(element_div, min, max, avg, cur){
 

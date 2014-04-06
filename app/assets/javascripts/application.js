@@ -16,7 +16,7 @@
 //= require bootstrap
 //= require bootstrap-switch
 //= require jqBootstrapValidation
-$(document).ready(function(){
+$(document).on('page:change', function(){
   $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
   $("#menu-switch").click(function() {
     if ($("#foreground").css("left")=="0px") {

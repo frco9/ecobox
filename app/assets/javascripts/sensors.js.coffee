@@ -5,7 +5,7 @@
 #= require moment
 #= require rickshaw
 
-jQuery(document).ready ($) ->
+$(document).on 'page:change', ->
   palette = new Rickshaw.Color.Palette()
   scales = {} 
   
