@@ -17,6 +17,7 @@
 //= require bootstrap-switch
 //= require jqBootstrapValidation
 $(document).on('page:change', function(){
+  $("#wrap").css("min-height", $(".my_container").height()+"px");
   $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
   $("#menu-switch").click(function() {
     if ($("#foreground").css("left")=="0px") {
