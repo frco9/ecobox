@@ -1,0 +1,7 @@
+<% provide(:head_title, 'Nouvel actionneur') %>
+<h1>Ajouter un nouvel actionneur</h1>
+
+<%= form_for(@actuator) do |f| %>
+	<%= render 'fields', f: f %>
+	<%= f.submit "Ajouter un nouvel actionneur", class: "btn btn-large btn-primary" %>
+<% end %>

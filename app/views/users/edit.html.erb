@@ -1,0 +1,22 @@
+<% provide(:head_title, 'Utilisateur') %>
+
+<section class="row">
+  <div class="sec_header col-md-12">
+    <h2>Mettre à jour le profil</h2>
+  </div>
+  <%= render 'layouts/flash' %>
+  <div class="sec_content col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <%= form_for @user, html: {novalidate: true} do |f| %>
+          <%= render 'fields', f: f %>
+          <div class="form-group">
+            <div class="col-sm-offset-4 col-sm-8">
+              <%= f.submit "Enregistrer", class: "btn btn-primary" %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

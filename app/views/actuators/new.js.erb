@@ -1,0 +1,13 @@
+$("#bootstrap_modal .modal-body")
+	.html("<%= escape_javascript(render(:partial => "new"))%>")
+$("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+
+$("#new_actuator").on("ajax:success", function(e, data, status, xhr) {
+    $("#content .row .sec_content").load( "actuators #content .row .sec_content .row", function( response, status, xhr ) {
+      $(this).prepend("<div class=\"alert alert-success alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Ajout de l'actionneur réalisé avec succès.</div>"); 
+    });
+    $('#bootstrap_modal').modal('hide');
+  }).bind("ajax:error", function(e, xhr, status, error) {
+    $("#modal-body .row .sec_content")
+      .prepend("<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Something wrong happend during the update.</div>"); 
+});

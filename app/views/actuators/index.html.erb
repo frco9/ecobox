@@ -1,0 +1,67 @@
+<% content_for :head_css_includes do %>
+	<%= stylesheet_link_tag "actuators", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
+<% end %>
+
+<% provide(:head_title, "Actionneurs") %>
+
+<% content_for :bottom_includes do %>
+<!-- Event Modal -->
+  <div id="bootstrap_modal" class="modal fade">
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Ajouter un actionneur</h4>
+            </div>
+            <div class="modal-body">
+                <p>Loading...</p>
+            </div>
+          </div>
+          <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+  </div>
+  <!-- Event modal -->
+<% end %>
+
+<section class="row">
+  <div class="sec_header col-md-12">
+    <div class="row">
+      <div class="col-md-6">
+        <h2>Liste des Actionneurs</h2>
+      </div>
+      <div class="col-md-6">
+        <h4><%= link_to "Ajouter un actionneur", new_actuator_path, remote: true, data: { target: "#bootstrap_modal", toggle: "modal"}, class: "pull-right", role: "button" %></h4>
+        <span class="clearfix"></span>
+      </div>
+    </div>
+  </div>
+  <div class="sec_content col-md-12">
+    <%= render 'layouts/flash' %>
+    <% @actuators.each_slice(3) do |s_actuators| %>
+    <div class="row">
+      <% s_actuators.each do |actuator| %>
+        <div class="col-md-4">
+          <div style="background-color: #FFF; padding: 15px; width: 100%;"> 
+            <%= link_to actuator, :remote => true do %>
+              <span><%= actuator.name %></span>
+              <span><%= actuator.room.name if actuator.room %></span>
+            <% end %>
+            <% if current_user.admin? %> 
+              <%= link_to "", actuator, remote: true, method: :delete, data: { confirm: "Etes vous certain de vouloir supprimer le capteur?" }, class: "icon-remove pull-right", style: "font-size:14pt; margin-left:5px;" %>
+              <%= link_to "", edit_actuator_path(actuator), remote: true, class: "glyphicon glyphicon-edit pull-right", style: "font-size:14pt; margin-left:5px;" %>
+            <% end %>
+            <%= link_to "", actuator, remote: true, class: "glyphicon glyphicon-cog pull-right", style: "font-size:14pt;" %>
+            <span class="clearfix"></span>
+          </div>  
+          <div id="ajax_content_<%= actuator.id %>" style="margin-bottom: 15px;"></div>
+        </div>
+      <% end %>
+    </div>
+    <% end %>
+  </div>
+</section>

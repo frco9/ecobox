@@ -1,0 +1,46 @@
+<% content_for :head_css_includes do %>
+    <%= stylesheet_link_tag "sensors", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "sensors", "data-turbolinks-track" => true %>
+<% end %>
+
+<% content_for :head_title do %>
+  Capteurs
+<% end %>
+
+
+
+<section class="row">
+  <div class="sec_header col-md-12">
+      <h2>Relev&eacute de temp&eacuterature</h2>
+  </div>
+  <%= render 'layouts/flash' %>
+
+  <div class="sec_content col-md-12">
+    <div class="row">
+      <div class="col-md-12" style="margin-bottom: 15px;">
+        <div id="legend"></div>
+      </div>
+      <div class="col-md-12" style="padding-top: 10px;">
+        <div id="graphContainer" class="row">
+          <div id="leftMarginFix" class="col-xs-2" style="width: 0; padding-left: 0; padding-right: 0; margin-left:15px;"></div>
+          <div id="temp_chart" class="col-xs-8" style="width:inherit; padding-left: 0; padding-right: 0;"></div>
+          <div id="rightMarginFix" class="col-xs-2" style="width: 0; padding-left: 0; padding-right: 0; margin-right:15px;"></div>
+        </div>
+        <div id="selectorContainer" class="row">
+          <div id="leftFreq" class="col-xs-1"></div>
+          <div id="preview" class="col-xs-10"></div>
+          <div id="rightFreq" class="col-xs-1"></div>
+        </div>
+        <div class="row">
+          <div id="freqSelector" class="col-xs-12"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!--  -->

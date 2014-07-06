@@ -1,0 +1,26 @@
+<% content_for :head_css_includes do %>
+	<%= stylesheet_link_tag "actuators", media: "all", "data-turbolinks-track" => true %>
+<% end %>
+
+<% content_for :head_js_includes do %>
+    <%= javascript_include_tag "actuators", "data-turbolinks-track" => false %>
+<% end %>
+
+<% provide(:head_title, "Modification actionneur #{@actuator.name}") %>
+
+<h1>Mettre à jour l'actionneur</h1>
+
+<%= form_for(@actuator) do |f| %>
+	<%= render 'fields', f: f %>
+	<div class="form-group">
+		<%= f.label :is_activated, "Etat", class: "col-sm-4 control-label" %>
+		<div id="button_edit" class="col-sm-8">
+	      <%= f.check_box :activated, id: "actuator_#{@actuator.id}" %>
+	    </div>
+	</div>
+	<div class="form-group">
+    	<div class="col-sm-offset-4 col-sm-8">
+			<%= f.submit "Enregistrer", class: "btn btn-large btn-primary" %>
+		</div>
+	</div>
+<% end %>

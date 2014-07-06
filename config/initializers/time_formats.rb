@@ -1,0 +1,1 @@
+Time::DATE_FORMATS[:morris_js] = '%Y-%m-%d %H:%M:%SZ%z'

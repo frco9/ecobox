@@ -1,0 +1,10 @@
+$("#ajax_content_<%= @sensor.id %>")
+  .html("<%= escape_javascript(render(:partial => "show"))%><a id=\"ajax_close_<%= @sensor.id %>\" class=\"pull-right\">Fermer  <span class=\"glyphicon glyphicon-chevron-up\"></span></a><span class=\"clearfix\"></span>")
+  .css({"background-color": "#FFF", "padding-left": "15px", "padding-right": "15px", "padding-bottom": "15px"});
+
+$("#ajax_close_<%= @sensor.id %>").click(function() {
+  $("#ajax_content_<%= @sensor.id %>").empty()
+    .css({"padding-left": "0px", "padding-right": "0px", "padding-bottom": "0px"});
+});
+
+

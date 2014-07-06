@@ -1,3 +1,23 @@
+GIT
+  remote: http://github.com/frco9/rickshaw_rails.git
+  revision: 9da807d95a9f9102ce39513bb10ac425e09d1aaf
+  specs:
+    rickshaw_rails (1.4.6)
+      railties (>= 3.1.0)
+
+GIT
+  remote: http://github.com/frco9/sql_funk
+  revision: eadf97bd44c47c39fcd85ce90c25295ee48f6a64
+  specs:
+    sql_funk (0.0.1)
+
+GIT
+  remote: https://github.com/vitormil/faker
+  revision: 6ace2f38b1507260f58f191251112421efb50236
+  specs:
+    faker (1.0.1)
+      i18n (~> 0.5)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -25,9 +45,25 @@ GEM
       multi_json (~> 1.3)
       thread_safe (~> 0.1)
       tzinfo (~> 0.3.37)
-    arel (4.0.1)
-    atomic (1.1.14)
+    arel (4.0.2)
+    atomic (1.1.16)
+    bcrypt (3.1.7)
+    bcrypt-ruby (3.1.5)
+      bcrypt (>= 3.1.3)
+    bootstrap-sass (3.1.1.0)
+      sass (~> 3.2)
+    bootstrap-switch-rails (2.0.2)
+    bootstrap-will_paginate (0.0.9)
+      will_paginate
     builder (3.1.4)
+    capybara (2.1.0)
+      mime-types (>= 1.16)
+      nokogiri (>= 1.3.3)
+      rack (>= 1.0.0)
+      rack-test (>= 0.5.4)
+      xpath (~> 2.0)
+    childprocess (0.5.2)
+      ffi (~> 1.0, >= 1.0.11)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -35,8 +71,12 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.7.0)
+    d3_rails (3.4.4)
+      railties (>= 3.1.0)
+    diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.0.2)
+    ffi (1.9.3)
     hike (1.2.3)
     i18n (0.6.9)
     jbuilder (1.5.3)
@@ -50,9 +90,15 @@ GEM
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
     mime-types (1.25.1)
+    mini_portile (0.5.3)
     minitest (4.7.5)
-    multi_json (1.8.4)
-    polyglot (0.3.3)
+    momentjs-rails (2.5.1)
+      railties (>= 3.1)
+    multi_json (1.9.2)
+    nokogiri (1.6.1)
+      mini_portile (~> 0.5.0)
+    pg (0.17.1)
+    polyglot (0.3.4)
     rack (1.5.2)
     rack-test (0.6.2)
       rack (>= 1.0)
@@ -64,23 +110,46 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.0.1)
       sprockets-rails (~> 2.0.0)
+    rails_12factor (0.0.2)
+      rails_serve_static_assets
+      rails_stdout_logging
+    rails_serve_static_assets (0.0.2)
+    rails_stdout_logging (0.0.3)
     railties (4.0.1)
       actionpack (= 4.0.1)
       activesupport (= 4.0.1)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.1.1)
+    rake (10.2.2)
     rdoc (4.1.1)
       json (~> 1.4)
-    sass (3.2.14)
-    sass-rails (4.0.1)
+    rspec-core (2.13.1)
+    rspec-expectations (2.13.0)
+      diff-lcs (>= 1.1.3, < 2.0)
+    rspec-mocks (2.13.1)
+    rspec-rails (2.13.1)
+      actionpack (>= 3.0)
+      activesupport (>= 3.0)
+      railties (>= 3.0)
+      rspec-core (~> 2.13.0)
+      rspec-expectations (~> 2.13.0)
+      rspec-mocks (~> 2.13.0)
+    rubyzip (0.9.9)
+    sass (3.2.18)
+    sass-rails (4.0.2)
       railties (>= 4.0.0, < 5.0)
-      sass (>= 3.1.10)
+      sass (~> 3.2.0)
+      sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0.0)
     sdoc (0.4.0)
       json (~> 1.8)
       rdoc (~> 4.0, < 5.0)
-    sprockets (2.10.1)
+    selenium-webdriver (2.35.1)
+      childprocess (>= 0.2.5)
+      multi_json (~> 1.0)
+      rubyzip (< 1.0.0)
+      websocket (~> 1.0.4)
+    sprockets (2.11.0)
       hike (~> 1.2)
       multi_json (~> 1.0)
       rack (~> 1.0)
@@ -89,31 +158,48 @@ GEM
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       sprockets (~> 2.8)
-    sqlite3 (1.3.8)
-    thor (0.18.1)
-    thread_safe (0.1.3)
-      atomic
+    thor (0.19.1)
+    thread_safe (0.3.1)
+      atomic (>= 1.1.7, < 2)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
     turbolinks (2.2.1)
       coffee-rails
-    tzinfo (0.3.38)
-    uglifier (2.4.0)
+    tzinfo (0.3.39)
+    uglifier (2.5.0)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
+    websocket (1.0.7)
+    will_paginate (3.0.4)
+    xpath (2.0.0)
+      nokogiri (~> 1.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt-ruby (~> 3.1.2)
+  bootstrap-sass (~> 3.1.1)
+  bootstrap-switch-rails
+  bootstrap-will_paginate (= 0.0.9)
+  capybara (= 2.1.0)
   coffee-rails (~> 4.0.0)
+  d3_rails (~> 3.4.1)
+  faker!
   jbuilder (~> 1.2)
   jquery-rails
+  momentjs-rails
+  pg
   rails (= 4.0.1)
+  rails_12factor
+  rickshaw_rails!
+  rspec-rails (= 2.13.1)
   sass-rails (~> 4.0.0)
   sdoc
-  sqlite3
+  selenium-webdriver (= 2.35.1)
+  sql_funk!
   turbolinks
   uglifier (>= 1.3.0)
+  will_paginate (= 3.0.4)

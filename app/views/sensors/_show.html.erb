@@ -1,0 +1,28 @@
+<section class="row">
+	<div class="col-md-12">
+    <%= render 'layouts/flash' %>
+		<div style="background-color: #FFF; padding: 15px;">
+      <p>
+  		  <strong>Nom :</strong>
+  		  <%= @sensor.name %>
+  		</p>
+  		<p>
+  		  <strong>Modèle :</strong>
+  		  <%= @sensor.detail.try(:name) %>
+  		</p>
+      <p>
+        <strong>Type(s) de données :</strong>
+        <ul>
+        <% @sensor.data_types.each do |data_type| %>
+          <li><%= data_type.try(:name) %></li>
+        <% end %>
+        </ul>
+      </p>
+  		<p>
+  		  <strong>Pièce :</strong>
+  		  <%= @sensor.room.try(:name) %>
+  		  
+  		</p>
+    </div>
+	</div>
+</section>

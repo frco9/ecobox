@@ -1,0 +1,16 @@
+$("#ajax_content_<%= @actuator.id %>")
+  .html("<%= escape_javascript(render(:partial => "edit"))%> <a id=\"ajax_close_<%= @actuator.id %>\" class=\"pull-right\">Fermer  <span class=\"glyphicon glyphicon-chevron-up\"></span></a><span class=\"clearfix\"></span>")
+  .css({"background-color": "#FFF", "padding-left": "15px", "padding-right": "15px", "padding-bottom": "15px"});
+$("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+
+$("#ajax_close_<%= @actuator.id %>").click(function() {
+  $("#ajax_content_<%= @actuator.id %>").empty()
+    .css({"padding-left": "0px", "padding-right": "0px", "padding-bottom": "0px"});
+});
+
+$("#edit_actuator_<%= @actuator.id %>").on("ajax:error", function(e, xhr, status, error) {
+    $("#ajax_content_<%= @actuator.id %> .row .sec_content")
+      .prepend("<div class=\"alert alert-danger alert-dismissable\"><button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-hidden=\"true\">&times;</button>Something wrong happend during the update.</div>"); 
+});
+
+$('#actuator_<%= @actuator.id %>').bootstrapSwitch();

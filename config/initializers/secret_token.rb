@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Ecobox::Application.config.secret_key_base = '8d3512f34ce761b4acd4c75adec3f6f60116888e0b6ae48d4bc638f98a5dd05befef46782c3d7254495eec7e72a4cccf26336afdde9ba8a5b73823e29cb4c8cc'
+Ecobox::Application.config.secret_key_base = 'ada0844676647560424e4d19600d581eaa8dcbef6ba34767954bf576a575d21e341011ba109d24199a3954a7a02b4f96f3ce2ca39179018e246eb9a6151caf0f'
